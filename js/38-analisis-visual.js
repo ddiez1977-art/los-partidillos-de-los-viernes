@@ -21,8 +21,87 @@ function _avNivelJugador(j) {
 }
 
 /**
+ * Determina los IDs ganadores de un partido archivado mirando los datos
+ * que SÍ se guardan en historicoJornadas.partidos[]:
+ *   - Estándar (1v1, 2v2, asimétrico, tríos): juegosA vs juegosB
+ *   - Australiana: puntosAustraliana[id] (gana el o los del max)
+ *   - Gamificado: puntosGamificados[id] (gana el o los del max)
+ *
+ * Devuelve { ganadores:Set<string>, jugadores:Set<string>, empate:boolean, sinDatos:boolean }
+ * - empate=true si hay marcador empatado (cuenta como "no derrota").
+ * - sinDatos=true si el partido se archivó sin marcador (no debe contarse).
+ */
+function _avResolverGanadoresPartido(p) {
+    const empty = { ganadores: new Set(), jugadores: new Set(), empate: false, sinDatos: true };
+    if (!p) return empty;
+
+    const tipo = p.tipo || (p.gamified ? 'gamificado' : null);
+    const esGamificado = tipo === 'gamificado' || !!p.gamified;
+    const esAustraliana = tipo === 'australiana' || !!p.puntosAustraliana;
+
+    // ── 1) GAMIFICADO: gana el / los que tienen máxima puntuación
+    if (esGamificado) {
+        const pts = p.puntosGamificados || {};
+        const ids = (p.idsG && p.idsG.length ? p.idsG : (p.ids || [])).map(String);
+        if (!ids.length) return empty;
+        const max = Math.max(0, ...ids.map(id => Number(pts[id] || pts[String(id)] || 0)));
+        if (max <= 0) {
+            // Sin datos de puntos → no contar como derrota de todos
+            return { ganadores: new Set(), jugadores: new Set(ids), empate: false, sinDatos: true };
+        }
+        const ganadores = new Set(ids.filter(id => Number(pts[id] || pts[String(id)] || 0) === max));
+        return { ganadores, jugadores: new Set(ids), empate: ganadores.size > 1, sinDatos: false };
+    }
+
+    // ── 2) AUSTRALIANA: gana el / los que tienen máximos juegos
+    if (esAustraliana) {
+        const pts = p.puntosAustraliana || {};
+        const ids = (p.ids || []).map(String);
+        if (!ids.length) return empty;
+        const max = Math.max(0, ...ids.map(id => Number(pts[id] || 0)));
+        if (max <= 0) return { ganadores: new Set(), jugadores: new Set(ids), empate: false, sinDatos: true };
+        const ganadores = new Set(ids.filter(id => Number(pts[id] || 0) === max));
+        return { ganadores, jugadores: new Set(ids), empate: ganadores.size > 1, sinDatos: false };
+    }
+
+    // ── 3) ESTÁNDAR (1v1, 2v2, 3v3, asimétrico): juegosA vs juegosB
+    const jA = Number(p.juegosA || 0);
+    const jB = Number(p.juegosB || 0);
+    // Reparto correcto de equipos: solo dividir por la mitad si tamanoEquipoA NO está, y SIEMPRE redondeado.
+    let idsA, idsB;
+    if (Array.isArray(p.idsA) && Array.isArray(p.idsB)) {
+        idsA = p.idsA.map(String);
+        idsB = p.idsB.map(String);
+    } else if (p.ids) {
+        const ids = p.ids.map(String);
+        const corte = Number.isFinite(p.tamanoEquipoA) ? Number(p.tamanoEquipoA) : Math.floor(ids.length / 2);
+        idsA = ids.slice(0, corte);
+        idsB = ids.slice(corte);
+    } else {
+        return empty;
+    }
+    const todos = new Set([...idsA, ...idsB]);
+    if (jA === 0 && jB === 0) {
+        // Marcador 0-0 → partido sin datos, no contar
+        return { ganadores: new Set(), jugadores: todos, empate: false, sinDatos: true };
+    }
+    // Tiebreak desempata si lo hay
+    let ganaA;
+    if (jA === jB) {
+        const tbA = Number((p.tiebreakScores && p.tiebreakScores.A) || p.tbA || 0);
+        const tbB = Number((p.tiebreakScores && p.tiebreakScores.B) || p.tbB || 0);
+        if (tbA !== tbB) ganaA = tbA > tbB;
+        else return { ganadores: new Set(), jugadores: todos, empate: true, sinDatos: false };
+    } else {
+        ganaA = jA > jB;
+    }
+    const ganadores = new Set(ganaA ? idsA : idsB);
+    return { ganadores, jugadores: todos, empate: false, sinDatos: false };
+}
+
+/**
  * Construir array de jornadas con resultados por jugador.
- * Devuelve: [{ fecha, jornadaId, resultados: { jugadorId: { ganados, perdidos, jugados, puntos } } }]
+ * Devuelve: [{ fecha, jornadaId, resultados: { jugadorId: { ganados, empatados, perdidos, jugados, puntos } } }]
  * Ordenado cronológicamente (más antigua primero).
  */
 function _avRendimientoPorJornada() {
@@ -30,39 +109,43 @@ function _avRendimientoPorJornada() {
         ? db.historicoJornadas
         : Object.values(db.historicoJornadas || {});
 
+    const initStats = () => ({ ganados: 0, empatados: 0, perdidos: 0, jugados: 0, puntos: 0 });
+
     const out = [];
     historico.forEach(jor => {
         if (!jor || !Array.isArray(jor.partidos)) return;
-        const resultados = {}; // jugadorId → { ganados, perdidos, jugados, puntos }
+        const resultados = {}; // jugadorId → stats
         jor.partidos.forEach(p => {
-            if (!p) return;
-            const idsA = (p.idsA || (p.ids || []).slice(0, p.tamanoEquipoA || (p.ids||[]).length / 2)).map(String);
-            const idsB = (p.idsB || (p.ids || []).slice(p.tamanoEquipoA || (p.ids||[]).length / 2)).map(String);
-            const ganadores = (p.ganadoresIds || p.idsG || []).map(String);
-            const allIds = [...new Set([...idsA, ...idsB, ...ganadores])];
+            const { ganadores, jugadores, empate, sinDatos } = _avResolverGanadoresPartido(p);
+            if (sinDatos) return;  // partido archivado sin marcador → ignorar para no falsear stats
 
-            allIds.forEach(id => {
-                if (!resultados[id]) resultados[id] = { ganados: 0, perdidos: 0, jugados: 0, puntos: 0 };
+            jugadores.forEach(id => {
+                if (!resultados[id]) resultados[id] = initStats();
                 resultados[id].jugados++;
-                const gano = ganadores.includes(id);
-                if (gano) {
+                if (empate) {
+                    resultados[id].empatados++;
+                    resultados[id].puntos += 2;
+                } else if (ganadores.has(id)) {
                     resultados[id].ganados++;
-                    resultados[id].puntos += 3;  // aprox: ganador recibe 3, perdedor 1
+                    resultados[id].puntos += 3;
                 } else {
                     resultados[id].perdidos++;
                     resultados[id].puntos += 1;
                 }
             });
         });
-        // MVPs adicionales
+
+        // MVPs adicionales (bonus aparte del partido)
         (jor.mvpIdsJugadores || []).forEach(id => {
-            if (!resultados[id]) resultados[id] = { ganados: 0, perdidos: 0, jugados: 0, puntos: 0 };
-            resultados[id].puntos += 3;
+            const sid = String(id);
+            if (!resultados[sid]) resultados[sid] = initStats();
+            resultados[sid].puntos += 3;
         });
         (jor.mvpIdsEntrenadores || []).forEach(id => {
-            if ((jor.mvpIdsJugadores || []).includes(id)) return;  // evitar doble
-            if (!resultados[id]) resultados[id] = { ganados: 0, perdidos: 0, jugados: 0, puntos: 0 };
-            resultados[id].puntos += 2;
+            const sid = String(id);
+            if ((jor.mvpIdsJugadores || []).map(String).includes(sid)) return;  // evitar doble
+            if (!resultados[sid]) resultados[sid] = initStats();
+            resultados[sid].puntos += 2;
         });
 
         out.push({ fecha: jor.fecha, jornadaId: jor.id, resultados });
@@ -237,18 +320,32 @@ function avRenderSparklineSVG(jugador, rendJornadas, maxJornadas = 10) {
 /**
  * Calcula la "forma" del jugador en las últimas 5 jornadas.
  * Devuelve { estado: 'caliente'|'tibio'|'frio'|'sin-datos', winRate, jornadas, racha }
+ *
+ * winRate "ponderado": las victorias valen 1, los empates 0.5, las derrotas 0.
+ * Necesita ≥3 partidos jugados en las últimas 5 jornadas para clasificar;
+ * si no hay datos suficientes devuelve 'sin-datos'.
  */
 function avCalcularForma(jugador, rendJornadas) {
     const idStr = String(jugador.id);
     const ultimas = rendJornadas.slice(-5).filter(j => j.resultados[idStr]);
     if (ultimas.length === 0) return { estado: 'sin-datos', winRate: 0, jornadas: 0, racha: 0 };
 
-    let totalGanados = 0, totalJugados = 0;
+    let totalGanados = 0, totalEmpatados = 0, totalJugados = 0;
     ultimas.forEach(j => {
-        totalGanados += j.resultados[idStr].ganados;
-        totalJugados += j.resultados[idStr].jugados;
+        const r = j.resultados[idStr];
+        totalGanados   += r.ganados   || 0;
+        totalEmpatados += r.empatados || 0;
+        totalJugados   += r.jugados   || 0;
     });
-    const winRate = totalJugados > 0 ? Math.round((totalGanados / totalJugados) * 100) : 0;
+
+    // Sin partidos suficientes → no clasificar como frío por defecto
+    if (totalJugados < 3) {
+        return { estado: 'sin-datos', winRate: 0, jornadas: ultimas.length, racha: 0,
+                 rachaD: jugador.rachaDerrotas || 0 };
+    }
+
+    // Empate cuenta como medio (no es derrota)
+    const winRate = Math.round(((totalGanados + totalEmpatados * 0.5) / totalJugados) * 100);
 
     let estado;
     if (winRate >= 60)       estado = 'caliente';
