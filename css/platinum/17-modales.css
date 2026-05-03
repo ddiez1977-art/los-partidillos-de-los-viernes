@@ -1,0 +1,15 @@
+/* ══ 16. MODALES ════════════════════════════════════════════ */
+body.theme-platinum .modal-atp {
+  background: rgba(0,0,0,0.9) !important;
+  backdrop-filter: blur(8px) !important;
+}
+body.theme-platinum .modal-content {
+  background: var(--pt-surface) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+  border-radius: var(--pt-r) !important;
+  color: var(--pt-text) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8) !important;
+}
+body.theme-platinum .close-modal { color: var(--pt-text-sub) !important; }
+body.theme-platinum .close-modal:hover { color: var(--pt-green) !important; }
+

@@ -1,0 +1,52 @@
+/* ══ 7. HISTORIAL GENERAL ═══════════════════════════════════ */
+
+/* Wrapper de jornada */
+body.theme-platinum .card-historial-item {
+  background: var(--pt-surface) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+  border-radius: var(--pt-r) !important;
+  color: var(--pt-text) !important;
+  box-shadow: var(--pt-shadow) !important;
+}
+body.theme-platinum .card-historial-item:hover {
+  border-color: var(--pt-gold) !important;
+  background: var(--pt-surface2) !important;
+}
+
+/* Header clickable (background:#fdfdfd) */
+body.theme-platinum .card-historial-item > [style*="cursor: pointer"],
+body.theme-platinum .card-historial-item > [style*="cursor:pointer"] {
+  background: var(--pt-surface) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Panel expandido de detalle (background:#fafafa) */
+body.theme-platinum [id^="detalle-"] {
+  background: var(--pt-surface2) !important;
+  border-top-color: var(--pt-border) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Fila de partido dentro del historial (background:white inline) */
+body.theme-platinum #lista-archivo-historico [style*="background: white"],
+body.theme-platinum #lista-archivo-historico [style*="background:white"] {
+  background: var(--pt-surface3) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Marcador monospace en historial */
+body.theme-platinum #lista-archivo-historico [style*="font-family:monospace"],
+body.theme-platinum #lista-archivo-historico [style*="font-family: monospace"] {
+  color: var(--pt-green) !important;
+}
+
+/* Botones inline de acción en historial (eliminar/MVP) */
+body.theme-platinum #lista-archivo-historico [style*="background:none"],
+body.theme-platinum #lista-archivo-historico [style*="background: none"] {
+  background: transparent !important;
+}
+body.theme-platinum #lista-archivo-historico [style*="border:1px solid #C5A059"],
+body.theme-platinum #lista-archivo-historico [style*="border: 1px solid #C5A059"] {
+  border-color: var(--pt-gold) !important;
+}
+

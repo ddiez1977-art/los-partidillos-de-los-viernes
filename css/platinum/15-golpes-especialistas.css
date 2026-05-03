@@ -1,0 +1,27 @@
+/* ══ 14. GOLPES / ESPECIALISTAS ═════════════════════════════ */
+body.theme-platinum .control-golpe {
+  background: var(--pt-surface2) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+}
+body.theme-platinum .btn-golpe-main { background: var(--pt-surface2) !important; color: var(--pt-text) !important; }
+body.theme-platinum .btn-golpe-main:active { background: rgba(204,255,0,0.1) !important; }
+body.theme-platinum .btn-golpe-restar { background: #c0392b !important; }
+body.theme-platinum .count-golpe { background: var(--pt-green) !important; color: #000 !important; font-weight: 900 !important; }
+body.theme-platinum .label-golpe  { color: var(--pt-text-sub) !important; }
+body.theme-platinum #ranking-especialistas div {
+  background: var(--pt-surface2) !important;
+  border-radius: var(--pt-rsm) !important;
+  box-shadow: var(--pt-shadow) !important;
+}
+/* Buscador golpes */
+body.theme-platinum [style*="background:#f8f9fa"][style*="border-radius:14px"],
+body.theme-platinum [style*="background: #f8f9fa"][style*="border-radius: 14px"] {
+  background: var(--pt-surface2) !important;
+  border: 1px solid var(--pt-border) !important;
+}
+body.theme-platinum [style*="background:#f8f9fa"][style*="border-radius:16px"],
+body.theme-platinum [style*="background: #f8f9fa"][style*="border-radius: 16px"] {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text-sub) !important;
+}
+

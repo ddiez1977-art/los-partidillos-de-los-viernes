@@ -1,0 +1,29 @@
+/* ==========================================
+   TIMER Y PISTA
+   ========================================== */
+.timer-card { 
+    background: #000; 
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 15px; 
+    width: fit-content; 
+    margin: 10px auto; 
+    border: 1px solid #333;
+}
+.timer-display { color: var(--atp-tennis); font-size: 1.8rem; font-family: 'Courier New', monospace; font-weight: bold; }
+.timer-input { width: 50px; background: #222; color: white; border: none; text-align: center; border-radius: 4px; }
+
+.tag-jugador { 
+    background: var(--atp-navy); 
+    color: white; 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    font-size: 0.8rem; 
+    margin: 3px; 
+    display: inline-block; 
+    font-weight: 600;
+}
+

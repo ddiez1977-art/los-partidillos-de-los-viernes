@@ -1,0 +1,25 @@
+<!-- ===== PANTALLA ESPERA ÁRBITRO ===== -->
+<div id="pantalla-espera-arbitro" style="display:none; position:fixed; inset:0; z-index:99998;
+     background:rgba(11,17,24,0.97); backdrop-filter:blur(8px);
+     flex-direction:column; justify-content:center; align-items:center;">
+    <div style="background:#1a2530; border:1px solid #334155; border-radius:16px;
+                padding:40px; max-width:380px; width:90%; text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:12px;">⏳</div>
+        <h2 style="color:#C5A059; margin:0 0 8px 0;">Solicitud enviada</h2>
+        <p style="color:#888; font-size:0.85rem; margin:0 0 20px 0;">
+            Tu solicitud ha sido enviada al administrador.<br>
+            Esta pantalla se actualizará automáticamente cuando te aprueben.
+        </p>
+        <div id="espera-nombre" style="color:white; font-weight:700; font-size:1rem; margin-bottom:6px;"></div>
+        <div id="espera-email" style="color:#888; font-size:0.8rem; margin-bottom:24px;"></div>
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(197,160,89,0.1);
+                    border:1px solid rgba(197,160,89,0.3); border-radius:20px; padding:8px 16px;">
+            <span style="width:8px; height:8px; background:#C5A059; border-radius:50%;
+                         display:inline-block; animation:live-pulse 2s ease-in-out infinite;"></span>
+            <span style="color:#C5A059; font-size:0.8rem; font-weight:700;">Esperando aprobación...</span>
+        </div>
+        <br><br>
+        <button onclick="cancelarSolicitud()" style="background:transparent; border:none;
+                color:#555; font-size:0.8rem; cursor:pointer;">Cancelar y salir</button>
+    </div>
+</div>

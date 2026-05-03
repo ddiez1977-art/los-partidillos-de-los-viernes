@@ -1,0 +1,38 @@
+/* ==========================================
+   CONFIGURACIÓN GENERAL & COLORES
+   ========================================== */
+:root {
+    --atp-navy: #001e3c;
+    --atp-blue: #0056b3;
+    --atp-gold: #C5A059;
+    --atp-tennis: #ccff00;
+    --atp-bg: #f4f7f9;
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; 
+    background: var(--atp-bg); 
+    padding-bottom: 80px; 
+    color: #333; 
+    overflow-x: hidden;
+}
+
+/* UX-FIX CSS-2: Tamaño de fuente mínimo para legibilidad en exteriores.
+   0.72rem (~11.5px) es el mínimo absoluto para texto secundario.
+   Aplica a labels y spans con tamaños declarados menores. */
+label[style*="font-size: 0.6rem"],
+label[style*="font-size:0.6rem"],
+span[style*="font-size: 0.6rem"],
+span[style*="font-size:0.6rem"],
+div[style*="font-size: 0.6rem"],
+div[style*="font-size:0.6rem"],
+small[style*="font-size: 0.6rem"],
+small[style*="font-size:0.6rem"] {
+    font-size: 0.72rem !important;
+}
+/* Inputs date iOS anti-zoom: garantizar >= 16px */
+input[type="date"], input[type="time"] {
+    font-size: 17px !important;
+}
+

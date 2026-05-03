@@ -1,0 +1,34 @@
+    <div id="modal-pistas" class="modal-atp" style="display:none;">
+    <div class="modal-content" style="max-height: 90vh; display: flex; flex-direction: column;">
+        <span class="close-modal" onclick="cerrarPistas()">&times;</span>
+        <h2 class="atp-title">🏟️ PASAR LISTA</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; flex-shrink: 0;">
+    <input type="text" id="input-search-asistencia" 
+       oninput="filtrarAsistencia()" 
+       placeholder="🔍 Buscar jugador en BBDD..." 
+       class="atp-input" 
+       style="border: 2px solid var(--atp-blue); background: #f0f7ff;">
+    
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="input-nuevo-asistente" 
+               list="lista-nombres-cantera" 
+               placeholder="Nuevo jugador..." 
+               class="atp-input">
+        
+        <button onclick="crearYAgregarJugador()" class="btn-add" style="width: 50px; margin:0;">+</button>
+    </div>
+
+    <datalist id="lista-nombres-cantera"></datalist>
+</div>
+
+        <div id="lista-disponibles-pista" style="overflow-y: auto; flex-grow: 1; padding-right: 5px;">
+            </div>
+
+        <div style="flex-shrink: 0; padding-top: 10px; border-top: 1px solid #eee; margin-top: 10px;">
+            <button onclick="confirmarAsistenciaMultiple()" class="btn-add" style="width:100%; margin:0; background:var(--atp-navy); height: 50px; font-weight: bold; border-radius: 12px;">
+                ✅ CONFIRMAR SELECCIÓN
+            </button>
+        </div>
+    </div>
+</div>

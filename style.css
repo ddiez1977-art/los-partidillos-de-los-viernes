@@ -1,0 +1,23 @@
+/* ============================================================
+   ATP PLATINUM — style.css (AGREGADOR)
+   Este archivo solo importa los 14 archivos en css/clasico/
+   ── Refactor: el style.css original (1251 líneas) se ha dividido
+      en 14 archivos por sección. El HTML sigue cargando style.css
+      como antes; este archivo se encarga de cargar los trozos.
+   ============================================================ */
+
+@import url("css/clasico/00-fondo-global.css");
+@import url("css/clasico/01-config-colores.css");
+@import url("css/clasico/02-cabecera-nav.css");
+@import url("css/clasico/03-estructura.css");
+@import url("css/clasico/04-botones-formularios.css");
+@import url("css/clasico/05-timer-pista.css");
+@import url("css/clasico/06-asistencia.css");
+@import url("css/clasico/07-ranking-rangos.css");
+@import url("css/clasico/08-modales.css");
+@import url("css/clasico/09-ranking-especialistas.css");
+@import url("css/clasico/10-tv-mvp.css");
+@import url("css/clasico/11-modo-tv.css");
+@import url("css/clasico/12-hub.css");
+@import url("css/clasico/13-hub-responsive.css");
+@import url("css/clasico/14-clases-complementarias.css");

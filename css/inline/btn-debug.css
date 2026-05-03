@@ -1,0 +1,41 @@
+.btn-debug-center-top {
+    position: fixed !important;
+    top: 15px !important; /* Ajusta esto si choca con tu menú superior */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    
+    width: 35px !important; /* 🔥 Pequeño y discreto */
+    height: 35px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* 🏆 Estilo Platinum Recuperado */
+    background: #1a2530 !important; 
+    color: #C5A059 !important; 
+    border: 1px solid #C5A059 !important;
+    
+    font-size: 1.1rem !important; /* Tamaño del engranaje */
+    cursor: pointer !important;
+    z-index: 999999 !important; /* Para que nunca lo tape nada */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-debug-center-top:hover {
+    background: #C5A059 !important;
+    color: #1a2530 !important;
+    transform: translateX(-50%) scale(1.1) !important;
+}
+
+/* 📱 Ajuste para móviles */
+@media (max-width: 600px) {
+    .btn-debug-center-top {
+        width: 32px; /* Un pelín más pequeño en móvil */
+        height: 32px;
+        font-size: 1rem;
+        top: 10px; /* Un poco más arriba en móvil */
+    }
+}

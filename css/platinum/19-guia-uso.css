@@ -1,0 +1,11 @@
+/* ══ 18. GUÍA DE USO ════════════════════════════════════════ */
+body.theme-platinum #guia-uso .card { color: var(--pt-text) !important; }
+body.theme-platinum #guia-uso p, body.theme-platinum #guia-uso li,
+body.theme-platinum #guia-uso b, body.theme-platinum #guia-uso span { color: var(--pt-text) !important; }
+body.theme-platinum #guia-uso .card[style*="background: var(--atp-navy)"],
+body.theme-platinum #guia-uso .card[style*="background:var(--atp-navy)"] { background: var(--pt-surface2) !important; }
+body.theme-platinum #guia-uso h3 { color: var(--pt-gold) !important; }
+body.theme-platinum #guia-uso table th { background: var(--pt-surface2) !important; color: var(--pt-gold) !important; }
+body.theme-platinum #guia-uso table td { color: var(--pt-text) !important; border-bottom-color: var(--pt-border) !important; }
+body.theme-platinum #guia-uso [style*="background:#fffdf5"] { background: var(--pt-surface2) !important; }
+

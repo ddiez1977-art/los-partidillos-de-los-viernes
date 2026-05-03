@@ -1,0 +1,47 @@
+/* ==========================================
+   MODALES
+   ========================================== */
+.modal-atp { 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); 
+    display: flex; 
+    /* ✅ FIX SCROLL MODAL iOS/móvil: align-items:center impide scroll cuando el contenido
+       supera la pantalla. Con flex-start + overflow-y:auto el modal es desplazable. */
+    align-items: flex-start; 
+    justify-content: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* momentum scroll en iOS */
+    backdrop-filter: blur(4px);
+    padding: 20px 0; /* espacio visual arriba y abajo */
+    box-sizing: border-box;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Para que nada lo tape */
+}
+.modal-content { 
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 92%; 
+    max-width: 480px; 
+    position: relative; 
+    /* ✅ FIX SCROLL MODAL: max-height:90vh + overflow:auto combinado con align-items:center
+       del padre causaba que iOS no dejara hacer scroll dentro del modal.
+       Con el nuevo modelo (padre hace scroll), el content puede crecer libremente. */
+    max-height: none;
+    overflow-y: visible;
+    margin: auto 0; /* centra verticalmente cuando el contenido cabe en pantalla */
+}
+.close-modal { position: absolute; right: 20px; top: 15px; font-size: 1.8rem; cursor: pointer; color: #999; }
+

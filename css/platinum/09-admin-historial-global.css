@@ -1,0 +1,60 @@
+/* ══ 8. ADMIN HISTORIAL GLOBAL (renderAdmHistorialGlobal) ════ */
+
+body.theme-platinum .adm-jornada-block {
+  background: var(--pt-surface) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+  border-radius: var(--pt-r) !important;
+  margin-bottom: 14px !important;
+  overflow: hidden !important;
+}
+body.theme-platinum .adm-jornada-header {
+  background: var(--pt-surface2) !important;
+  border-bottom: 1px solid var(--pt-border) !important;
+  padding: 14px 16px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  color: var(--pt-text) !important;
+}
+body.theme-platinum .adm-jornada-header:hover { background: var(--pt-surface3) !important; }
+body.theme-platinum .adm-jornada-body {
+  background: var(--pt-surface) !important;
+  padding: 14px 16px !important;
+  color: var(--pt-text) !important;
+}
+
+/* Fila de partido (background:#f8f9fa) en admin historial global */
+body.theme-platinum .adm-jornada-body [style*="background:#f8f9fa"],
+body.theme-platinum .adm-jornada-body [style*="background: #f8f9fa"] {
+  background: var(--pt-surface3) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Marcador en admin historial global (background:#fff, border:#ddd) */
+body.theme-platinum .adm-jornada-body [style*="background:#fff"],
+body.theme-platinum .adm-jornada-body [style*="background: #fff"] {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+  color: var(--pt-green) !important;
+}
+
+/* MVP blocks dentro del historial global */
+body.theme-platinum .adm-jornada-body [style*="background:#f0fdf9"],
+body.theme-platinum .adm-jornada-body [style*="background: #f0fdf9"] {
+  background: rgba(16,172,132,0.08) !important;
+  border-color: rgba(16,172,132,0.3) !important;
+}
+body.theme-platinum .adm-jornada-body [style*="background:#fffbeb"],
+body.theme-platinum .adm-jornada-body [style*="background: #fffbeb"] {
+  background: rgba(197,160,89,0.08) !important;
+  border-color: rgba(197,160,89,0.3) !important;
+}
+body.theme-platinum .adm-jornada-body label { color: var(--pt-text) !important; }
+
+/* Dashed border en bloque MVP */
+body.theme-platinum .adm-jornada-body [style*="border-top:1px dashed"],
+body.theme-platinum .adm-jornada-body [style*="border-top: 1px dashed"] {
+  border-top-color: var(--pt-border) !important;
+}
+

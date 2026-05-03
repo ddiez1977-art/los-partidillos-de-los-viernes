@@ -1,0 +1,37 @@
+/* ============================================================
+   ATP PLATINUM — theme-platinum.css (AGREGADOR)
+   Este archivo solo importa los 29 archivos en css/platinum/
+   ── Refactor: el theme-platinum.css original (1257 líneas) se ha
+      dividido en 29 archivos por sección. El HTML sigue cargando
+      theme-platinum.css como antes; este archivo carga los trozos.
+   ============================================================ */
+
+@import url("css/platinum/00-header.css");
+@import url("css/platinum/01-variables.css");
+@import url("css/platinum/02-layout.css");
+@import url("css/platinum/03-overrides-globales.css");
+@import url("css/platinum/04-cards.css");
+@import url("css/platinum/05-botones.css");
+@import url("css/platinum/06-inputs-forms.css");
+@import url("css/platinum/07-admin.css");
+@import url("css/platinum/08-historial-general.css");
+@import url("css/platinum/09-admin-historial-global.css");
+@import url("css/platinum/10-ranking.css");
+@import url("css/platinum/11-ficha-jugador.css");
+@import url("css/platinum/12-cantera.css");
+@import url("css/platinum/13-pistas-activas.css");
+@import url("css/platinum/14-check-asistencia.css");
+@import url("css/platinum/15-golpes-especialistas.css");
+@import url("css/platinum/16-tablas.css");
+@import url("css/platinum/17-modales.css");
+@import url("css/platinum/18-analisis.css");
+@import url("css/platinum/19-guia-uso.css");
+@import url("css/platinum/20-skill-bars.css");
+@import url("css/platinum/21-pantallas-fijas.css");
+@import url("css/platinum/22-hub.css");
+@import url("css/platinum/23-headings.css");
+@import url("css/platinum/24-toggle-button.css");
+@import url("css/platinum/25-responsive-movil.css");
+@import url("css/platinum/26-historial-card-item.css");
+@import url("css/platinum/27-perfil-modos-jugados.css");
+@import url("css/platinum/28-fixes-contraste.css");

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ATP MASTER TOUR | PLATINUM v.2026</title>
+    <meta name="description" content="ATP Master Tour Platinum — Sistema de gestión de torneos, ranking y pistas en tiempo real.">
+    <meta property="og:title" content="ATP Master Tour | PLATINUM v.2026">
+    <meta property="og:description" content="Sistema de gestión de torneos, ranking y pistas en tiempo real.">
+    <meta property="og:image" content="fondo_tenis.jpg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contrast-boost.css">
+    <link rel="stylesheet" href="theme-platinum.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+
+<body>
+
+<div id="pantalla-inicio-hub">
+    <div class="hub-background" id="parallax-bg"></div>
+    <div class="hub-overlay"></div>
+
+    <div class="hub-container">
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+        <div style="margin-bottom: 20px;">
+            <h1 style="color: #ccff00; margin:0; font-size: 2.8rem; font-weight: 900;">ATP MASTER</h1>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <div style="color: #C5A059; font-weight: bold; letter-spacing: 4px; font-size: 0.8rem;">PLATINUM SYSTEM</div>
+                <!-- Botón admin visible con icono y texto -->
+                <button onclick="accederSistemaConAuth('admin-historico')" title="Administración"
+                        style="background:rgba(197,160,89,0.15); border:1px solid rgba(197,160,89,0.4);
+                               cursor:pointer; padding:6px 12px; border-radius:8px;
+                               opacity:0.75; transition:all 0.3s ease; font-size:0.78rem;
+                               color:#C5A059; line-height:1; display:inline-flex;
+                               align-items:center; gap:5px; font-weight:700; letter-spacing:1px;"
+                        onmouseover="this.style.opacity='1'; this.style.background='rgba(197,160,89,0.28)'"
+                        onmouseout="this.style.opacity='0.75'; this.style.background='rgba(197,160,89,0.15)'">
+                    ⚙️ ADMINISTRADOR
+                </button>
+            </div>
+        </div>
+
+        <div id="hub-convocatoria-counter" 
+     onclick="accederSistemaConAuth('inicio')" 
+     style="cursor: pointer; transition: transform 0.2s; background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; margin-bottom: 5px; border-left: 4px solid #ccff00; display: flex; justify-content: space-between; align-items: center;"
+     onmouseover="this.style.transform='scale(1.02)'; this.style.background='rgba(255, 255, 255, 0.08)'"
+     onmouseout="this.style.transform='scale(1)'; this.style.background='rgba(255, 255, 255, 0.05)'">
+    
+    <div>
+        <div style="color: #888; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">
+            Convocatoria Actual <span style="font-size: 0.6rem; color: var(--atp-gold); opacity: 0.8;">(VER LISTA ➔)</span>
+        </div>
+        <div id="count-confirmados-hub" style="color: white; font-size: 1.4rem; font-weight: 900;">0 Jugadores</div>
+        <div id="aviso-quorum-hub" style="color: #ccff00; font-size: 0.65rem; font-weight: bold; margin-top: 4px;"></div>
+    </div>
+    <div id="status-portal-hub" style="font-size: 0.6rem; padding: 4px 8px; border-radius: 20px; font-weight: bold; border: 1px solid #444;">---</div>
+</div>
+
+        <div id="hub-status-alert" style="margin-bottom: 20px;"></div>
+        
+        <button onclick="accederSistemaConAuth('inicio')" class="btn-hub-item" style="border-left: 4px solid var(--atp-gold);">📢 GESTIÓN DE CONVOCATORIA</button>
+        <button id="btn-hub-jornada" onclick="accederSistemaConAuth('jornada')" class="btn-hub-item">
+    📍 GESTIÓN DE PISTAS 
+    <span id="hub-pistas-count" style="background:#ccff00; color:black; padding:1px 6px; border-radius:10px; font-size:0.65rem; font-weight:900; margin-left:5px;">0</span>
+</button>
+        <button id="btn-hub-golpes" onclick="accederSistemaConAuth('hitos-votos')" class="btn-hub-item">🎯 REGISTRO DE GOLPES</button>
+        <button id="btn-hub-mvp" onclick="accederSistemaConAuth('sec-mvp')" class="btn-hub-item" style="border-left:4px solid #C5A059;">👑 SELECCIÓN MVP</button>
+        <button id="btn-hub-ranking" onclick="accederSistemaConAuth('ranking')" class="btn-hub-item">🏆 RANKING & LÍDERES</button>
+        <button onclick="accederSistemaConAuth('bbdd-jugadores')" class="btn-hub-item">👥 CANTERA DE JUGADORES</button>
+        <button onclick="accederSistemaConAuth('analisis')" class="btn-hub-item">📊 ANÁLISIS AVANZADO</button>
+
+        <!-- Roce #6: secciones de lectura libre, siempre accesibles -->
+        <div style="display:flex; gap:8px; margin-top:14px; padding-top:14px; border-top:1px solid rgba(197,160,89,0.18);">
+            <button onclick="accederSistemaConAuth('historial')" class="btn-hub-item" style="flex:1; font-size:0.85rem; opacity:0.85;">📚 HISTORIAL</button>
+            <button onclick="accederSistemaConAuth('guia-uso')" class="btn-hub-item" style="flex:1; font-size:0.85rem; opacity:0.85;">📖 GUÍA</button>
+        </div>
+    </div>
+
+    <div style="flex: 1.2; display: flex; flex-direction: column;">
+        <div class="hub-tablon">
+            <h2 style="color: #C5A059; border-bottom: 1px solid rgba(197, 160, 89, 0.3); padding-bottom: 15px;">📢 TABLÓN DE ANUNCIOS</h2>
+            <div id="tablon-hub-status" style="margin-bottom: 15px;"></div>
+            <div id="tablon-contenido" style="flex: 1; overflow-y: auto;"></div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="abrirDashboardTV()" class="btn-hub-action gold">📺 TV MODE</button>
+                <button onclick="resetTimer()" class="btn-hub-action outline">⏱️ RESET RELOJ</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div id="pantalla-apertura" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--atp-navy, #1a2530); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; color: white;">
+    <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); max-width: 400px;">
+        <h1 style="margin-top: 0; color: #00d4ff;">🎾 Nuevo Evento</h1>
+        <p style="opacity: 0.8; margin-bottom: 30px;">Inicia la jornada de hoy para resetear las pistas, limpiar el historial anterior y comenzar a registrar la asistencia de los jugadores.</p>
+        
+        <h3 id="fecha-apertura-texto" style="color: var(--atp-gold, #C5A059); margin-bottom: 20px;"></h3>
+        
+        <!-- NAV-FIX 4: guard de rol delegado en iniciarJornadaConAuth (extraído a JS) -->
+        <button onclick="iniciarJornadaConAuth()" style="background: #00d4ff; color: #000; border: none; padding: 15px 30px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);">
+            INICIAR JORNADA
+        </button>
+    </div>
+</div>
+
+    <header>
+        <div class="top-bar">
+    <span>📡 ATP PLATINUM SYSTEM v.2026</span>
+    <span id="fecha-actual-display" style="color: var(--atp-gold); font-weight: bold; margin-left: 10px;"></span>
+    <span id="pistas-libres-badge">Pistas Libres: 2 / 2</span>
+</div>
+        <h1>🎾 ATP MASTER TOUR PRO</h1>
+        <div class="timer-card">
+    <div class="timer-display">
+        <span id="minutes">15</span>:<span id="seconds">00</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:5px; margin-top:5px; justify-content:center;">
+        <label style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:bold;">MIN:</label>
+        <input type="number" id="input-time" value="15" min="1" max="90"
+               style="width:50px; text-align:center; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:white; border-radius:4px; padding:2px 4px; font-size:0.8rem;">
+    </div>
+</div>
+
+
+<div class="timer-controls">
+                <button class="btn-timer play" onclick="startTimer()">▶</button>
+                <button class="btn-timer pause" onclick="pauseTimer()">⏸</button>
+                <button class="btn-timer reset" onclick="resetTimer()">🔄</button>
+                <button class="btn-tv" onclick="abrirDashboardTV()">📺 ABRIR TV MODE</button>
+            </div>    
+</header>
+
+   <nav>
+    <!-- NAV-FIX 1: todos los botones pasan por accederSistemaConAuth
+         para garantizar el guard de auth + rol antes de mostrar cualquier sección.
+         Antes INICIO/JORNADA/RANKING/HISTORIAL/GUIA usaban showSection() directamente
+         → bypass completo de la verificación de sesión y rol. -->
+    <button onclick="volverAlHub()" style="background: var(--atp-gold); color: black; font-weight: 900;">🏠 HUB</button>
+    <button onclick="accederSistemaConAuth('inicio')">📋 CONVOCATORIA</button>
+    <button onclick="accederSistemaConAuth('jornada')">📍 PISTA</button>
+    <button onclick="accederSistemaConAuth('control-pistas')">🎮 CONTROL</button>
+    <button onclick="accederSistemaConAuth('sec-mvp')">👑 MVP</button>
+    <button onclick="accederSistemaConAuth('hitos-votos')">🎯 GOLPES</button>
+    <button onclick="accederSistemaConAuth('ranking')">🏆 RANKING</button>
+    <button onclick="accederSistemaConAuth('bbdd-jugadores')">👥 CANTERA</button>
+    <button onclick="accederSistemaConAuth('historial')">📚 HISTORIAL</button>
+    <button onclick="accederSistemaConAuth('admin-historico')">🔐 ADMIN</button>
+    <button onclick="accederSistemaConAuth('guia-uso')">📖 GUÍA</button>
+    <button onclick="accederSistemaConAuth('analisis')">📊 ANÁLISIS</button>
+</nav>
+
+    <main>
+        <section id="inicio" class="tab-content active">
+    <div class="card" style="text-align: center; padding: 20px;">
+        <h2 style="color: var(--atp-navy); font-size: 1.8rem; margin-top: 0;">🚀 BIENVENIDO</h2>
+        <button onclick="abrirPistas()" class="btn-add" style="font-size: 1.1rem; padding: 15px; width: 100%; max-width: 400px;">
+            🏟️ TRAER JUGADORES A PISTA MANUALMENTE
+        </button>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--atp-gold); margin-top: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <h3 style="margin: 0; color: var(--atp-navy); font-size: 0.9rem;">📢 GESTIÓN DE CONVOCATORIA</h3>
+                <span id="badge-estado-convocatoria" style="font-size: 0.65rem; font-weight: bold; padding: 3px 8px; border-radius: 12px; background: #eee; color: #888; border: 1px solid #ddd;">
+                    ⏳...
+                </span>
+            </div>
+
+            <button onclick="lanzarMensajeConvocatoria()" class="btn-whatsapp-platinum" style="font-size: 0.7rem; padding: 6px 12px; margin: 0; border-radius: 8px;">
+                <span class="ws-icon">📱</span> Iniciar Convocatoria y ENVIAR WHATSAPP
+            </button>
+        </div>
+        
+        <p style="font-size: 0.75rem; color: #666; margin-bottom: 15px; line-height: 1.4;">
+            Revisa quién ha confirmado asistencia. Recuerda que <b>nadie está apuntado por defecto — cada jugador debe confirmarse</b> desde el portal. Al iniciar, solo los confirmados entrarán a la pista.
+        </p>
+
+        <div style="display: flex; justify-content: space-between; gap: 10px; margin-bottom: 10px;">
+            <button onclick="renderListaConvocatoria()" class="btn-timer play" style="font-size: 0.65rem; padding: 8px 10px; flex: 1;">
+                🔄 CARGAR CONVOCATORIA ACTIVA
+            </button>
+            <button onclick="limpiarConvocatoriaUI()" class="btn-timer reset" style="font-size: 0.65rem; padding: 8px 10px; flex: 1; background: #ffebee; color: #c62828;">
+                🔒 CERRAR CONVOCATORIA ACTIVA
+            </button>
+        </div>
+
+        <div id="lista-convocatoria-ui" style="display: grid; grid-template-columns: 1fr; gap: 6px; max-height: 350px; overflow-y: auto; padding-right: 5px;">
+            <p style="text-align:center; color:#999; font-size: 0.8rem; font-style: italic;">Pulsa "Cargar Convocatoria" para ver a los jugadores.</p>
+        </div>
+
+        <!-- PISTAS RESERVADAS (alimentadas desde inscripciones.html) -->
+        <div id="admin-pistas-reservadas" style="margin-top:14px; display:none;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                <span style="font-size:0.68rem; font-weight:900; color:var(--atp-navy); letter-spacing:1px; text-transform:uppercase;">
+                    🏟️ Pistas reservadas por los padres
+                </span>
+                <button onclick="limpiarPistasReservadas()" title="Borrar todas las reservas"
+                    style="background:transparent; border:none; color:#bbb; font-size:0.7rem; cursor:pointer; padding:2px 6px;">
+                    ✕ Limpiar
+                </button>
+            </div>
+            <div id="admin-pistas-lista"></div>
+        </div>
+        
+        <button onclick="llevarConvocatoriaAPista()" class="btn-add" style="width: 100%; margin-top: 15px; background: #0056b3; border: 2px solid #004085; height: 50px; font-size: 1rem;">
+            🚀 LLEVAR CONVOCADOS A PISTA
+        </button>
+        
+        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+            <label style="font-size: 0.7rem; font-weight: bold; color: var(--atp-navy);">+ NUEVO FICHAJE (Añadir a cantera y convocar):</label>
+            <div style="display: flex; gap: 5px; margin-top: 5px;">
+                <input type="text" id="input-nuevo-convocado" placeholder="Nombre..." class="atp-input" style="padding: 8px;">
+                <button onclick="crearJugadorDesdeConvocatoria()" class="btn-add" style="width: 50px; margin: 0; height: auto;">+</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="jornada" class="tab-content">
+
+  <div class="card" style="margin-bottom:15px; background:white;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <h3 style="margin:0; font-size:0.8rem; color:var(--atp-blue);">
+        👥 PRESENTES HOY (<span id="count-presentes">0</span>)
+    </h3>
+    <button onclick="abrirPistas()" class="btn-atp-secondary" style="font-size:0.7rem; padding:5px 10px;">+ PASAR LISTA</button>
+</div>
+    <div id="lista-presentes-hoy" style="display:flex; flex-wrap:wrap; gap:5px; min-height: 30px;"></div>
+</div>
+
+   <div class="card" style="border-top: 4px solid var(--atp-gold); background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <h3 style="margin-bottom: 15px; color: var(--atp-navy); display: flex; align-items: center; gap: 10px;">
+        📅 CONFIGURACIÓN DE JORNADA
+    </h3>
+    
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:15px; margin-bottom:15px;">
+        <div class="field">
+            <label style="font-size: 0.65rem; font-weight: bold; opacity: 0.8; display: block; margin-bottom: 5px;">⏰ HORAS TOTALES</label>
+            <input type="number" id="plan-hours" class="atp-input" value="2" min="1" oninput="generarCajasPistas()">
+        </div>
+        
+        <div class="field">
+            <label style="font-size: 0.65rem; font-weight: bold; opacity: 0.8; display: block; margin-bottom: 5px;">🎾 PISTAS CLUB</label>
+            <input type="number" id="plan-pistas-totales" class="atp-input" value="8" min="1" max="99"
+                   oninput="generarCajasPistas(); actualizarContadoresPistas(); guardarConfigPistasClub();"
+                   title="Número total de pistas del club. Se guarda automáticamente.">
+            <div style="font-size:0.58rem;color:var(--atp-text-dim,#888);margin-top:3px;">✓ Se guarda automáticamente</div>
+        </div>
+
+
+        <div class="field">
+            <label style="font-size: 0.65rem; font-weight: bold; opacity: 0.8; display: block; margin-bottom: 5px;">⏱️ MINS / PARTIDO</label>
+            <input type="number" id="plan-duracion" class="atp-input" value="15">
+        </div>
+
+        <div class="field">
+            <label style="font-size: 0.65rem; font-weight: bold; opacity: 0.8; display: block; margin-bottom: 5px;">🥤 DESCANSO (Min)</label>
+            <input type="number" id="plan-descanso" class="atp-input" value="3">
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid var(--atp-border,#eee); margin: 20px 0;">
+
+    <p style="font-size: 0.85rem; color: var(--atp-text-muted,#666); margin-bottom: 12px; font-weight: 600;">
+        Marca las pistas disponibles en cada hora (por defecto todas están sin marcar):
+    </p>
+
+    <div id="contenedor-cajas-pistas" style="display: flex; flex-direction: column; gap: 8px;">
+        </div>
+
+<div class="sec-card" style="background: var(--atp-navy); color: white; margin-top:25px; margin-bottom:0; border-radius:12px 12px 0 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+    <p style="margin:0 0 10px 0; font-size:0.75rem; font-weight:900; color:var(--atp-gold); letter-spacing:2px; text-transform:uppercase;">🎯 PRIORIZAR HOY:</p>
+    <select id="estrategia-rotacion" class="atp-input select-estrategia" onchange="actualizarInterfazManual()">
+        <option value="dobles">🎾 Máximos Dobles (4 pers/pista)</option>
+        <option value="individual">🤺 Máximos Individuales (2 pers/pista)</option>
+        <option value="equipos3">🔄 Australiana (2vs1 rotativo)</option>
+        <option value="trios">🔱 Modo Tríos (6 pers/pista)</option>
+        <option value="asimetrico">⚡ Asimétrico (3v2 / 2v1 / libre)</option>
+    </select>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:12px;">
+    <button onclick="generarPlanMaestro()" class="btn-primary-atp"
+        style="background:#1e2d3d; color:#aab8c5; font-size:0.72rem; border:1px solid rgba(255,255,255,0.12);
+               border-radius:10px; padding:14px 10px; letter-spacing:1.5px; transition: all 0.2s;">
+        🔄 ROTACIÓN ESTÁNDAR (V1)
+    </button>
+    <button onclick="generarPlanMaestroV2()" class="btn-primary-atp"
+        style="background:linear-gradient(135deg, var(--atp-gold) 0%, #a07830 100%); color:#0b1118; font-size:0.72rem;
+               font-weight:900; border:none; border-radius:10px; padding:14px 10px; letter-spacing:1.5px;
+               box-shadow: 0 4px 14px rgba(197,160,89,0.35); transition: all 0.2s;">
+        🚀 INTELIGENTE 2.0 (ELITE)
+    </button>
+</div>
+
+<button onclick="enviarPlanATV()" class="btn-primary-atp"
+    style="width:100%; margin-top:10px; background:linear-gradient(135deg,#0056b3,#00d4ff);
+           color:white; font-size:0.72rem; font-weight:900; border:none; border-radius:10px;
+           padding:12px 10px; letter-spacing:1.5px; transition:all 0.2s; display:flex;
+           align-items:center; justify-content:center; gap:8px;">
+    📺 ENVIAR A TV &amp; FANS
+</button>
+
+<div id="resultado-planificacion" class="plan-results-grid" style="margin-top:20px;"></div>
+
+<button onclick="copiarPlanWhatsApp()" class="btn-whatsapp-platinum" style="width:100%; margin-top:20px; margin-bottom:20px; justify-content:center; border-radius:10px; letter-spacing:1.5px;" id="btn-copiar-plan">
+    📋 COPIAR PLAN PARA WHATSAPP
+</button>
+
+<!-- ✅ FIX: Eliminado #resultado-planificacion-v2 — generarPlanMaestroV2()
+     inyecta en #resultado-planificacion, este div estaba siempre vacío. -->
+
+
+<div class="card" id="selector-partido-manual" style="border-bottom: 4px solid var(--atp-blue);">
+    <h3 style="margin:0 0 10px 0; font-size:0.8rem; color:var(--atp-navy);">🏟️ ASIGNAR PISTA MANUAL</h3>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+        <div>
+            <label style="font-size: 0.65rem; font-weight: bold; opacity: 0.7;">MODO:</label>
+            <select id="tipo-evento-manual" class="atp-input" onchange="actualizarInterfazManual()">
+                <option value="individual">🎾 INDIVIDUAL (1 vs 1)</option>
+                <option value="dobles" selected>👥 DOBLES (2 vs 2)</option>
+                <option value="equipos3">🔄 AUSTRALIANA (2vs1 rotativo)</option>
+                <option value="trios">🔱 TRÍOS (3 vs 3)</option>
+                <option value="asimetrico">⚡ ASIMÉTRICO (libre)</option>
+                <option value="gamificado">🎮 MODO GAMIFICADO</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="font-size: 0.65rem; font-weight: bold; opacity: 0.7;">PISTA:</label>
+            <select id="pista-manual" class="atp-input">
+    <option value="">— cargando —</option>
+</select>
+        </div>
+    </div>
+    
+    <div id="controles-evento-manual" style="margin-top:10px;"></div>
+    
+    <button onclick="lanzarPartidoManual()" class="btn-add" style="margin-top:10px; width:100%; height: 50px; font-size: 1rem;">
+        🚀 ENVIAR A PISTA
+    </button>
+</div>
+
+
+
+    <div class="card" style="border-top: 4px solid #00d4ff; background: #f0faff;">
+        <h3 style="margin-top:0; font-size:0.8rem; color:#0056b3;">🎮 MODO CLASE / ENTRENAMIENTO</h3>
+        <p style="font-size:0.7rem; color:#555; margin-bottom:10px;">Otorga +1 punto de experiencia a todos los presentes.</p>
+        <button onclick="finalizarGamificado()" class="btn-add" style="background:#00d4ff; color:black; font-weight: bold; border: 1px solid #00b8e6;">
+            ➕ SUMAR +1 PT A TODOS
+        </button>
+    </div>
+
+    <div id="partidos-abiertos-container" style="margin-top:20px;"></div>
+
+ <!-- ✅ FIX: #lista-partidos-jugados envuelto en .card para que
+         renderHistorialHoy() tenga contenedor con padding y estilo correcto. -->
+    <div class="card" style="margin-top:20px; padding:0;">
+        <div id="lista-partidos-jugados"></div>
+    </div>
+    <!-- ✅ NUEVO: #lista-resultados-hoy -->
+<div class="card" style="margin-top:20px;">
+    <div id="lista-resultados-hoy"></div>
+</div>
+    <!-- ✅ FIX: #contenedor-pistas-jornada añadido al HTML.
+         actualizarVistaPistas() inyecta aquí pero el div no existía,
+         haciendo que la función se ejecutara sin renderizar nada visible. -->
+    <div id="contenedor-pistas-jornada" style="margin-top:15px;"></div>
+
+
+    <button onclick="cerrarJornada()" class="btn-add" style="background: #900; margin-top: 40px; width: 100%; height: 60px; font-size: 1.1rem; border: 2px solid #600;">
+        🏁 FINALIZAR Y CERRAR JORNADA
+    </button>
+    <p style="text-align:center; font-size:0.65rem; color:#888; margin-top:10px;">
+        * Requiere asignar MVP antes de cerrar.
+    </p>
+</section>
+
+<section id="control-pistas" class="tab-content">
+    <div id="control-pistas-container"></div>
+</section>
+
+        <!-- ✅ NUEVA SECCIÓN MVP -->
+        <section id="sec-mvp" class="tab-content">
+            <h2 class="atp-title">👑 SELECCIÓN MVP DE JORNADA</h2>
+            <div id="mvp-section-container"></div>
+        </section>
+
+        <!-- SECCIÓN GOLPES -->
+        <section id="hitos-votos" class="tab-content">
+            <h2 class="atp-title">🎯 REGISTRO DE GOLPES GANADORES</h2>
+
+            <!-- Buscador rápido -->
+            <div style="background:#f8f9fa;border-radius:14px;padding:16px;margin-bottom:20px;border:1px solid #e2e8f0;">
+                <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
+                    <input type="text" id="golpes-buscador" placeholder="🔍 Buscar jugador..." 
+                           oninput="filtrarJugadorGolpes(this.value)"
+                           style="flex:1;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:1rem;outline:none;transition:border 0.2s;"
+                           onfocus="this.style.borderColor='#001e3c'" onblur="this.style.borderColor='#e2e8f0'">
+                    <button onclick="limpiarBuscadorGolpes()" style="padding:10px 16px;background:#ee5253;color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;">✕</button>
+                </div>
+                <!-- Sugerencias rápidas -->
+                <div id="golpes-sugerencias" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+            </div>
+
+            <!-- Panel del jugador seleccionado -->
+            <div id="golpes-panel-jugador" style="display:none;"></div>
+
+            <!-- Lista compacta todos los jugadores -->
+            <div id="lista-hitos-viva"></div>
+        </section>
+
+      <section id="ranking" class="tab-content">
+    <h2 class="atp-title">🏆 RANKING GENERAL</h2>
+    <div id="lista-ranking"></div>
+
+    <h2 class="atp-title" style="margin-top: 30px;">🎯 LÍDERES POR ESPECIALIDAD</h2>
+    <div id="ranking-especialistas"></div>
+</section>
+
+        <section id="bbdd-jugadores" class="tab-content">
+    <h2 class="atp-title">👥 GESTIÓN DE CANTERA</h2>
+    <div id="lista-total-jugadores" class="grid-cantera"></div>
+</section>
+
+<section id="historial" class="tab-content">
+    <div class="card" style="border-top: 4px solid var(--atp-gold);">
+        <h2 style="margin:0 0 15px; color:var(--atp-navy);">📚 HISTORIAL GENERAL</h2>
+        <div id="lista-archivo-historico">
+            </div>
+    </div>
+
+
+</section>
+
+	<section id="guia-uso" class="tab-content">
+    <h2 class="atp-title">📖 MANUAL DE OPERACIONES PLATINUM</h2>
+
+    <!-- FLUJO DE LA JORNADA -->
+    <div class="card" style="border-left:5px solid var(--atp-gold);margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">📋 FLUJO DE LA JORNADA (paso a paso)</h3>
+        <ol style="font-size:0.85rem;line-height:2;padding-left:20px;margin:0;">
+            <li><b>CONVOCATORIA</b> — Envía el WhatsApp desde "Gestión de Convocatoria". Los jugadores se apuntan en el portal (pestaña <b>Inscripción</b>) y los padres reservadores indican las pistas disponibles (pestaña <b>Pistas reservadas</b>).</li>
+            <li><b>LLEVAR A PISTA</b> — Pulsa "Llevar convocatoria a pista" para abrir la jornada con los confirmados.</li>
+            <li><b>GENERAR PLAN</b> — En la sección PISTA usa "Generar Plan" para crear los emparejamientos automáticos.</li>
+            <li><b>LANZAR PARTIDOS</b> — Asigna jugadores a pistas y pulsa "Lanzar". El marcador se actualiza en tiempo real.</li>
+            <li><b>REGISTRAR GOLPES</b> — En la sección GOLPES busca el jugador y anota los golpes ganadores durante el partido.</li>
+            <li><b>MVP</b> — En la sección MVP registra los votos verbales y selecciona el MVP técnico antes de cerrar.</li>
+            <li><b>CERRAR JORNADA</b> — Genera el resumen de WhatsApp y archiva la jornada. El ranking se actualiza automáticamente.</li>
+        </ol>
+    </div>
+
+    <!-- TABLA DE PUNTOS -->
+    <div class="card" style="margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">🏆 SISTEMA DE PUNTUACIÓN COMPLETO</h3>
+        <p style="font-size:0.8rem;color:#666;margin-bottom:12px;">Los puntos se suman al ranking acumulado de cada jugador al finalizar cada partido.</p>
+
+        <p style="font-size:0.75rem;font-weight:900;color:var(--atp-navy);text-transform:uppercase;margin:10px 0 6px;">Partidos estándar (dobles, individual, tríos)</p>
+        <table class="atp-table" style="font-size:0.82rem;width:100%;margin-bottom:12px;">
+            <tr><td>🏆 Victoria</td><td style="color:#2e7d32;font-weight:900;text-align:right;">+3 pts</td></tr>
+            <tr><td>🤝 Empate</td><td style="color:#e65100;font-weight:900;text-align:right;">+2 pts</td></tr>
+            <tr><td>❌ Derrota</td><td style="color:#c62828;font-weight:900;text-align:right;">+1 pt</td></tr>
+            <tr><td>⚡ David vs Goliat — equipo más pequeño que gana</td><td style="color:#7b1fa2;font-weight:900;text-align:right;">+4 pts (3+1 bonus)</td></tr>
+            <tr><td>⚡ Australiana — jugador solo que gana en solitario</td><td style="color:#7b1fa2;font-weight:900;text-align:right;">+4 pts (3+1 bonus)</td></tr>
+        </table>
+
+        <p style="font-size:0.75rem;font-weight:900;color:var(--atp-navy);text-transform:uppercase;margin:10px 0 6px;">🎮 Modo Gamificado (puntos proporcionales)</p>
+        <table class="atp-table" style="font-size:0.82rem;width:100%;margin-bottom:12px;">
+            <tr><td>🥇 Máxima puntuación (único ganador)</td><td style="color:#2e7d32;font-weight:900;text-align:right;">+3 pts</td></tr>
+            <tr><td>🥈 Puntuación proporcional al ganador</td><td style="color:#e65100;font-weight:900;text-align:right;">+1 ó +2 pts</td></tr>
+            <tr><td>🤝 Empate en el máximo</td><td style="color:#e65100;font-weight:900;text-align:right;">+2 pts</td></tr>
+            <tr><td>⬛ Sin puntuación (0 pts en el juego)</td><td style="color:#c62828;font-weight:900;text-align:right;">+0 pts</td></tr>
+            <tr><td>⬜ Todos sin datos</td><td style="color:#555;font-weight:900;text-align:right;">+1 pt participación</td></tr>
+        </table>
+        <p style="font-size:0.72rem;color:#888;font-style:italic;margin:0 0 12px;">
+            Fórmula proporcional: si el máximo es 7 pts → el que tiene 7 obtiene +3, el que tiene 4 obtiene +2 (round(4/7×3)), el que tiene 1 obtiene +1, el que tiene 0 obtiene +0.
+        </p>
+
+        <p style="font-size:0.75rem;font-weight:900;color:var(--atp-navy);text-transform:uppercase;margin:10px 0 6px;">👑 MVP de Jornada (bonus independiente del partido)</p>
+        <table class="atp-table" style="font-size:0.82rem;width:100%;margin-bottom:0;">
+            <tr><td>🗳️ MVP Jugadores — elegido por votación verbal</td><td style="color:#10ac84;font-weight:900;text-align:right;">+3 pts</td></tr>
+            <tr><td>👨‍🏫 MVP Entrenadores — elegido por el equipo técnico</td><td style="color:#C5A059;font-weight:900;text-align:right;">+2 pts</td></tr>
+        </table>
+        <p style="font-size:0.72rem;color:#888;font-style:italic;margin:8px 0 0;">
+            Puede haber varios MVPs simultáneos. Sin MVP seleccionado no se puede cerrar la jornada.
+        </p>
+    </div>
+
+    <!-- MODOS DE JUEGO -->
+    <div class="card" style="margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">🎾 MODOS DE JUEGO</h3>
+        <div style="display:grid;gap:10px;font-size:0.82rem;">
+            <div style="border-left:4px solid var(--atp-navy);padding-left:12px;">
+                <b>🤺 Individual (1v1)</b><br>
+                <span style="color:#666;">Un jugador contra otro. Marcador de juegos A-B. Victoria = más juegos.</span>
+            </div>
+            <div style="border-left:4px solid var(--atp-navy);padding-left:12px;">
+                <b>🎾 Dobles (2v2)</b><br>
+                <span style="color:#666;">Dos equipos de dos. Mismo sistema de juegos. El algoritmo evita repetir compañeros.</span>
+            </div>
+            <div style="border-left:4px solid #ff6b35;padding-left:12px;">
+                <b>⚡ Asimétrico (equipos de distinto tamaño)</b><br>
+                <span style="color:#666;">Ej: 3 jugadores vs 1, o 2 vs 1. El equipo más pequeño que gane recibe el bonus David vs Goliat (+1pt extra → total +4pts).</span>
+            </div>
+            <div style="border-left:4px solid #a78bfa;padding-left:12px;">
+                <b>🔄 Australiana (3 jugadores rotando)</b><br>
+                <span style="color:#666;">3 jugadores en rotación: 2 juegan contra 1. Cada ronda se rotan los papeles. El jugador solo que gane la ronda recibe el bonus (+1pt). Al finalizar, gana el que más juegos acumule.</span>
+            </div>
+            <div style="border-left:4px solid #ff9f43;padding-left:12px;">
+                <b>🔱 Tríos (3v3)</b><br>
+                <span style="color:#666;">Dos equipos de tres. Mismo sistema de juegos estándar.</span>
+            </div>
+            <div style="border-left:4px solid #00d4ff;padding-left:12px;">
+                <b>🎮 Gamificado (múltiples jugadores, sin equipos)</b><br>
+                <span style="color:#666;">Cada jugador acumula puntos individualmente (aces, winners, etc.). Al finalizar se convierten a pts de ranking de forma proporcional. El ticker y la TV muestran el marcador en tiempo real.</span>
+            </div>
+            <div style="border-left:4px solid #ee5253;padding-left:12px;">
+                <b>🔥 Partido de Venganza</b><br>
+                <span style="color:#666;">El algoritmo lo activa automáticamente cuando el equipo perdedor repite contra el mismo rival en la siguiente ronda.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALGORITMO DE ROTACIÓN -->
+    <div class="card" style="border-left:5px solid var(--atp-tennis);margin-bottom:16px;">
+        <h3 style="color:var(--atp-navy);margin-top:0;">🧠 ALGORITMO DE ROTACIÓN</h3>
+        <ul style="font-size:0.85rem;padding-left:20px;line-height:1.8;margin:0;">
+            <li><b>Prioridad por espera:</b> Cada bloque descansado suma +2.5 pts de prioridad. El que más lleva esperando entra primero.</li>
+            <li><b>Balanceo competitivo:</b> El algoritmo empareja jugadores de nivel similar (diferencia de rating &lt; 3 puntos).</li>
+            <li><b>Anti-repetición de compañeros:</b> Evita que dos jugadores repitan como pareja en partidos consecutivos.</li>
+            <li><b>Modo Supervivencia:</b> Si hay números impares o jugadores insuficientes, activa modos asimétrico, australiana o individual.</li>
+            <li><b>Jugadores pausados:</b> Los jugadores marcados como "ausentes" quedan fuera de la rotación automática pero siguen en la lista.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN MVP -->
+    <div class="card" style="margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">👑 SECCIÓN MVP — Cómo funciona</h3>
+        <div style="font-size:0.85rem;line-height:1.7;">
+            <p style="margin:0 0 8px;"><b>MVP Jugadores (🗳️):</b> Los jugadores votan verbalmente durante la jornada. El admin va anotando +1 por cada voto recibido. Al pulsar "Confirmar MVP Jugadores" se asignan +3pts automáticamente al jugador (o jugadores) con más votos. Se puede re-confirmar si cambian los votos.</p>
+            <p style="margin:0 0 8px;"><b>MVP Entrenadores (👨‍🏫):</b> El equipo técnico elige directamente. Pulsa sobre el jugador para activar/desactivar. Se aplican +2pts inmediatamente al activar y se revierten al desactivar. Se pueden seleccionar varios.</p>
+            <p style="margin:0;"><b>Para cerrar la jornada</b> es obligatorio haber seleccionado al menos un MVP (de cualquier fuente). Si no hay MVP, el botón de cierre redirige automáticamente a esta sección.</p>
+        </div>
+    </div>
+
+    <!-- GOLPES GANADORES -->
+    <div class="card" style="margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">🎯 REGISTRO DE GOLPES — Cómo funciona</h3>
+        <div style="font-size:0.85rem;line-height:1.7;">
+            <p style="margin:0 0 8px;">Cada golpe (Ace, Winner, Dejada, Volea, Smash, Passing) se registra en tiempo real durante el partido. No afecta a los puntos de ranking — es una estadística técnica independiente.</p>
+            <p style="margin:0 0 8px;"><b>Búsqueda rápida:</b> Escribe las primeras letras del nombre del jugador. Si hay una sola coincidencia se abre directamente su panel de registro.</p>
+            <p style="margin:0;"><b>Los golpes aparecen en:</b> la ficha individual del jugador, el ranking de especialistas, el ticker de la TV, y el análisis avanzado de la cantera.</p>
+        </div>
+    </div>
+
+    <!-- RANGGOS Y NIVELES -->
+    <div class="card" style="margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">🎖️ RANGOS Y NIVELES</h3>
+        <p style="font-size:0.82rem;color:#666;margin:0 0 10px;">El <b>rango de ranking</b> se basa en pts acumulados. El <b>nivel técnico</b> se basa en la media de habilidades (Saque, Derecha, Revés, Volea, Mental).</p>
+        <table class="atp-table" style="font-size:0.82rem;width:100%;margin-bottom:10px;">
+            <tr><th>Rango Ranking</th><th>Puntos</th></tr>
+            <tr><td>🥉 Bronce</td><td>&lt; 20 pts</td></tr>
+            <tr><td>🥈 Plata</td><td>20 – 49 pts</td></tr>
+            <tr><td>🥇 Oro</td><td>50 – 99 pts</td></tr>
+            <tr><td>💎 Platinum</td><td>100+ pts</td></tr>
+        </table>
+        <table class="atp-table" style="font-size:0.82rem;width:100%;">
+            <tr><th>Nivel Técnico</th><th>Media habilidades</th></tr>
+            <tr><td>⚪ Amateur</td><td>0.0 – 6.9</td></tr>
+            <tr><td>🔵 Avanzado</td><td>7.0 – 8.9</td></tr>
+            <tr><td>👑 Élite / Pro</td><td>9.0 – 10.0</td></tr>
+        </table>
+        <p style="font-size:0.72rem;color:#888;font-style:italic;margin:8px 0 0;">Las habilidades técnicas evolucionan automáticamente según los golpes registrados en cada jornada.</p>
+    </div>
+
+    <!-- ECOSISTEMA DIGITAL -->
+    <div class="card" style="background:var(--atp-navy);color:white;margin-bottom:16px;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">📺 ECOSISTEMA DIGITAL</h3>
+        <ul style="font-size:0.85rem;padding-left:20px;line-height:1.8;margin:0;color:#e0e8f0;">
+            <li style="color:#e0e8f0;"><b style="color:white;">TV Mode:</b> Abre una ventana de marcador en tiempo real sincronizada via BroadcastChannel. Muestra pistas activas, ranking live y especialistas.</li>
+            <li style="color:#e0e8f0;"><b style="color:white;">Portal Fans:</b> Página pública donde cualquiera puede seguir los partidos y el ranking en tiempo real sin acceso al panel admin.</li>
+            <li style="color:#e0e8f0;"><b style="color:white;">Portal Inscripciones:</b> Permite a los jugadores apuntarse ellos mismos a la convocatoria. La lista se sincroniza con Firebase en tiempo real.</li>
+            <li style="color:#e0e8f0;"><b style="color:white;">Ticker:</b> La marquesina inferior anuncia pistas libres, marcadores en directo (incluyendo gamificado en tiempo real) y duelos por el liderato.</li>
+            <li style="color:#e0e8f0;"><b style="color:white;">Firebase Sync:</b> Todos los datos se sincronizan en la nube. Si el admin registra un partido desde otro dispositivo, todos los paneles se actualizan solos.</li>
+        </ul>
+    </div>
+
+    <!-- RESERVA DE PISTAS -->
+    <div class="card" style="border-left:5px solid #10ac84;margin-bottom:16px;">
+        <h3 style="color:#10ac84;margin-top:0;">🏟️ RESERVA DE PISTAS — Para padres y reservadores</h3>
+        <p style="font-size:0.82rem;color:#666;margin:0 0 12px;">
+            El portal de inscripciones incluye una pestaña independiente <b>"🏟️ Pistas reservadas"</b> donde los padres o reservadores del club pueden indicar qué pistas han conseguido y a qué hora. Esto es <b>completamente independiente de apuntarse a jugar</b>.
+        </p>
+        <div style="display:grid;gap:10px;font-size:0.82rem;">
+            <div style="border-left:4px solid #10ac84;padding-left:12px;">
+                <b>¿Quién lo usa?</b><br>
+                <span style="color:#666;">Los padres o encargados de reservar pistas en el club, no los propios jugadores.</span>
+            </div>
+            <div style="border-left:4px solid #10ac84;padding-left:12px;">
+                <b>¿Cómo funciona?</b><br>
+                <span style="color:#666;">Abre el portal de inscripciones → pestaña <b>Pistas reservadas</b> → selecciona la pista del club en el desplegable → indica la hora de inicio y fin (opcional) → escribe tu nombre → pulsa <b>✅ Añadir esta reserva</b>. Puedes añadir varias pistas una tras otra; el nombre se recuerda entre reservas.</span>
+            </div>
+            <div style="border-left:4px solid #10ac84;padding-left:12px;">
+                <b>¿Dónde lo ve el admin?</b><br>
+                <span style="color:#666;">En el panel de <b>Gestión de Convocatoria</b> aparece automáticamente un bloque <b>"🏟️ Pistas reservadas por los padres"</b> con la lista en tiempo real. Desde ahí el admin puede limpiarlas con un clic cuando ya no hagan falta.</span>
+            </div>
+            <div style="border-left:4px solid #10ac84;padding-left:12px;">
+                <b>¿Y si me equivoco?</b><br>
+                <span style="color:#666;">Cada reserva tiene un botón <b>✕ Cancelar</b> individual para retirarla sin afectar al resto.</span>
+            </div>
+            <div style="background:rgba(16,172,132,0.08);border-radius:8px;padding:10px 12px;">
+                <b style="color:#10ac84;">📌 Nota para el admin:</b>
+                <span style="font-size:0.8rem;color:#555;"> El número de pistas del desplegable se actualiza automáticamente según la configuración de pistas del club en el panel de ajustes. Si el club añade más pistas, actualiza el número en Ajustes y se reflejará en el portal.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANÁLISIS VISUAL AVANZADO -->
+    <div class="card" style="margin-bottom:16px;border-left:5px solid #6e5526;">
+        <h3 style="color:var(--atp-gold);margin-top:0;">🎯 ANÁLISIS VISUAL POR JUGADOR</h3>
+        <p style="font-size:0.82rem;color:#555;margin-bottom:14px;line-height:1.55;">
+            En la pestaña <b>📊 ANÁLISIS</b>, debajo de los récords históricos, hay un bloque dedicado al
+            <b>análisis individual de cada jugador</b> con 5 visualizaciones interactivas pensadas
+            para entrenadores y jugadores. Selecciona un jugador del desplegable y verás:
+        </p>
+
+        <!-- 1. RADAR -->
+        <div style="border-left:4px solid #0a7556;padding:10px 14px;margin-bottom:12px;background:rgba(10,117,86,0.04);border-radius:0 8px 8px 0;">
+            <div style="font-weight:900;color:#0a7556;font-size:0.92rem;margin-bottom:6px;">
+                🕸️ Radar pentagonal de habilidades
+            </div>
+            <p style="font-size:0.8rem;color:#555;line-height:1.5;margin:0;">
+                Pentágono con las 5 habilidades técnicas: <b>Saque · Derecha · Revés · Volea · Mental</b>.
+                El polígono verde muestra el nivel actual de cada una sobre 10. Las habilidades flojas
+                aparecen como "valles" del polígono y las fuertes como "picos". De un solo vistazo ves
+                dónde destaca el jugador y dónde necesita trabajar.
+            </p>
+            <p style="font-size:0.75rem;color:#888;font-style:italic;margin:6px 0 0;">
+                Las habilidades se actualizan automáticamente cuando registras golpes ganadores
+                (aces → Saque, winners → Derecha, dejadas → Mental, voleas y smashes → Volea, passings → Revés).
+            </p>
+        </div>
+
+        <!-- 2. SPARKLINE -->
+        <div style="border-left:4px solid #1d4ed8;padding:10px 14px;margin-bottom:12px;background:rgba(29,78,216,0.04);border-radius:0 8px 8px 0;">
+            <div style="font-weight:900;color:#1d4ed8;font-size:0.92rem;margin-bottom:6px;">
+                📈 Evolución de puntos por jornada
+            </div>
+            <p style="font-size:0.8rem;color:#555;line-height:1.5;margin:0;">
+                Línea (sparkline) con los puntos del jugador en las últimas 10 jornadas. Junto a la
+                gráfica aparece una etiqueta automática de tendencia:
+                <b style="color:#0a7556;">📈 SUBE</b> /
+                <b style="color:#6e5526;">➡️ ESTABLE</b> /
+                <b style="color:#dc2626;">📉 BAJA</b>,
+                calculada comparando el primer tercio del periodo con el último. Útil para detectar
+                jugadores que progresan o que están regresando.
+            </p>
+        </div>
+
+        <!-- 3. SUGERENCIAS -->
+        <div style="border-left:4px solid #92400e;padding:10px 14px;margin-bottom:12px;background:rgba(146,64,14,0.04);border-radius:0 8px 8px 0;">
+            <div style="font-weight:900;color:#92400e;font-size:0.92rem;margin-bottom:6px;">
+                💡 Sugerencias del entrenador
+            </div>
+            <p style="font-size:0.8rem;color:#555;line-height:1.5;margin:0 0 8px;">
+                Hasta 3 sugerencias automáticas generadas analizando stats + habilidades del jugador.
+                El sistema detecta patrones como:
+            </p>
+            <ul style="font-size:0.78rem;color:#555;padding-left:18px;line-height:1.7;margin:0;">
+                <li><b>Habilidad débil</b> → "Trabajar el revés (4.2/10 — punto débil)" cuando hay diferencia ≥1pt entre la mejor y la peor.</li>
+                <li><b>Fortaleza clara</b> → "Aprovechar el saque (8.5/10 — fortaleza)" si alguna habilidad supera 7.</li>
+                <li><b>Consistencia</b> → "Mejora la consistencia" para win-rate &lt;35% o "Jugador de élite" para ≥70%.</li>
+                <li><b>Tendencia</b> → "En clara mejoría" o "Bajada de rendimiento" según evolución reciente.</li>
+                <li><b>Participación</b> → "Necesita más partidos" si jugó menos de 4.</li>
+                <li><b>Estilo de juego</b> → detecta "saque-volea" (muchos aces, pocos winners) o "jugador de fondo" (al revés).</li>
+            </ul>
+        </div>
+
+        <!-- 4. COMBINACIONES -->
+        <div style="border-left:4px solid #6e5526;padding:10px 14px;margin-bottom:12px;background:rgba(110,85,38,0.04);border-radius:0 8px 8px 0;">
+            <div style="font-weight:900;color:#6e5526;font-size:0.92rem;margin-bottom:6px;">
+                🤝 Combinaciones equilibradas para dobles y tríos
+            </div>
+            <p style="font-size:0.8rem;color:#555;line-height:1.5;margin:0 0 8px;">
+                Botón para alternar entre <b>👥 DOBLES (4)</b> y <b>🔱 TRÍOS (6)</b>. Para cada modo el sistema
+                propone hasta 3 escenarios de equipos:
+            </p>
+            <ul style="font-size:0.78rem;color:#555;padding-left:18px;line-height:1.7;margin:0 0 8px;">
+                <li><b>🏆 Élite</b> → los mejores X jugadores divididos con algoritmo "snake" (mejor + último vs medianos).</li>
+                <li><b>⚖️ Nivel medio</b> → salta los más fuertes, equilibra los siguientes.</li>
+                <li><b>🎓 Mixto</b> → formato alternativo con top contra bottom (útil para sesiones de mentoría).</li>
+            </ul>
+            <p style="font-size:0.78rem;color:#555;line-height:1.5;margin:0;">
+                Cada combinación muestra los nombres, el nivel total sumado de cada equipo, la diferencia
+                entre ambos y un badge de balance:
+                <b style="color:#0a7556;">✓ EQUILIBRADO</b> (diff ≤0.5),
+                <b style="color:#92400e;">⚠️ ACEPTABLE</b> (≤1.5),
+                <b style="color:#dc2626;">❌ DESEQUILIBRADO</b> (&gt;1.5).
+            </p>
+            <p style="font-size:0.75rem;color:#888;font-style:italic;margin:6px 0 0;">
+                El algoritmo snake ("mejor + peor vs medianos") es la solución óptima del problema
+                "particionar en 2 grupos de suma similar" para conjuntos pequeños — minimiza
+                automáticamente la diferencia.
+            </p>
+        </div>
+
+        <!-- 5. TERMÓMETRO -->
+        <div style="border-left:4px solid #dc2626;padding:10px 14px;margin-bottom:0;background:rgba(220,38,38,0.04);border-radius:0 8px 8px 0;">
+            <div style="font-weight:900;color:#dc2626;font-size:0.92rem;margin-bottom:6px;">
+                🔥 Termómetro de forma — últimas 5 jornadas
+            </div>
+            <p style="font-size:0.8rem;color:#555;line-height:1.5;margin:0 0 6px;">
+                Cuadrícula con TODOS los jugadores ordenados por su forma reciente:
+            </p>
+            <ul style="font-size:0.78rem;color:#555;padding-left:18px;line-height:1.7;margin:0 0 8px;">
+                <li><b style="color:#dc2626;">🔥 EN RACHA</b> — ≥60% victorias en las últimas 5 jornadas.</li>
+                <li><b style="color:#92400e;">〰️ REGULAR</b> — entre 40% y 59%.</li>
+                <li><b style="color:#1d4ed8;">❄️ FRÍO</b> — &lt;40% (necesita atención).</li>
+            </ul>
+            <p style="font-size:0.78rem;color:#555;line-height:1.5;margin:0;">
+                Cada tarjeta muestra el nombre del jugador, el % de victorias y cuántas jornadas se han
+                considerado. Identificación instantánea de quién está en su mejor momento y quién
+                necesita atención — útil para decidir convocatorias o formar parejas.
+            </p>
+        </div>
+    </div>
+
+    <!-- FILOSOFÍA / CASOS DE USO -->
+    <div class="card" style="margin-bottom:16px;background:#f8fafc;border-left:5px solid #0a7556;">
+        <h3 style="color:#0a7556;margin-top:0;">🧭 ¿Cuándo usar cada sección de Análisis?</h3>
+        <div style="display:grid;gap:10px;font-size:0.82rem;">
+            <div style="background:white;padding:10px 14px;border-radius:8px;">
+                <b>📅 Antes de cada jornada:</b><br>
+                <span style="color:#555;">Mira el termómetro de forma para ver quién está flojo y planifica una sesión motivadora. Usa las combinaciones equilibradas para preparar parejas.</span>
+            </div>
+            <div style="background:white;padding:10px 14px;border-radius:8px;">
+                <b>🎓 Para sesiones individuales:</b><br>
+                <span style="color:#555;">Las sugerencias automáticas dan exactamente los 3 puntos a trabajar con cada jugador. Comparte el radar con el alumno para que vea sus debilidades.</span>
+            </div>
+            <div style="background:white;padding:10px 14px;border-radius:8px;">
+                <b>👨‍👩‍👦 Reuniones con padres:</b><br>
+                <span style="color:#555;">El radar pentagonal y el sparkline son muy visuales — comunican progreso o estancamiento sin necesidad de explicar números crudos.</span>
+            </div>
+            <div style="background:white;padding:10px 14px;border-radius:8px;">
+                <b>🤝 Formación de equipos:</b><br>
+                <span style="color:#555;">Para clases grupales, las combinaciones evitan partidos descompensados. El formato "🎓 Mixto" sirve para que los más avanzados ayuden a los principiantes.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="card" style="background:#fffdf5;border-left:5px solid var(--atp-gold);">
+        <h3 style="color:var(--atp-gold);margin-top:0;">🚀 TIPS RÁPIDOS</h3>
+        <ul style="font-size:0.85rem;padding-left:20px;line-height:1.9;margin:0;">
+            <li>El <b>Hub</b> muestra el estado del MVP de jornada en tiempo real — verde = seleccionado, naranja = pendiente.</li>
+            <li>En <b>Golpes</b> el buscador filtra mientras escribes. Con un jugador abierto, los botones + y − son grandes para facilitar el registro durante el juego.</li>
+            <li>El <b>modo gamificado</b> muestra el marcador en vivo en el ticker, la TV y el portal de fans — no espera a que finalice el partido.</li>
+            <li>El <b>bonus David vs Goliat</b> se aplica automáticamente — si el equipo más pequeño gana, recibe +1pt extra sin necesidad de marcarlo manualmente.</li>
+            <li>Un jugador puede ser <b>MVP doble</b> (elegido por jugadores Y por entrenadores). Solo recibe los pts de jugadores (+3) para evitar duplicar.</li>
+            <li>El <b>Modo Admin</b> permite registrar partidos históricos y cerrar jornadas pasadas. Los puntos se aplican al ranking igual que en directo.</li>
+            <li>Usa <b>Pausar jugador</b> (en la lista de presentes) para que alguien salga temporalmente de la rotación sin quitarlo de la jornada.</li>
+            <li>En el <b>Análisis Visual</b>, cambia de jugador en el desplegable y todos los gráficos se actualizan al instante (radar, sparkline, sugerencias).</li>
+            <li>Las <b>sugerencias automáticas</b> aparecen por orden de prioridad (puntos débiles primero) y se limitan a 3 por jugador para no saturar.</li>
+        </ul>
+    </div>
+</section>
+
+<section id="analisis" class="tab-content">
+    <h2 class="atp-title">📊 ANÁLISIS DE RENDIMIENTO GLOBAL</h2>
+
+    <div class="whatsapp-action-container">
+        <button onclick="descargarCapturaAnalisis()" class="btn-whatsapp-platinum">
+            <span class="ws-icon">📸</span> GENERAR IMAGEN PARA WHATSAPP
+        </button>
+        <button onclick="diagnosticarYRepararStats()" class="btn-add"
+                style="background:#e67e22; border:none; color:#fff; font-size:0.82rem;
+                       padding:10px 16px; border-radius:10px; margin-top:8px;
+                       width:100%; cursor:pointer; font-weight:800;">
+            🔧 DIAGNOSTICAR Y REPARAR STATS
+        </button>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+        <div class="card stat-card-platinum blue-accent">
+            <h4 class="stat-label">TOTAL PARTIDOS</h4>
+            <div id="stat-total-partidos" class="stat-value">0</div>
+        </div>
+        <div class="card stat-card-platinum gold-accent">
+            <h4 class="stat-label">GOLPES TOTALES</h4>
+            <div id="stat-total-golpes" class="stat-value">0</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="color: var(--atp-navy); border-bottom: 2px solid #eee; padding-bottom: 10px;">📈 EFECTIVIDAD DE LA CANTERA</h3>
+        <div id="grafico-rendimiento-cantera" style="padding: 20px 0;">
+            <p style="text-align:center; color:#999; font-size: 0.8rem;">Cargando comparativa de rendimiento...</p>
+        </div>
+    </div>
+
+    <div class="card" style="background: var(--atp-navy); color: white;">
+        <h3 style="color: var(--atp-gold); margin-top: 0;">🏅 RÉCORDS HISTÓRICOS</h3>
+        <div id="records-historicos" style="font-size: 0.9rem;"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ANÁLISIS VISUAL AVANZADO
+         ═══════════════════════════════════════════════════════ -->
+    <div style="margin-top:24px;">
+        <h2 style="font-size:1.05rem;font-weight:900;color:#6e5526;letter-spacing:1.5px;
+                   text-transform:uppercase;margin:0 0 12px 0;
+                   border-bottom:3px solid #C5A059;padding-bottom:8px;">
+            🎯 ANÁLISIS VISUAL POR JUGADOR
+        </h2>
+        <div id="analisis-visual-container">
+            <p style="text-align:center;padding:30px;color:#888;font-size:0.85rem;">
+                Cargando análisis avanzado...
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MODO ADMINISTRADOR — REGISTRO HISTÓRICO MANUAL
+     ══════════════════════════════════════════════════════ -->
+<!-- partial: seccion-admin-historico -->
+<div data-partial="partials/seccion-admin-historico.html"></div>
+
+<!-- partial: modal-editar-partido -->
+<div data-partial="partials/modal-editar-partido.html"></div>
+
+    </main>
+
+<!-- partial: modal-pistas -->
+<div data-partial="partials/modal-pistas.html"></div>
+
+<!-- partial: modal-ficha -->
+<div data-partial="partials/modal-ficha.html"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+<!-- 👇 AÑADE ESTA -->
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+<!-- ===== ATP PLATINUM — Bootstrap del refactor ===== -->
+<!--
+  El antiguo script.js (12 624 líneas) está dividido en 37 módulos en js/.
+  La carga es DIFERIDA: primero se cargan los parciales HTML
+  (partials/*.html → modales y secciones grandes), y solo cuando todos
+  están en el DOM se cargan los scripts modulares en orden.
+
+  Esto garantiza que el listener de Firebase no se dispare antes de que
+  el DOM esté completo (los getElementById de los modales fallarían
+  silenciosamente si los scripts arrancasen antes que los parciales).
+
+  ⚠ IMPORTANTE: si abres el HTML directamente (file://) los fetch fallan.
+     Sirve siempre desde un servidor. Para pruebas locales rápidas:
+        python3 -m http.server 8000
+     Y abre http://localhost:8000/
+-->
+<script>
+// Lista en ORDEN ESTRICTO de los módulos. Cambiar el orden puede romper la app.
+window.ATP_MODULES = [
+    'js/01-config-firebase.js',
+    'js/02-jornada.js',
+    'js/03-sync-tv.js',
+    'js/04-ranking-especialistas-tv.js',
+    'js/05-asistencia.js',
+    'js/06-lanzamiento-manual.js',
+    'js/07-render-pistas.js',
+    'js/08-score-australiana-toast.js',
+    'js/09-tiebreak.js',
+    'js/10-finalizar-partido.js',
+    'js/11-historial-hoy.js',
+    'js/12-golpes-hitos.js',
+    'js/13-ranking-ficha.js',
+    'js/14-cierre-jornada.js',
+    'js/15-mvp-dual.js',
+    'js/16-pdf-informe.js',
+    'js/17-historico-invitados.js',
+    'js/18-historico-helpers.js',
+    'js/19-historico-edicion.js',
+    'js/20-ficha-cantera.js',
+    'js/21-jugador-mvp-section.js',
+    'js/22-timer-cronometro.js',
+    'js/23-evolucion-gamificado.js',
+    'js/24-plan-maestro.js',
+    'js/25-abrir-pistas.js',
+    'js/26-asistencia-filtro.js',
+    'js/27-pistas-cajas-ticker.js',
+    'js/28-estadisticas-historicas.js',
+    'js/29-backup-restore.js',
+    'js/30-admin-analisis.js',
+    'js/31-hub-navegacion.js',
+    'js/32-convocatoria.js',
+    'js/33-plan-maestro-v2.js',
+    'js/34-utilidades-mantenimiento.js',
+    'js/35-timer-control-pistas.js',
+    'js/36-mvp-toggle.js',
+    'js/37-nueva-jornada-admin.js',
+    'js/38-analisis-visual.js'
+];
+
+// Función llamada por partials-loader.js cuando todos los parciales
+// están en el DOM. Carga los módulos en serie respetando el orden.
+window.atpArrancarApp = function () {
+    let i = 0;
+    function siguiente() {
+        if (i >= window.ATP_MODULES.length) {
+            console.log('[ATP] ✓ Los ' + window.ATP_MODULES.length + ' módulos están cargados.');
+            // Cargar los scripts inline al final (auth + admin)
+            cargar('js/inline/auth-acceso.js', function () {
+                cargar('js/inline/admin-panel.js', function () {
+                    console.log('[ATP] ✓ Scripts inline cargados. App lista.');
+
+                    // ✅ FIX BUG "banner JORNADA ACTIVA no aparece tras refresh":
+                    // El listener Firebase se registra en 01-config-firebase.js y
+                    // dispara su primer snapshot ANTES de que cargue 31-hub-navegacion.js
+                    // (que define verificarEstadoHub). Cuando el snapshot llega, los
+                    // typeof verificarEstadoHub === 'function' devuelven false y el
+                    // banner queda sin pintar.
+                    //
+                    // Solución: tras cargar TODOS los módulos, repintamos los componentes
+                    // del HUB que dependen de los datos ya recibidos (db ya está poblado).
+                    if (typeof verificarEstadoHub === 'function') verificarEstadoHub(true);
+                    if (typeof actualizarTablonHub === 'function') actualizarTablonHub();
+                    if (typeof actualizarBadgeConvocatoria === 'function') actualizarBadgeConvocatoria();
+                    if (typeof actualizarContadorConvocatoriaHub === 'function') actualizarContadorConvocatoriaHub();
+                    if (typeof actualizarTablonAnuncios === 'function') actualizarTablonAnuncios();
+                });
+            });
+            return;
+        }
+        cargar(window.ATP_MODULES[i++], siguiente);
+    }
+    function cargar(src, cb) {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = cb;
+        s.onerror = function () {
+            console.error('[ATP] ❌ Error cargando ' + src);
+            cb();  // continuar de todas formas
+        };
+        document.body.appendChild(s);
+    }
+    siguiente();
+};
+</script>
+<script src="js/partials-loader.js"></script>
+
+
+<!-- partial: pantalla-espera-arbitro -->
+<div data-partial="partials/pantalla-espera-arbitro.html"></div>
+
+<!-- ===== PANEL SOLICITUDES FLOTANTE (solo admin) ===== -->
+<div id="panel-solicitudes-admin" style="display:none; position:fixed; bottom:20px; right:20px;
+     z-index:9999; max-width:320px; width:90%;"></div>
+
+
+
+<!-- partial: pantalla-login-admin -->
+<div data-partial="partials/pantalla-login-admin.html"></div>
+
+<!-- (auth-acceso.js se carga vía bootstrap, no aquí) -->
+
+<div id="ticker-container" style="
+    position: fixed; 
+    bottom: 70px; /* Justo encima del banner de Oro Plus */
+    left: 0; 
+    width: 100%; 
+    background: rgba(0, 0, 0, 0.8); 
+    color: #00d4ff; 
+    height: 30px; 
+    display: flex; 
+    align-items: center; 
+    overflow: hidden; 
+    border-top: 1px solid #C5A059;
+    z-index: 998;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+">
+    <div id="ticker-text" style="white-space: nowrap; padding-left: 100%;
+         animation: ticker-move 60s linear infinite; animation-play-state: paused;">
+        Cargando estadísticas en tiempo real...
+    </div>
+</div>
+
+<!-- ✅ FIX: Renombrado ticker-animation → ticker-move para que coincida con
+     lo que actualizarTicker() asigna en el JS. Con el nombre anterior
+     el ticker nunca se movía porque el keyframe no se encontraba.
+     También corregido el translate de -200% a -100% para un loop limpio. -->
+<link rel="stylesheet" href="css/inline/ticker.css">
+
+    <div id="banner-footer" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    border-top: 3px solid #C5A059; /* Color Oro ATP */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 0 20px;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+">
+    <div style="
+        color: #C5A059;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-right: 25px;
+        border-right: 1px solid rgba(197, 160, 89, 0.3);
+        padding-right: 20px;
+        line-height: 1;
+    ">
+        Official<br>Partner
+    </div>
+
+    <a href="https://www.instagram.com/oroplus_joyeria/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; cursor: pointer;" title="Visitar Instagram de Oro Plus">
+        <img src="oro_plus.jpg" 
+             alt="Oro Plus Sponsor" 
+             style="
+                max-height: 55px; 
+                width: auto; 
+                filter: drop-shadow(0px 0px 8px rgba(197, 160, 89, 0.4));
+                transition: transform 0.3s ease;
+             "
+             onmouseover="this.style.transform='scale(1.05)'"
+             onmouseout="this.style.transform='scale(1)'">
+    </a>
+
+    <a href="https://albaescayo.com/albaescayo/" target="_blank" rel="noopener noreferrer" style="margin-left: 25px; display: flex; align-items: center; cursor: pointer;" title="Visitar Alba Escayo">
+        <img src="alba.jpg" 
+             alt="Alba Escayo Sponsor" 
+             style="
+                max-height: 38px; 
+                width: auto; 
+                mix-blend-mode: screen;
+                filter: invert(1) sepia(1) saturate(5) hue-rotate(5deg) brightness(1.2) drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
+                transition: transform 0.3s ease;
+             "
+             onmouseover="this.style.transform='scale(1.1)'"
+             onmouseout="this.style.transform='scale(1)'">
+    </a>
+
+    <div style="
+        margin-left: 25px;
+        border-left: 1px solid rgba(197, 160, 89, 0.3);
+        padding-left: 20px;
+        color: rgba(255,255,255,0.6);
+        font-size: 13px;
+        font-style: italic;
+        font-family: serif;
+    ">
+        "Excelencia en cada set"
+    </div>
+</div>
+
+<button onclick="menuDebugSistema()" class="btn-debug-center-top" title="Diagnóstico">⚙️</button>
+
+<link rel="stylesheet" href="css/inline/btn-debug.css">
+<link rel="stylesheet" href="css/inline/admin-module.css">
+
+<!-- (admin-panel.js se carga vía bootstrap, no aquí) -->
+
+    <script src="theme-toggle.js"></script>
+</body>
+</html>

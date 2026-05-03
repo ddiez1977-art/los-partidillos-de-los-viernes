@@ -1,0 +1,71 @@
+/* ══ 4. BOTONES ═════════════════════════════════════════════ */
+body.theme-platinum .btn-add {
+  background: var(--pt-green) !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: var(--pt-rsm) !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 16px rgba(204,255,0,0.2) !important;
+}
+body.theme-platinum .btn-add:hover { filter: brightness(1.1) !important; }
+
+/* Botón con background:var(--atp-navy) hardcoded (guardar admin) */
+body.theme-platinum .btn-add[style*="background:var(--atp-navy)"],
+body.theme-platinum .btn-add[style*="background: var(--atp-navy)"] {
+  background: var(--pt-gold) !important;
+  color: #000 !important;
+}
+
+/* Verde "#28a745" (archivar jornada) */
+body.theme-platinum [style*="background: #28a745"],
+body.theme-platinum [style*="background:#28a745"] {
+  background: #1a6b35 !important;
+  color: #fff !important;
+}
+
+/* Botón eliminar con background:#fee2e2 */
+body.theme-platinum [style*="background: #fee2e2"],
+body.theme-platinum [style*="background:#fee2e2"] {
+  background: rgba(239,68,68,0.15) !important;
+  color: #ff6b6b !important;
+  border-color: rgba(239,68,68,0.3) !important;
+}
+
+/* Botón toggle golpes */
+body.theme-platinum #btn-toggle-golpes {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+  color: var(--pt-text-sub) !important;
+}
+body.theme-platinum .btn-whatsapp-platinum {
+  background: linear-gradient(135deg,#25D366,#128C7E) !important;
+  color: #fff !important;
+}
+body.theme-platinum .btn-atp-secondary {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+}
+body.theme-platinum .btn-terminar {
+  background: #c0392b !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+/* Botones inline con background:#d9534f (danger) */
+body.theme-platinum [style*="background: #d9534f"],
+body.theme-platinum [style*="background:#d9534f"] {
+  background: #a93226 !important;
+  color: #fff !important;
+}
+
+/* Botones anular/editar partido (background:#fff border:#ccc o #ee5253) */
+body.theme-platinum [style*="background: #fff"][style*="border: 1px solid #ccc"],
+body.theme-platinum [style*="background:#fff"][style*="border:1px solid #ccc"],
+body.theme-platinum [style*="background: #fff"][style*="border: 1px solid #ee5253"],
+body.theme-platinum [style*="background:#fff"][style*="border:1px solid #ee5253"] {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+  color: var(--pt-text) !important;
+}
+

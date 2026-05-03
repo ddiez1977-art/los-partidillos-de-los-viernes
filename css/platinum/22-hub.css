@@ -1,0 +1,21 @@
+/* ══ 21. HUB ════════════════════════════════════════════════ */
+body.theme-platinum .btn-hub-item {
+  background: rgba(255,255,255,0.07) !important;
+  color: var(--pt-text) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  font-weight: 800 !important;
+}
+body.theme-platinum .btn-hub-item:hover {
+  background: var(--pt-green) !important;
+  color: #000 !important;
+  border-color: var(--pt-green) !important;
+  box-shadow: 0 0 22px rgba(204,255,0,0.4) !important;
+}
+body.theme-platinum .hub-tablon { background: rgba(255,255,255,0.04) !important; border: 2px solid var(--pt-gold) !important; }
+body.theme-platinum .btn-hub-action.gold { background: var(--pt-gold) !important; color: #000 !important; }
+body.theme-platinum .btn-hub-action.outline { border: 1px solid rgba(255,255,255,0.35) !important; color: var(--pt-text) !important; }
+body.theme-platinum .hub-overlay { background: rgba(0,6,14,0.9) !important; }
+body.theme-platinum #hub-convocatoria-counter { background: rgba(255,255,255,0.06) !important; border-left-color: var(--pt-green) !important; }
+body.theme-platinum #hub-convocatoria-counter:hover { background: rgba(255,255,255,0.1) !important; }
+body.theme-platinum #count-confirmados-hub { color: var(--pt-text) !important; }
+

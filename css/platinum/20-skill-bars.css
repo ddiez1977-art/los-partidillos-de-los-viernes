@@ -1,0 +1,4 @@
+/* ══ 19. SKILL BARS ═════════════════════════════════════════ */
+body.theme-platinum .skill-bar-bg { background: var(--pt-border) !important; border: 1px solid var(--pt-border-hi) !important; }
+body.theme-platinum .skill-bar-fill { background: linear-gradient(90deg, var(--pt-gold), var(--pt-green)) !important; }
+

@@ -1,0 +1,12 @@
+/* ==========================================
+   RANKING ESPECIALISTAS (GOLPES)
+   ========================================== */
+#ranking-especialistas div {
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+#ranking-especialistas div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+

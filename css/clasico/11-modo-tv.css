@@ -1,0 +1,279 @@
+/* ==========================================
+   DISEÑO EXCLUSIVO MODO TV (REVISADO)
+   ========================================== */
+
+/* Contenedor principal de la TV: 35% Partidos / 65% Otros */
+.layout-tv {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: 20px;
+    height: calc(100vh - 120px); /* Ajuste para que quepa el ticker abajo */
+    overflow: hidden;
+    padding: 10px;
+}
+
+/* Partidos más pequeños para que quepan más en pantalla */
+.match-card-tv {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 6px solid var(--atp-tennis);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.match-card-tv .player-names {
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+    text-transform: uppercase;
+}
+
+.match-card-tv .score-tv {
+    font-size: 2.8rem;
+    color: var(--atp-tennis);
+    font-family: 'JetBrains Mono', monospace;
+    margin: 2px 0;
+    line-height: 1;
+}
+
+/* GOLPES (ESPECIALISTAS) EN CUADRÍCULA 3x2 (Sin Scroll) */
+.esp-grid-tv {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas fijas */
+    grid-template-rows: repeat(2, 1fr);    /* 2 filas fijas */
+    gap: 12px;
+    height: 100%; /* Ocupa el espacio asignado */
+    padding: 10px;
+}
+
+.esp-item-tv {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 3px solid var(--atp-gold);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.esp-item-tv .label {
+    font-size: 0.7rem;
+    color: var(--atp-gold);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.esp-item-tv .nombre {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.esp-item-tv .valor {
+    font-size: 1.4rem;
+    color: var(--atp-tennis);
+    font-weight: 900;
+}
+
+/* CONFIGURACIÓN DEL TICKER (CORREGIDA DEFINITIVA) */
+#ticker-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    /* Quitamos el display: flex para que el texto pueda crecer infinitamente hacia la derecha */
+    position: relative; 
+}
+
+#ticker-text {
+    display: inline-block;
+    white-space: nowrap;
+    color: var(--atp-tennis);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 85px; 
+    
+    /* Cambiamos esto: */
+    padding-left: 100%; /* Empieza justo cuando termina la pantalla */
+    will-change: transform; 
+    /* Aumentamos el tiempo para que sea legible si hay muchos mensajes */
+    animation: ticker-move 60s linear infinite;
+}
+
+@keyframes ticker-move {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); } 
+    /* Al llegar a -100%, todo el texto (incluido el padding inicial) ha pasado */
+}
+
+#banner-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85px;
+    z-index: 999;
+}
+
+#tv-ranking-list {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.analisis-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    color: #e8edf3; /* siempre sobre fondo navy oscuro */
+}
+
+.analisis-val {
+    color: var(--atp-gold);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+}
+
+/* Card de récords históricos: forzar color blanco en todo su interior */
+#records-historicos,
+#records-historicos span {
+    color: #e8edf3;
+}
+#records-historicos .analisis-val {
+    color: var(--atp-gold);
+}
+
+.fila-pistas-hora {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f9f9f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 4px solid #eee;
+}
+
+.caja-pista-check {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.7rem;
+    transition: all 0.2s;
+    user-select: none;
+    border: 2px solid transparent;
+}
+
+/* Pista marcada como disponible en esta hora */
+.caja-pista-check.activa {
+    background: var(--atp-tennis);
+    color: var(--atp-navy);
+    border-color: #b3e600;
+}
+
+/* Pista no disponible en esta hora (estado por defecto) */
+.caja-pista-check.inactiva {
+    background: #e8e8e8;
+    color: #aaa;
+    border-color: #d0d0d0;
+}
+/* Fila de pistas: label de hora */
+.fila-pistas-hora .hora-label {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--atp-gold);
+    min-width: 52px;
+    white-space: nowrap;
+}
+
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Contenedor para separar el botón de los cuadros */
+.whatsapp-action-container {
+    margin: 25px 0; /* Espaciado generoso arriba y abajo */
+    display: flex;
+    justify-content: center;
+}
+
+/* Botón con aspecto Platinum */
+.btn-whatsapp-platinum {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp-platinum:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    filter: brightness(1.1);
+}
+
+.btn-whatsapp-platinum:active {
+    transform: translateY(0);
+}
+
+/* Refuerzo visual para las stat-cards */
+.stat-card-platinum {
+    text-align: center;
+    padding: 20px !important;
+    transition: transform 0.3s ease;
+}
+
+.stat-card-platinum:hover {
+    transform: scale(1.02);
+}
+
+.stat-label {
+    margin: 0;
+    font-size: 0.65rem;
+    opacity: 0.6;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--atp-navy);
+}
+
+.blue-accent { border-left: 5px solid var(--atp-blue) !important; }
+.gold-accent { border-left: 5px solid var(--atp-gold) !important; }
+

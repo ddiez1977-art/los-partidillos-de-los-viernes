@@ -1,0 +1,443 @@
+<section id="admin-historico" class="tab-content">
+
+<h2 class="atp-title">🔐 MODO ADMINISTRADOR</h2>
+<p style="font-size:0.8rem;color:#888;text-align:center;margin-bottom:20px;">
+    Registra partidos históricos o jornadas pasadas. Todos los datos suman en el ranking, fichas y estadísticas.
+</p>
+
+<!-- ── PIN DE ACCESO ── -->
+<div id="admin-pin-screen" style="max-width:380px;margin:0 auto 20px;">
+    <div class="card" style="text-align:center;padding:28px 20px;">
+        <div style="font-size:3rem;margin-bottom:10px;">🔒</div>
+        <h3 style="color:var(--atp-navy);margin-bottom:16px;font-size:1rem;">Introduce el PIN de administrador</h3>
+        <input type="password" id="admin-pin-input" class="atp-input"
+               placeholder="PIN..." maxlength="8"
+               style="text-align:center;letter-spacing:6px;font-size:1.4rem;margin-bottom:12px;"
+               onkeydown="if(event.key==='Enter') verificarPinAdmin()">
+        <button onclick="verificarPinAdmin()" class="btn-add" style="width:100%;margin:0;background:var(--atp-navy);">
+            🔓 ACCEDER
+        </button>
+        <p id="admin-pin-error" style="color:#d9534f;font-size:0.8rem;margin-top:8px;display:none;">
+            PIN incorrecto. Inténtalo de nuevo.
+        </p>
+    </div>
+</div>
+
+<!-- ── PANEL ADMIN (oculto hasta PIN correcto) ── -->
+<div id="admin-panel" style="display:none;">
+
+    <!-- TABS INTERNOS -->
+    <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+        <button class="admin-tab-btn active" onclick="switchAdminTab('registrar',this)">➕ Registrar Partido</button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('jornada-manual',this)">📅 Cerrar Jornada</button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('nueva-jornada',this)">📋 Nueva Jornada</button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('admin-historial',this)">✏️ Editar Sesión</button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('admin-historial-global',this)">📚 Editar Historial</button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('backup-restore',this)">💾 Backup</button>
+    </div>
+
+    <!-- TAB 1: REGISTRAR PARTIDO -->
+    <div id="admin-tab-registrar" class="admin-tab-content">
+
+        <div class="card">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                ➕ Registrar Partido Histórico
+            </h3>
+
+            <!-- DESTINO DEL PARTIDO -->
+            <div class="form-group">
+                <label class="form-label">📂 Destino del partido</label>
+                <select id="adm-destino" class="atp-input" onchange="actualizarDestinoAdmin()">
+                    <option value="sesion">➕ Añadir a la cola de esta sesión (archivar después)</option>
+                    <option value="jornada-existente">📚 Añadir directamente a una jornada archivada</option>
+                </select>
+                <div id="adm-destino-jornada" style="display:none;margin-top:8px;">
+                    <label class="form-label" style="font-size:0.75rem;">Selecciona la jornada de destino:</label>
+                    <select id="adm-jornada-destino-id" class="atp-input">
+                        <option value="">Cargando jornadas...</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- FECHA -->
+            <div class="form-group">
+                <label class="form-label">📅 Fecha del partido</label>
+                <input type="date" id="adm-fecha" class="atp-input">
+            </div>
+
+            <!-- MODALIDAD -->
+            <div class="form-group">
+                <label class="form-label">🎾 Modalidad</label>
+                <select id="adm-modalidad" class="atp-input" onchange="actualizarFormAdmin()">
+                    <option value="dobles">🎾 Dobles (2v2)</option>
+                    <option value="individual">🤺 Individual (1v1)</option>
+                    <option value="trios">🔱 Tríos (3v3)</option>
+                    <option value="asimetrico">⚡ Asimétrico (equipos libres)</option>
+                    <option value="equipos3">🔄 Australiana (3 jugadores)</option>
+                    <option value="gamificado">🎮 Gamificado</option>
+                </select>
+            </div>
+
+            <!-- PISTA (opcional) -->
+            <div class="form-group">
+                <label class="form-label">🏟️ Pista (opcional)</label>
+                <input type="text" id="adm-pista" class="atp-input" placeholder="Ej: 1, 2, ...">
+            </div>
+
+            <!-- SELECCIÓN JUGADORES -->
+            <div id="adm-jugadores-container">
+                <!-- Se rellena con actualizarFormAdmin() -->
+            </div>
+
+            <!-- RESULTADO -->
+            <div id="adm-resultado-container">
+                <!-- Se rellena según modalidad -->
+            </div>
+
+            <!-- GOLPES GANADORES -->
+            <div class="form-group">
+                <label class="form-label" style="display:flex;align-items:center;justify-content:space-between;">
+                    🎯 Golpes ganadores
+                    <button onclick="toggleAdmGolpes()" id="btn-toggle-golpes"
+                            style="background:none;border:1px solid #ddd;border-radius:6px;padding:3px 10px;font-size:0.75rem;cursor:pointer;color:#666;">
+                        + Añadir golpes
+                    </button>
+                </label>
+                <div id="adm-golpes-panel" style="display:none;">
+                    <p style="font-size:0.75rem;color:#888;margin-bottom:10px;">
+                        Selecciona el jugador y registra sus golpes destacados de este partido.
+                    </p>
+                    <div id="adm-golpes-container">
+                        <!-- Se rellena dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- MVP dual: jugadores y entrenadores por separado -->
+            <div class="form-group">
+                <label class="form-label">👑 MVP del partido (opcional)</label>
+                <!-- MVP JUGADORES -->
+                <div style="background:#f0fdf9;border:1px solid #a7f3d0;border-radius:8px;padding:10px;margin-bottom:8px;">
+                    <div style="font-size:0.68rem;font-weight:800;color:#065f46;letter-spacing:1px;margin-bottom:6px;">🗳️ MVP JUGADORES (+3 pts)</div>
+                    <div id="adm-mvp-container" style="max-height:120px;overflow-y:auto;padding:4px;">
+                        <p style="color:#aaa;font-size:0.78rem;text-align:center;">Selecciona jugadores primero</p>
+                    </div>
+                </div>
+                <!-- MVP ENTRENADORES -->
+                <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:10px;">
+                    <div style="font-size:0.68rem;font-weight:800;color:#92400e;letter-spacing:1px;margin-bottom:6px;">👨‍🏫 MVP ENTRENADORES (+2 pts)</div>
+                    <div id="adm-mvp-entrenadores-container" style="max-height:120px;overflow-y:auto;padding:4px;">
+                        <p style="color:#aaa;font-size:0.78rem;text-align:center;">Selecciona jugadores primero</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTÓN GUARDAR -->
+            <button onclick="guardarPartidoAdmin()" class="btn-add"
+                    style="width:100%;margin-top:8px;background:var(--atp-navy);height:50px;font-size:1rem;font-weight:900;border-radius:12px;">
+                💾 GUARDAR Y APLICAR AL RANKING
+            </button>
+
+            <div id="adm-feedback" style="display:none;margin-top:12px;padding:12px 14px;border-radius:10px;font-size:0.85rem;font-weight:700;text-align:center;"></div>
+        </div>
+    </div>
+
+    <!-- TAB 2: CERRAR JORNADA MANUAL -->
+    <div id="admin-tab-jornada-manual" class="admin-tab-content" style="display:none;">
+        <div class="card">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                📅 Registrar Jornada Completa Manual
+            </h3>
+            <p style="font-size:0.82rem;color:#666;margin-bottom:16px;line-height:1.5;">
+                Usa esta opción para añadir una jornada pasada completa al historial.
+                Los partidos que hayas registrado en la pestaña anterior y aún no se hayan archivado
+                se pueden consolidar aquí.
+            </p>
+
+            <div class="form-group">
+                <label class="form-label">📅 Fecha de la jornada</label>
+                <input type="date" id="adm-jornada-fecha" class="atp-input">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">👑 MVP de la jornada (opcional)</label>
+                <!-- MVP JUGADORES -->
+                <div style="background:#f0fdf9;border:1px solid #a7f3d0;border-radius:8px;padding:10px;margin-bottom:8px;">
+                    <div style="font-size:0.68rem;font-weight:800;color:#065f46;letter-spacing:1px;margin-bottom:6px;">🗳️ MVP JUGADORES (+3 pts)</div>
+                    <div id="adm-jornada-mvpJ-container" style="max-height:120px;overflow-y:auto;padding:4px;">
+                        <p style="color:#aaa;font-size:0.78rem;text-align:center;">Cargando jugadores...</p>
+                    </div>
+                </div>
+                <!-- MVP ENTRENADORES -->
+                <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:10px;">
+                    <div style="font-size:0.68rem;font-weight:800;color:#92400e;letter-spacing:1px;margin-bottom:6px;">👨‍🏫 MVP ENTRENADORES (+2 pts)</div>
+                    <div id="adm-jornada-mvp-container" style="max-height:120px;overflow-y:auto;padding:4px;">
+                        <p style="color:#aaa;font-size:0.78rem;text-align:center;">Cargando jugadores...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📝 Partidos a incluir en esta jornada</label>
+                <div id="adm-partidos-para-jornada" style="max-height:240px;overflow-y:auto;border:1px solid #eee;border-radius:8px;padding:10px;">
+                    <p style="color:#999;font-size:0.8rem;text-align:center;padding:20px 0;">
+                        Registra partidos primero en la pestaña "Registrar Partido"
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="cerrarJornadaManual()" class="btn-add"
+                    style="width:100%;margin-top:8px;background:#28a745;height:50px;font-size:1rem;font-weight:900;border-radius:12px;">
+                📚 ARCHIVAR JORNADA EN HISTORIAL
+            </button>
+        </div>
+    </div>
+
+    <!-- TAB NUEVA JORNADA: JORNADA COMPLETA DESDE CERO -->
+    <!-- TAB NUEVA JORNADA -->
+    <div id="admin-tab-nueva-jornada" class="admin-tab-content" style="display:none;">
+        <div class="card">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                &#x1F4CB; Nueva Jornada Completa
+            </h3>
+            <p style="font-size:0.82rem;color:#666;margin-bottom:16px;line-height:1.5;">
+                Crea una jornada completa con sus partidos y MVPs directamente en el historial,
+                sin pasar por la sesi&#xF3;n activa. Ideal para registrar jornadas no celebradas
+                o recuperar datos de partidas pasadas.
+            </p>
+
+            <div class="form-group">
+                <label class="form-label">&#x1F4C5; Fecha de la jornada</label>
+                <input type="date" id="nj-fecha" class="atp-input">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">&#x1F451; MVP de la jornada (opcional)</label>
+                <div style="background:#f0fdf9;border:1px solid #a7f3d0;border-radius:8px;padding:10px;margin-bottom:8px;">
+                    <div style="font-size:0.68rem;font-weight:800;color:#065f46;letter-spacing:1px;margin-bottom:6px;">&#x1F5F3;&#xFE0F; MVP JUGADORES (+3 pts)</div>
+                    <div id="nj-mvpJ-container" style="max-height:130px;overflow-y:auto;padding:4px;">
+                        <p style="color:#aaa;font-size:0.78rem;text-align:center;">Cargando jugadores...</p>
+                    </div>
+                </div>
+                <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:10px;">
+                    <div style="font-size:0.68rem;font-weight:800;color:#92400e;letter-spacing:1px;margin-bottom:6px;">&#x1F468;&#x200D;&#x1F3EB; MVP ENTRENADORES (+2 pts)</div>
+                    <div id="nj-mvpE-container" style="max-height:130px;overflow-y:auto;padding:4px;">
+                        <p style="color:#aaa;font-size:0.78rem;text-align:center;">Cargando jugadores...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" style="display:flex;justify-content:space-between;align-items:center;">
+                    &#x1F3BE; Partidos de esta jornada
+                    <button onclick="njAnadirPartido()"
+                            style="background:#0056b3;color:white;border:none;border-radius:8px;
+                                   padding:6px 14px;font-size:0.78rem;font-weight:900;cursor:pointer;letter-spacing:0.5px;">
+                        + A&#xF1;adir Partido
+                    </button>
+                </label>
+                <div id="nj-partidos-lista" style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+                    <div id="nj-partidos-empty" style="text-align:center;padding:24px;background:#f8f9fa;
+                         border:2px dashed #dee2e6;border-radius:10px;color:#aaa;font-size:0.82rem;font-style:italic;">
+                        A&#xFA;n no hay partidos. Pulsa &quot;+ A&#xF1;adir Partido&quot; para comenzar.
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="njArchivarJornada()" class="btn-add"
+                    style="width:100%;margin-top:8px;background:#155724;height:52px;font-size:1rem;
+                           font-weight:900;border-radius:12px;letter-spacing:0.5px;">
+                &#x1F4DA; ARCHIVAR JORNADA EN HISTORIAL
+            </button>
+            <div id="nj-feedback" style="display:none;margin-top:10px;padding:12px;border-radius:10px;
+                 font-size:0.85rem;font-weight:700;text-align:center;"></div>
+        </div>
+    </div>
+    <!-- TAB 3: EDITAR SESIÓN ACTUAL -->
+    <div id="admin-tab-admin-historial" class="admin-tab-content" style="display:none;">
+        <div class="card">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                ✏️ Partidos de esta sesión — Editar / Eliminar
+            </h3>
+            <p style="font-size:0.8rem;color:#888;margin-bottom:12px;">
+                Los cambios <b>revertirán los puntos anteriores</b> y aplicarán los nuevos valores.
+            </p>
+            <div id="adm-lista-registrados">
+                <p style="text-align:center;color:#999;padding:30px;font-style:italic;">
+                    Aún no se han registrado partidos en esta sesión.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: EDITAR HISTORIAL GLOBAL -->
+    <div id="admin-tab-admin-historial-global" class="admin-tab-content" style="display:none;">
+        <div class="card">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                📚 Historial Global — Editar Jornadas y Partidos
+            </h3>
+            <p style="font-size:0.8rem;color:#888;margin-bottom:14px;">
+                Edita o elimina partidos de jornadas ya archivadas. Los puntos y stats se recalculan.
+            </p>
+
+            <div id="adm-historial-global-container">
+                <p style="text-align:center;color:#999;padding:20px;font-style:italic;">Cargando historial...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: BACKUP / RESTAURAR -->
+    <div id="admin-tab-backup-restore" class="admin-tab-content" style="display:none;">
+
+        <!-- ── EXPORTAR ────────────────────────────────────────── -->
+        <div class="card">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                📤 Exportar Backup
+            </h3>
+            <p style="font-size:0.82rem;color:#555;margin:0 0 16px;line-height:1.5;">
+                Descarga una copia de seguridad en formato JSON. Incluye todos los datos de la base de datos: jugadores, ranking, historial de jornadas, partidos abiertos, golpes, MVPs y configuración. Puedes elegir un backup completo o solo una sección.
+            </p>
+
+            <div style="display:flex;flex-direction:column;gap:10px;">
+                <button onclick="exportarBackupCompleto()"
+                        style="background:linear-gradient(135deg,#10ac84,#0d8c6c);color:white;border:none;
+                               padding:14px 18px;border-radius:10px;font-weight:900;font-size:0.92rem;
+                               cursor:pointer;box-shadow:0 4px 12px rgba(16,172,132,0.3);text-align:left;">
+                    💾 Backup COMPLETO &nbsp;<span style="opacity:0.85;font-weight:600;font-size:0.78rem;">(toda la BBDD)</span>
+                </button>
+
+                <details style="background:#f8f9fa;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
+                    <summary style="cursor:pointer;font-weight:800;font-size:0.85rem;color:var(--atp-navy);">
+                        📦 Backup parcial (solo una sección)
+                    </summary>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:12px;">
+                        <button onclick="exportarBackupParcial('jugadores')"        class="btn-backup-parcial">👥 Jugadores + Ranking</button>
+                        <button onclick="exportarBackupParcial('historicoJornadas')" class="btn-backup-parcial">📚 Historial Jornadas</button>
+                        <button onclick="exportarBackupParcial('golpesGanadoresHoy')" class="btn-backup-parcial">🎯 Golpes (hoy)</button>
+                        <button onclick="exportarBackupParcial('partidosAbiertos')"  class="btn-backup-parcial">🎾 Partidos Abiertos</button>
+                        <button onclick="exportarBackupParcial('partidosRecientes')" class="btn-backup-parcial">🏁 Partidos Recientes</button>
+                        <button onclick="exportarBackupParcial('mvp')"               class="btn-backup-parcial">👑 MVPs</button>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- ── RESTAURAR ───────────────────────────────────────── -->
+        <div class="card" style="margin-top:16px;border-top:4px solid #ff9f43;">
+            <h3 style="color:var(--atp-navy);border-bottom:2px solid #eee;padding-bottom:10px;margin-bottom:16px;">
+                📥 Restaurar desde Backup
+            </h3>
+
+            <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:12px 14px;margin-bottom:14px;">
+                <div style="font-size:0.78rem;color:#856404;line-height:1.5;">
+                    ⚠️ <b>Operación delicada.</b> Antes de restaurar nada, el sistema descargará automáticamente un backup del estado actual como red de seguridad. Se pedirá el PIN de admin para confirmar.
+                </div>
+            </div>
+
+            <!-- Paso 1: cargar archivo -->
+            <div style="margin-bottom:16px;">
+                <div style="font-size:0.8rem;font-weight:900;color:var(--atp-navy);margin-bottom:8px;">
+                    1️⃣ Selecciona el archivo .json
+                </div>
+                <label style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;
+                              background:var(--atp-navy);color:white;border-radius:10px;cursor:pointer;
+                              font-size:0.85rem;font-weight:900;">
+                    📂 Elegir archivo
+                    <input type="file" accept=".json" id="backup-file-input"
+                           onchange="onBackupArchivoSeleccionado(this)" style="display:none;">
+                </label>
+                <span id="backup-file-name" style="margin-left:10px;font-size:0.78rem;color:#666;font-style:italic;">
+                    Ningún archivo seleccionado
+                </span>
+            </div>
+
+            <!-- Paso 2: previsualización + selección de modo (oculto hasta cargar archivo) -->
+            <div id="backup-preview-zone" style="display:none;">
+
+                <!-- Resumen del archivo -->
+                <div id="backup-preview-resumen"
+                     style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;
+                            padding:12px 14px;margin-bottom:14px;font-size:0.8rem;color:#0c4a6e;line-height:1.6;">
+                </div>
+
+                <!-- Selección de modo -->
+                <div style="font-size:0.8rem;font-weight:900;color:var(--atp-navy);margin-bottom:10px;">
+                    2️⃣ ¿Cómo quieres restaurar?
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+
+                    <label style="display:flex;align-items:flex-start;gap:10px;padding:12px;
+                                  border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;
+                                  background:white;transition:0.2s;" class="backup-modo-opcion">
+                        <input type="radio" name="backup-modo" value="completo" checked
+                               style="margin-top:3px;width:18px;height:18px;cursor:pointer;">
+                        <div>
+                            <div style="font-weight:900;color:#dc2626;font-size:0.88rem;">
+                                💣 Restaurar TODO (reemplazar BBDD)
+                            </div>
+                            <div style="font-size:0.74rem;color:#666;margin-top:3px;line-height:1.4;">
+                                Sustituye la base de datos entera por la del backup. Se pierde todo lo que no esté en el archivo.
+                            </div>
+                        </div>
+                    </label>
+
+                    <label style="display:flex;align-items:flex-start;gap:10px;padding:12px;
+                                  border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;
+                                  background:white;transition:0.2s;" class="backup-modo-opcion">
+                        <input type="radio" name="backup-modo" value="granular"
+                               style="margin-top:3px;width:18px;height:18px;cursor:pointer;"
+                               onchange="document.getElementById('backup-secciones-zone').style.display=this.checked?'block':'none';">
+                        <div style="flex:1;">
+                            <div style="font-weight:900;color:#0d8c6c;font-size:0.88rem;">
+                                🎯 Restaurar solo secciones concretas
+                            </div>
+                            <div style="font-size:0.74rem;color:#666;margin-top:3px;line-height:1.4;">
+                                Marca abajo qué partes traer. El resto de la BBDD no se toca.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Checkboxes de secciones (solo en modo granular) -->
+                <div id="backup-secciones-zone" style="display:none;background:#f8f9fa;border:1px solid #e2e8f0;
+                                                       border-radius:10px;padding:14px;margin-bottom:16px;">
+                    <div style="font-size:0.78rem;font-weight:900;color:var(--atp-navy);margin-bottom:10px;">
+                        Selecciona las secciones a restaurar:
+                    </div>
+                    <div id="backup-secciones-lista" style="display:flex;flex-direction:column;gap:6px;">
+                    </div>
+                </div>
+
+                <!-- Botón ejecutar -->
+                <div style="font-size:0.8rem;font-weight:900;color:var(--atp-navy);margin-bottom:8px;">
+                    3️⃣ Ejecutar restauración
+                </div>
+                <button onclick="ejecutarRestauracionBackup()"
+                        style="width:100%;background:linear-gradient(135deg,#ff9f43,#e67e22);color:white;
+                               border:none;padding:14px;border-radius:10px;font-weight:900;font-size:0.95rem;
+                               cursor:pointer;box-shadow:0 4px 12px rgba(255,159,67,0.35);">
+                    🔄 RESTAURAR (pedirá PIN)
+                </button>
+            </div>
+
+            <div id="backup-restore-status-new" style="margin-top:12px;font-size:0.8rem;font-weight:700;"></div>
+        </div>
+
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div style="border-top: 3px solid #d9534f; margin-top: 30px; padding: 20px; background: rgba(217,83,79,0.08); border-radius: 0 0 12px 12px;">
+        <h3 style="color: #d9534f; margin-top: 0; font-size: 0.9rem; font-weight: 900;">⚠️ DANGER ZONE: ADMINISTRACIÓN</h3>
+
+        <p style="font-size: 0.75rem; color: #888; margin-bottom: 15px; line-height: 1.4;">
+            Esta acción es irreversible. Elimina la cantera completa, todos los puntos, MVPs e historial de partidos. Úsalo solo para limpiar pruebas.
+        </p>
+        <button onclick="resetAppTotal()" style="background: #d9534f; color: white; border: none; padding: 15px; font-weight: bold; font-size: 0.9rem; border-radius: 8px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(217, 83, 79, 0.3); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            💣 BORRAR TODO Y VOLVER A FÁBRICA
+        </button>
+    </div>
+
+</div><!-- fin admin-panel -->
+
+</section>

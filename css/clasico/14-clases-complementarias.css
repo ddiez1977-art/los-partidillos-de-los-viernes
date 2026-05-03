@@ -1,0 +1,195 @@
+/* ==========================================
+   CLASES COMPLEMENTARIAS (usadas en script.js)
+   ========================================== */
+
+.btn-primary-atp {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: filter 0.2s, transform 0.1s;
+}
+.btn-primary-atp:hover  { filter: brightness(1.1); }
+.btn-primary-atp:active { transform: scale(0.98); }
+
+.btn-terminar {
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: filter 0.2s;
+}
+.btn-terminar:hover  { filter: brightness(1.15); }
+.btn-terminar:active { filter: brightness(0.9); }
+
+.card-pista-activa {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.pista-header {
+    padding: 5px 10px;
+    font-weight: 900;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px 5px 0 0;
+    color: white;
+    background: var(--atp-navy, #001e3c);
+}
+
+.pista-body {
+    padding: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.card-resultado {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border-left: 5px solid #334155;
+}
+
+.no-partidos {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+}
+
+.card-historial {
+    background: white;
+    margin-bottom: 12px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#lista-ranking {
+    max-width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    #lista-ranking {
+        padding: 10px;
+    }
+    
+    #lista-ranking h2 {
+        font-size: 1.65rem;
+    }
+}
+/* Selector de estrategia — adaptado al contenedor oscuro */
+.select-estrategia {
+    background: #0f1f35 !important;
+    color: white !important;
+    border: 1px solid rgba(197,160,89,0.4) !important;
+    border-radius: 8px !important;
+}
+.select-estrategia option {
+    background: #001e3c;
+    color: white;
+}
+/* En tema platinum (body.theme-platinum) se hereda el estilo oscuro */
+
+/* Botón "Enviar a TV & Fans" — hover */
+.btn-tv-fans:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* ── Ranking rows hover ───────────────────────────────────── */
+.ranking-row:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important; }
+
+/* ── TIE-BREAK buttons — Classic mode ───────────────────── */
+.btn-tiebreak-activar {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 22px; cursor: pointer;
+    font-size: 0.78rem; font-weight: 900; letter-spacing: 0.8px;
+    border: 2px solid #0056b3; background: rgba(0,86,179,0.08);
+    color: #0056b3; transition: all 0.2s; touch-action: manipulation;
+}
+.btn-tiebreak-activar:hover {
+    background: #0056b3; color: white;
+    box-shadow: 0 4px 12px rgba(0,86,179,0.3);
+}
+.btn-tiebreak-desactivar {
+    display: inline-flex; align-items: center; gap: 6px;
+    width: 100%; justify-content: center;
+    padding: 7px 14px; border-radius: 8px; cursor: pointer;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.4px;
+    border: 1px solid rgba(220,53,69,0.4); background: rgba(220,53,69,0.06);
+    color: rgba(180,0,20,0.8); transition: all 0.2s; touch-action: manipulation;
+    margin-top: 8px;
+}
+.btn-tiebreak-desactivar:hover { background: rgba(220,53,69,0.15); color: #c00; }
+
+/* UX-FIX CSS-3: Select estrategia en iOS Safari
+   Los <select> nativos de iOS ignoran background-color.
+   Añadimos un wrapper visual para que el select oscuro
+   sea reconocible aunque el OS lo sobreescriba internamente. */
+.select-estrategia-wrapper {
+    position: relative;
+    border-radius: 8px;
+    background: #0f1f35;
+    border: 1px solid rgba(197,160,89,0.4);
+}
+.select-estrategia-wrapper::after {
+    content: '▼';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #C5A059;
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+.select-estrategia {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent !important;
+    border: none !important;
+    width: 100%;
+    padding-right: 32px !important;
+}
+
+/* UX-FIX CSS-4: active-tab ya aplicada desde showSection(), reforzar visualmente */
+nav button.active-tab {
+    color: #ccff00 !important;
+    border-bottom: 3px solid #ccff00 !important;
+    background: rgba(204,255,0,0.08) !important;
+    font-weight: 900 !important;
+}
+
+/* UX-FIX CSS-5: btn-copiar-plan y btn-enviar-tv ocultos por defecto (JS los activa) */
+#btn-copiar-plan { display: none; }
+#btn-enviar-tv   { display: none; }
+
+/* UX-FIX CSS-6: Modal admin sticky header en iOS */
+#modal-editar-partido-admin .modal-content {
+    overscroll-behavior: contain;
+}

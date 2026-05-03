@@ -1,0 +1,261 @@
+/* ============================================================
+   ATP PLATINUM — CONTRAST BOOST (ambos temas)
+   Mejoras de contraste para uso en exteriores / alta luminosidad.
+   Se aplica siempre, independientemente del tema.
+   ============================================================ */
+
+/* ── TEMA CLÁSICO: refuerzos sin romper el look & feel ─────── */
+
+/* ✅ FIX BUG CONTRASTE EN CLASSIC MODE:
+   El dorado #C5A059 y el verde #10ac84 originales tienen ratio 2.46/2.57
+   sobre fondos claros (#fff y #f8f1e3 top3), muy por debajo del WCAG AA 4.5.
+   Solución: cuando estos colores se usan como TEXTO sobre fondo claro,
+   los oscurecemos. Mantenemos los originales en bordes, fondos, badges.
+
+   Esto solo se aplica EN CLASSIC MODE (body:not(.theme-platinum)) para no
+   afectar al dark mode donde los dorados claros sí son visibles. */
+
+/* Dorado oscurecido para texto sobre fondos claros: ratio 4.6 sobre blanco */
+body:not(.theme-platinum) .ranking-row [style*="color:#C5A059"],
+body:not(.theme-platinum) .ranking-row [style*="color: #C5A059"],
+body:not(.theme-platinum) .stat-card [style*="color:#C5A059"],
+body:not(.theme-platinum) .stat-card [style*="color: #C5A059"],
+body:not(.theme-platinum) [style*="color:#C5A059"][style*="font-size:1.9"],
+body:not(.theme-platinum) [style*="color:#C5A059"][style*="font-size:2.7"],
+body:not(.theme-platinum) [style*="color:#C5A059"][style*="font-weight:900"] {
+    color: #8c6f39 !important;  /* Dorado oscuro - contraste 4.6 vs blanco */
+}
+
+/* Verde MVP oscurecido para texto sobre fondos claros: ratio 4.7 sobre blanco */
+body:not(.theme-platinum) .ranking-row [style*="color:#10ac84"],
+body:not(.theme-platinum) .ranking-row [style*="color: #10ac84"],
+body:not(.theme-platinum) [style*="color:#10ac84"][style*="font-size:0.9"],
+body:not(.theme-platinum) [style*="color:#10ac84"][style*="font-size:2.7"] {
+    color: #0a7556 !important;  /* Verde oscuro - contraste 4.7 vs blanco */
+}
+
+/* H2/H3 con dorado: oscurecer para tipografía clara legible */
+body:not(.theme-platinum) h1[style*="color:#C5A059"],
+body:not(.theme-platinum) h1[style*="color: #C5A059"],
+body:not(.theme-platinum) h2[style*="color:#C5A059"],
+body:not(.theme-platinum) h2[style*="color: #C5A059"],
+body:not(.theme-platinum) h3[style*="color:#C5A059"],
+body:not(.theme-platinum) h3[style*="color: #C5A059"] {
+    color: #6e5526 !important;  /* Dorado más oscuro para títulos - ratio 6.5 */
+}
+
+/* Refuerzo: TODOS los span que muestran badge dorado/verde inline en filas
+   de ranking (independientemente de la sintaxis exacta del style inline) */
+body:not(.theme-platinum) .ranking-row span[style*="color"],
+body:not(.theme-platinum) .ranking-row div[style*="color"] {
+    /* Asegurar peso fuerte para mejor legibilidad */
+    font-weight: 700;
+}
+
+/* Texto principal sobre cards blancas: más oscuro y más fuerte */
+body:not(.theme-platinum) .card p,
+body:not(.theme-platinum) .card span,
+body:not(.theme-platinum) .card div,
+body:not(.theme-platinum) .card label,
+body:not(.theme-platinum) .card li {
+  color: #1a1a2e;
+}
+
+.atp-title {
+  color: var(--atp-navy);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+/* Nav: texto más visible */
+nav button {
+  color: #b0b8c4; /* Antes #888 — +1.5 stops de contraste */
+}
+nav button:hover {
+  color: #ffffff !important;
+}
+nav button.active-tab {
+  color: #ccff00 !important;
+  font-weight: 900 !important;
+}
+
+/* Top bar */
+.top-bar {
+  color: #9aaabb; /* Antes #aaa */
+  font-weight: 600;
+}
+
+/* Inputs: borde más visible */
+.atp-input {
+  border: 2px solid #b0bec5 !important; /* Antes 1px #ddd */
+  color: #001e3c !important;
+  font-size: 1rem !important;
+}
+.atp-input:focus {
+  border-color: var(--atp-gold) !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(197,160,89,0.2) !important;
+}
+
+/* Botón add: sombra para que destaque más sobre fondos claros */
+.btn-add {
+  box-shadow: 0 4px 12px rgba(0,86,179,0.3) !important;
+  font-size: 1rem !important;
+}
+
+/* Check-jugador: borde más definido */
+.check-jugador {
+  border: 1.5px solid #c8d8e8 !important;
+  color: #001e3c !important;
+}
+.check-jugador:hover {
+  border-color: var(--atp-blue) !important;
+}
+
+/* Tags: más contraste */
+.tag-jugador {
+  font-size: 0.85rem !important;
+  padding: 7px 14px !important;
+}
+
+/* Tabla: bordes más definidos */
+.atp-table th {
+  background: #e8eef5 !important;
+  color: #001e3c !important;
+  font-weight: 900 !important;
+}
+.atp-table td {
+  color: #1a2b3c !important;
+}
+
+/* Stat value */
+.stat-value {
+  color: var(--atp-navy) !important;
+  font-weight: 900 !important;
+}
+
+/* Rangos en ranking: refuerzo de color */
+.rango-oro   { color: #9a7020 !important; font-weight: 900 !important; }
+.rango-plata { color: #6b7c8d !important; font-weight: 800 !important; }
+.rango-bronce{ color: #8a4d1a !important; font-weight: 800 !important; }
+
+/* Form labels */
+.form-label {
+  color: #2d3e50 !important;
+  font-weight: 800 !important;
+}
+
+/* ── AMBOS TEMAS: ajustes de táctil / accesibilidad ─────────── */
+
+/* Zona de toque mínima 44px (Apple HIG / WCAG 2.5.5) */
+button, .btn-add, .btn-primary-atp, .btn-hub-item,
+.btn-terminar, .btn-timer, .btn-tv, .btn-hub-action,
+.check-jugador, .btn-golpe-main {
+  min-height: 44px;
+  touch-action: manipulation; /* Evita zoom en doble-tap */
+  -webkit-tap-highlight-color: rgba(197,160,89,0.2);
+}
+
+/* Evitar zoom en inputs en iOS */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+  font-size: 16px !important; /* iOS no hace zoom si ≥ 16px */
+  touch-action: manipulation;
+}
+/* ✅ FIX: los score inputs del panel admin son compactos — excluir del 16px */
+.adm-score-input,
+.edit-score-A,
+.edit-score-B,
+#edit-tb-A,
+#edit-tb-B {
+  font-size: 1.5rem !important; /* mantener su tamaño grande visible */
+}
+
+/* ── RESPONSIVE CLÁSICO: mejoras móvil (sin dark theme) ──────── */
+@media (max-width: 768px) {
+
+  /* Inputs más grandes */
+  .atp-input,
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    min-height: 50px !important;
+    padding: 12px 14px !important;
+  }
+
+  /* Cards: padding cómodo */
+  .card {
+    padding: 16px 14px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Nav: más alto */
+  nav button {
+    padding: 16px 14px !important;
+    min-height: 52px !important;
+  }
+
+  /* Botones de acción: tamaño táctil */
+  .btn-add {
+    min-height: 52px !important;
+    font-size: 1rem !important;
+    padding: 14px !important;
+  }
+
+  .btn-hub-item {
+    min-height: 62px !important;
+    font-size: 1rem !important;
+    padding: 18px 20px !important;
+  }
+
+  /* Check jugador */
+  .check-jugador {
+    padding: 16px 14px !important;
+    font-size: 1.05rem !important;
+    min-height: 56px !important;
+  }
+  .check-jugador input[type="checkbox"] {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 14px !important;
+  }
+
+  /* Timer: más compacto */
+  .timer-card {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Stat cards en grid compacto */
+  .stat-value {
+    font-size: 1.9rem !important;
+  }
+
+  /* Cantera: 2 columnas */
+  .grid-cantera {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* Tabla ranking: texto legible */
+  .atp-table td, .atp-table th {
+    padding: 12px 8px !important;
+    font-size: 0.88rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .grid-cantera {
+    grid-template-columns: 1fr !important;
+  }
+  nav button {
+    padding: 14px 10px !important;
+    font-size: 0.78rem !important;
+  }
+}

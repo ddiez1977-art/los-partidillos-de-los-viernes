@@ -1,0 +1,30 @@
+/* ==========================================
+   RANKING Y RANGOS
+   ========================================== */
+.atp-table { width: 100%; border-collapse: collapse; }
+.atp-table th { background: #f8f9fa; padding: 12px; font-size: 0.75rem; color: #666; }
+.atp-table td { padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; }
+
+.rango-platinum {
+    color: #00d4ff !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #00d4ff, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 5px rgba(0,212,255,0.5));
+}
+.rango-oro { color: var(--atp-gold) !important; font-weight: bold; }
+.rango-plata { color: #a9a9a9 !important; }
+.rango-bronce { color: #cd7f32 !important; }
+
+.top-1-card { 
+    animation: champion-glow 2s ease-in-out infinite alternate; 
+    border: 2px solid #00d4ff !important; 
+}
+@keyframes champion-glow {
+    from { box-shadow: 0 0 5px rgba(0,212,255,0.2); }
+    to { box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+}
+

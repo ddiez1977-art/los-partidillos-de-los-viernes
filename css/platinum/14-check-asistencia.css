@@ -1,0 +1,41 @@
+/* ══ 13. CHECK-JUGADOR / ASISTENCIA ═════════════════════════ */
+body.theme-platinum .check-jugador {
+  background: var(--pt-surface2) !important;
+  border: 1.5px solid var(--pt-border) !important;
+  border-radius: var(--pt-rsm) !important;
+  color: var(--pt-text) !important;
+}
+body.theme-platinum .check-jugador:hover {
+  background: rgba(197,160,89,0.1) !important;
+  border-color: var(--pt-gold) !important;
+}
+body.theme-platinum .check-jugador input[type="checkbox"] {
+  accent-color: var(--pt-green) !important;
+}
+body.theme-platinum .tag-jugador {
+  background: var(--pt-border-hi) !important;
+  color: var(--pt-text) !important;
+  border: 1px solid var(--pt-gold) !important;
+  border-radius: 20px !important;
+}
+
+/* Convocatoria */
+body.theme-platinum #lista-convocatoria-ui > * {
+  background: var(--pt-surface2) !important;
+  border: 1px solid var(--pt-border) !important;
+  border-radius: var(--pt-rsm) !important;
+  color: var(--pt-text) !important;
+}
+
+/* MVP selectors */
+body.theme-platinum .btn-mvp-selector {
+  background: var(--pt-surface2) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+  color: var(--pt-text) !important;
+}
+body.theme-platinum .btn-mvp-selector.is-mvp {
+  background: var(--pt-gold) !important;
+  color: #000 !important;
+  border-color: var(--pt-gold) !important;
+}
+

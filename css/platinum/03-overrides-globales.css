@@ -1,0 +1,103 @@
+/* ══ 2. OVERRIDES GLOBALES DE COLORES HARDCODEADOS ══════════
+   Estas reglas cubren los inline styles inyectados desde JS.
+   Usan "!important" y selectores de atributo para ganar
+   la cascada sobre los estilos inline del DOM.
+   ══════════════════════════════════════════════════════════ */
+
+/* --- Fondos blancos/grises claros hardcodeados --- */
+body.theme-platinum [style*="background: white"],
+body.theme-platinum [style*="background:white"],
+body.theme-platinum [style*="background: #fff"],
+body.theme-platinum [style*="background:#fff"],
+body.theme-platinum [style*="background: #fdfdfd"],
+body.theme-platinum [style*="background:#fdfdfd"],
+body.theme-platinum [style*="background: #fafafa"],
+body.theme-platinum [style*="background:#fafafa"],
+body.theme-platinum [style*="background: #f8f9fa"],
+body.theme-platinum [style*="background:#f8f9fa"],
+body.theme-platinum [style*="background: #f8f1e3"],
+body.theme-platinum [style*="background:#f8f1e3"] {
+  background: var(--pt-surface) !important;
+  color: var(--pt-text) !important;
+}
+
+/* --- MVP: fondos verde-claro y amarillo-claro --- */
+body.theme-platinum [style*="background:#f0fdf9"],
+body.theme-platinum [style*="background: #f0fdf9"] {
+  background: rgba(16,172,132,0.1) !important;
+  border-color: rgba(16,172,132,0.35) !important;
+}
+body.theme-platinum [style*="background:#fffbeb"],
+body.theme-platinum [style*="background: #fffbeb"] {
+  background: rgba(197,160,89,0.1) !important;
+  border-color: rgba(197,160,89,0.35) !important;
+}
+/* Color de texto de etiquetas MVP jugadores/entrenadores */
+body.theme-platinum [style*="color:#065f46"],
+body.theme-platinum [style*="color: #065f46"] { color: #6ee7b7 !important; }
+body.theme-platinum [style*="color:#92400e"],
+body.theme-platinum [style*="color: #92400e"] { color: var(--pt-gold) !important; }
+
+/* --- Fondo azul claro del score en historial --- */
+body.theme-platinum [style*="background: #f0f7ff"],
+body.theme-platinum [style*="background:#f0f7ff"] {
+  background: var(--pt-surface3) !important;
+}
+
+/* --- Fondo blanco con borde ddd (marcador score) --- */
+body.theme-platinum [style*="background:#fff"][style*="border:1px solid #ddd"],
+body.theme-platinum [style*="background: #fff"][style*="border: 1px solid #ddd"] {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+  color: var(--pt-green) !important;
+}
+
+/* --- Textos oscuros hardcodeados --- */
+body.theme-platinum [style*="color: #001e3c"],
+body.theme-platinum [style*="color:#001e3c"],
+body.theme-platinum [style*="color: #1f2937"],
+body.theme-platinum [style*="color:#1f2937"],
+body.theme-platinum [style*="color: #333"],
+body.theme-platinum [style*="color:#333"],
+body.theme-platinum [style*="color: var(--atp-navy)"],
+body.theme-platinum [style*="color:var(--atp-navy)"] {
+  color: var(--pt-text) !important;
+}
+body.theme-platinum [style*="color: #666"],
+body.theme-platinum [style*="color:#666"],
+body.theme-platinum [style*="color: #555"],
+body.theme-platinum [style*="color:#555"] {
+  color: var(--pt-text-sub) !important;
+}
+body.theme-platinum [style*="color: #888"],
+body.theme-platinum [style*="color:#888"],
+body.theme-platinum [style*="color: #999"],
+body.theme-platinum [style*="color:#999"],
+body.theme-platinum [style*="color: #aaa"],
+body.theme-platinum [style*="color:#aaa"] {
+  color: var(--pt-text-dim) !important;
+}
+
+/* --- Bordes claros hardcodeados --- */
+body.theme-platinum [style*="border: 1px solid #eee"],
+body.theme-platinum [style*="border:1px solid #eee"],
+body.theme-platinum [style*="border-top: 1px solid #eee"],
+body.theme-platinum [style*="border-top:1px solid #eee"],
+body.theme-platinum [style*="border-bottom: 1px solid #eee"],
+body.theme-platinum [style*="border-bottom:1px solid #eee"],
+body.theme-platinum [style*="border-bottom: 1px dashed #ccc"],
+body.theme-platinum [style*="border-top: 1px dashed #ccc"],
+body.theme-platinum [style*="border-top:1px dashed"],
+body.theme-platinum [style*="border-bottom:1px dashed"],
+body.theme-platinum [style*="border: 1px solid #ddd"],
+body.theme-platinum [style*="border:1px solid #ddd"] {
+  border-color: var(--pt-border-hi) !important;
+}
+
+/* --- navy via CSS var inline --- */
+body.theme-platinum [style*="background: var(--atp-navy)"],
+body.theme-platinum [style*="background:var(--atp-navy)"] {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text) !important;
+}
+

@@ -1,0 +1,63 @@
+/* ==========================================
+   CABECERA Y NAVEGACIÓN
+   ========================================== */
+header { 
+    background: var(--atp-navy); 
+    color: white; 
+    padding: 10px; 
+    text-align: center; 
+    border-bottom: 3px solid var(--atp-gold); 
+}
+
+.top-bar { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 0.7rem; 
+    padding: 5px 15px; 
+    background: #001021; 
+    color: #aaa; 
+}
+
+nav { 
+    display: flex; 
+    background: #001021; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    overflow-x: auto;
+    overflow-y: hidden; 
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; /* scroll suave iOS */
+    white-space: nowrap;               /* evita salto de línea */
+    /* UX-FIX CSS-1: indicador visual de scroll lateral — sombra en el borde derecho */
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    mask-image: linear-gradient(to right, black 88%, transparent 100%);
+}
+nav::-webkit-scrollbar { display: none; }
+/* Quitar mask cuando el nav no tiene overflow (desktop con todas las pestañas visibles) */
+@supports (overflow-x: clip) {
+    nav { -webkit-mask-image: unset; mask-image: unset;
+          box-shadow: inset -24px 0 20px -16px rgba(0,0,0,0.7); }
+}
+
+nav button { 
+    flex: 0 0 auto;
+    padding: 14px 18px;
+    border: none; 
+    background: none; 
+    color: #888; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 0.78rem;
+    text-transform: uppercase; 
+    white-space: nowrap; 
+    transition: 0.3s;
+}
+nav button:hover { color: white; background: rgba(255,255,255,0.1); }
+
+/* Botón activo en el nav */
+nav button.active-tab {
+    color: #ccff00;
+    border-bottom: 2px solid #ccff00;
+}
+

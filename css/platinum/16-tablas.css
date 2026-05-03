@@ -1,0 +1,20 @@
+/* ══ 15. TABLAS ═════════════════════════════════════════════ */
+body.theme-platinum .atp-table th {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-gold) !important;
+  border-bottom: 2px solid var(--pt-border-hi) !important;
+}
+body.theme-platinum .atp-table td {
+  border-bottom: 1px solid var(--pt-border) !important;
+  color: var(--pt-text) !important;
+}
+body.theme-platinum .atp-table tr:hover td { background: rgba(197,160,89,0.05) !important; }
+
+/* Tablas en historial (border-bottom:#eee, background:#f0f7ff) */
+body.theme-platinum [style*="background: #f0f7ff"][style*="border-bottom"],
+body.theme-platinum [style*="background:#f0f7ff"][style*="border-bottom"] {
+  background: var(--pt-surface3) !important;
+  color: var(--pt-green) !important;
+  border-bottom-color: var(--pt-border) !important;
+}
+

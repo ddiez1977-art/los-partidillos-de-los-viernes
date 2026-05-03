@@ -1,0 +1,31 @@
+/* ══ 10. FICHA JUGADOR (modal dinámico) ═════════════════════ */
+body.theme-platinum #ficha-modal-platinum > div {
+  background: var(--pt-surface) !important;
+  border-radius: var(--pt-r) !important;
+  color: var(--pt-text) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+}
+/* Cabecera degradado de la ficha */
+body.theme-platinum #ficha-modal-platinum [style*="background: linear-gradient(135deg, #C5A059"] {
+  background: linear-gradient(135deg, var(--pt-gold), #8a6a30) !important;
+}
+/* Mini-stats dentro de la ficha (background:white) */
+body.theme-platinum #ficha-modal-platinum [style*="background: white"],
+body.theme-platinum #ficha-modal-platinum [style*="background:white"] {
+  background: var(--pt-surface2) !important;
+  box-shadow: var(--pt-shadow) !important;
+}
+body.theme-platinum #ficha-modal-platinum [style*="color: #333"],
+body.theme-platinum #ficha-modal-platinum [style*="color:#333"],
+body.theme-platinum #ficha-modal-platinum h3[style*="color: #333"] {
+  color: var(--pt-text) !important;
+}
+body.theme-platinum #ficha-modal-platinum [style*="border-top:1px solid #eee"],
+body.theme-platinum #ficha-modal-platinum [style*="border-top: 1px solid #eee"] {
+  border-top-color: var(--pt-border) !important;
+}
+/* Boton cerrar ficha */
+body.theme-platinum [style*="background:rgba(0,0,0,0.3)"][style*="color:white"] {
+  background: rgba(0,0,0,0.5) !important;
+}
+

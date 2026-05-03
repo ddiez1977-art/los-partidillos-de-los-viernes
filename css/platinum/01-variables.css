@@ -1,0 +1,31 @@
+/* ══ VARIABLES ══════════════════════════════════════════════ */
+body.theme-platinum {
+  --pt-bg:        #07090d;
+  --pt-surface:   #0f1923;
+  --pt-surface2:  #162232;
+  --pt-surface3:  #1a2d42;
+  --pt-border:    #1e3048;
+  --pt-border-hi: #2a4060;
+  --pt-text:      #f0f4f8;
+  --pt-text-sub:  #94a3b8;
+  --pt-text-dim:  #64748b;
+  --pt-gold:      #d4af6a;
+  --pt-gold-hi:   #ffcc66;
+  --pt-green:     #ccff00;
+  --pt-cyan:      #00e5ff;
+  --pt-shadow:    0 4px 20px rgba(0,0,0,0.7);
+  --pt-r:         14px;
+  --pt-rsm:       8px;
+  /* Bridge vars: index.html usa var(--atp-text-dim,#888) etc como fallback clásico.
+     En platinum sobreescribimos con colores visibles sobre fondo oscuro. */
+  --atp-text-dim:   var(--pt-text-sub);
+  --atp-text-muted: var(--pt-text-sub);
+  --atp-border:     var(--pt-border-hi);
+  /* ✅ Fondo global ahora se aplica vía body::before/::after en
+     css/clasico/00-fondo-global.css, que muestra fondo_tenis.jpg con blur
+     fuerte en classic mode y un overlay oscuro premium en dark.
+     Body queda transparente para que se vea ese fondo. */
+  background: transparent !important;
+  color: var(--pt-text) !important;
+}
+

@@ -1,0 +1,202 @@
+/* ==========================================
+   CENTRO DE MANDO: PANTALLA HUB (ACCESO INICIAL)
+   ========================================== */
+
+/* Contenedor principal del Hub */
+/* Pantalla completa, fondo sólido y por encima de todo */
+#pantalla-inicio-hub {
+    display: flex; /* Se activa por defecto o mediante JS */
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    height: 100vh;
+    background: var(--atp-navy); /* Color sólido para que no transparente la app */
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iPhone */
+}
+
+/* Cuando el JS pone display: none, forzamos que desaparezca de verdad */
+#pantalla-inicio-hub[style*="display: none"] {
+    display: none !important;
+    pointer-events: none !important;
+    z-index: -1000 !important;
+    visibility: hidden;
+}
+
+/* Capa de la imagen con Parallax */
+/* Busca estas clases en tu style.css y déjalas así: */
+
+
+.hub-overlay {
+    position: fixed !important; /* 👈 También fija para que siempre tape el fondo */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: rgba(0, 12, 24, 0.85); /* Un poco más oscuro para que no se vea "lavado" */
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+}
+
+
+.hub-container {
+    position: relative;
+    z-index: 99999; /* 👈 Subimos el valor para que esté al frente de todo */
+    display: flex;
+    gap: 40px;
+    width: 95%;
+    max-width: 1200px;
+    /* Eliminamos height: 80vh para que no se descoloque al crecer el contenido */
+    margin: auto; 
+    align-items: center;
+    pointer-events: auto;
+}
+/* Botones verticales del Menú */
+.btn-hub-item {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 22px 28px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-align: left;
+    border-radius: 15px;
+    position: relative !important;
+    z-index: 100000 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    min-height: 64px;
+}
+
+.btn-hub-item:hover {
+    background: #ccff00; /* Verde Tenis */
+    color: #001e3c;
+    transform: translateX(12px);
+    border-color: #ccff00;
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+}
+
+/* Tablón de Anuncios Estilo Cristal */
+.hub-tablon {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid #C5A059; /* Oro ATP */
+    border-radius: 24px;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Botones de acción inferior (TV, Reset) */
+.btn-hub-action {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.btn-hub-action.gold {
+    background: #C5A059;
+    color: black;
+}
+
+.btn-hub-action.outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+}
+
+.btn-hub-action:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Mejora el header para que se sienta premium */
+header {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1001;
+}
+
+.hub-background {
+    /* Estilos completos en css/clasico/00-fondo-global.css.
+       Se mantiene como contenedor pero el fondo se aplica desde allí,
+       que añade la imagen fondo_tenis.jpg con difuminado y un gradient
+       azul ATP por encima para mantener la identidad. */
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+#tablon-contenido {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    will-change: opacity, transform;
+}
+
+/* Animación de aviso parpadeante */
+@keyframes pulse-red-platinum {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
+    70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+}
+
+/* Estilo para botones deshabilitados */
+.btn-hub-item:disabled, 
+.btn-hub-item[style*="pointer-events: none"] {
+    cursor: not-allowed !important;
+    position: relative;
+}
+
+/* Opcional: Icono de candado sobre botones bloqueados */
+.btn-hub-item[style*="pointer-events: none"]::after {
+    content: "🔒";
+    position: absolute;
+    right: 15px;
+    opacity: 0.5;
+    font-size: 0.8rem;
+}
+
+/* Evita que el body oculte contenido por error */
+main {
+    position: relative;
+    z-index: 1;
+}
+
+/* Bloqueo total para evitar que asome la App por detrás del Hub */
+body:has(#pantalla-inicio-hub:not([style*="display: none"])) header,
+body:has(#pantalla-inicio-hub:not([style*="display: none"])) nav,
+body:has(#pantalla-inicio-hub:not([style*="display: none"])) main {
+    display: none !important;
+}
+

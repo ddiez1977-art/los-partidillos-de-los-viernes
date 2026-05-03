@@ -1,0 +1,255 @@
+/* --- BASE --- */
+body {
+    background-color: #0b1118;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- HEADER --- */
+.header-fans {
+    text-align: center;
+    padding: 20px 16px;
+    background: linear-gradient(180deg, #1a2530 0%, #0b1118 100%);
+    border-bottom: 2px solid #C5A059;
+    flex-shrink: 0;
+}
+.header-fans h1 {
+    margin: 0;
+    color: #ccff00;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+    letter-spacing: 2px;
+}
+.header-fans h2 {
+    margin: 5px 0 0 0;
+    color: #C5A059;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 5px;
+}
+
+/* --- MAIN --- */
+.main-fans {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+    min-height: 0;
+}
+.columna {
+    flex: 1;
+    background: rgba(26, 37, 48, 0.8);
+    border-radius: 15px;
+    border: 1px solid #334155;
+    padding: 20px;
+    overflow-y: auto;
+    min-width: 0;
+}
+
+/* --- PESTAÑAS --- */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid #334155;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    background: transparent;
+    color: #888;
+    border: 2px solid transparent;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+.tab-btn.active {
+    color: #1a2530;
+    background: #C5A059;
+    border: 2px solid #C5A059;
+}
+
+/* --- BOTÓN INSCRIPCIÓN --- */
+.btn-inscripcion {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #ccff00;
+    color: #0b1118;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.4);
+    min-height: 44px;
+    touch-action: manipulation;
+}
+.btn-inscripcion.disabled {
+    background: #1a2530;
+    color: #555;
+    border: 1px solid #334155;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* --- HISTORIAL ACORDEÓN --- */
+#fans-historial-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.jornada-header {
+    width: 100%;
+    background: rgba(26, 37, 48, 0.9);
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+.jornada-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 10px 10px;
+}
+.jornada-content.open {
+    max-height: 2000px;
+    padding: 15px;
+    border: 1px solid #334155;
+    border-top: none;
+}
+
+.arrow-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    color: #C5A059;
+    font-size: 0.8rem;
+}
+.arrow-icon.open-arrow { transform: rotate(180deg); }
+
+/* indicador live parpadeante */
+.live-indicator {
+    color: #ff4444 !important;
+    animation: live-pulse 1.5s ease-in-out infinite;
+}
+@keyframes live-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* --- SPONSORS --- */
+.sponsors-portal-container {
+    background: rgba(15, 23, 42, 0.9);
+    padding: 15px 10px;
+    text-align: center;
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+    flex-shrink: 0;
+}
+.sponsors-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.sponsors-header .title {
+    color: #C5A059;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.sponsors-header .line {
+    height: 1px;
+    width: 30px;
+    background: rgba(197, 160, 89, 0.3);
+}
+.sponsors-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.sponsor-item img {
+    max-height: 45px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0px 0px 5px rgba(197, 160, 89, 0.2));
+}
+.sponsor-item.alba img {
+    max-height: 30px;
+    mix-blend-mode: screen;
+    filter: invert(1) sepia(1) saturate(2);
+}
+.sponsor-item:hover img { transform: scale(1.1); }
+
+/* --- TICKER --- */
+.footer-ticker {
+    height: 60px;
+    background: black;
+    border-top: 2px solid #ccff00;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+@keyframes ticker-move {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .main-fans { padding: 16px; gap: 16px; }
+    .columna { padding: 16px; }
+    .tabs-container { gap: 10px; padding: 12px; }
+    .tab-btn { padding: 12px 18px; font-size: 0.85rem; }
+}
+
+@media (max-width: 768px) {
+    .main-fans {
+        flex-direction: column;
+        overflow: auto;
+        padding: 12px;
+        gap: 12px;
+    }
+    .columna {
+        overflow: visible;
+        padding: 14px;
+    }
+    .header-fans { padding: 16px 12px; }
+    .tabs-container { gap: 8px; padding: 10px; }
+    .tab-btn {
+        padding: 10px 14px;
+        font-size: 0.78rem;
+        min-height: 44px;
+    }
+    .sponsors-grid { gap: 20px; }
+    .sponsor-item img { max-height: 38px; }
+}
+
+@media (max-width: 380px) {
+    .header-fans h1 { font-size: 1.5rem; }
+    .header-fans h2 { font-size: 0.7rem; letter-spacing: 3px; }
+    .tab-btn { padding: 9px 10px; font-size: 0.72rem; }
+    .sponsors-grid { gap: 14px; }
+    .sponsor-item img { max-height: 32px; }
+}

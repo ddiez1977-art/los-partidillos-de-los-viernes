@@ -1,0 +1,36 @@
+/* ══ 9. RANKING ═════════════════════════════════════════════ */
+body.theme-platinum #lista-ranking { background: transparent !important; }
+
+/* Top-3 (background:#f8f1e3) y resto (background:#f8f9fa) renderizados por JS */
+body.theme-platinum #lista-ranking > div > div[style*="background"] {
+  color: var(--pt-text) !important;
+}
+
+/* Rangos */
+body.theme-platinum .rango-platinum {
+  background: linear-gradient(90deg, var(--pt-cyan), #fff) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 6px rgba(0,229,255,0.5)) !important;
+  font-weight: 900 !important;
+}
+body.theme-platinum .rango-oro    { color: var(--pt-gold-hi) !important; font-weight: 900 !important; }
+body.theme-platinum .rango-plata  { color: #c8d8e8 !important; font-weight: 800 !important; }
+body.theme-platinum .rango-bronce { color: #e8904a !important; font-weight: 800 !important; }
+body.theme-platinum .top-1-card {
+  border: 2px solid var(--pt-cyan) !important;
+  box-shadow: 0 0 24px rgba(0,229,255,0.25) !important;
+  animation: champion-glow-pt 2s ease-in-out infinite alternate !important;
+}
+@keyframes champion-glow-pt {
+  from { box-shadow: 0 0 8px rgba(0,229,255,0.2); }
+  to   { box-shadow: 0 0 28px rgba(0,229,255,0.5); }
+}
+
+/* Stat cards */
+body.theme-platinum .stat-card-platinum { background: var(--pt-surface2) !important; border-radius: var(--pt-r) !important; }
+body.theme-platinum .stat-value { color: var(--pt-text) !important; }
+body.theme-platinum .stat-label { color: var(--pt-text-sub) !important; }
+body.theme-platinum .blue-accent { border-left: 5px solid var(--pt-cyan) !important; }
+body.theme-platinum .gold-accent { border-left: 5px solid var(--pt-gold) !important; }
+

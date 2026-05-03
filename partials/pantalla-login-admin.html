@@ -1,0 +1,48 @@
+<!-- ===== PANTALLA DE LOGIN ADMIN ===== -->
+<div id="pantalla-login-admin" style="display:none; position:fixed; inset:0; z-index:99999;
+     background:rgba(11,17,24,0.97); backdrop-filter:blur(8px);
+     flex-direction:column; justify-content:center; align-items:center;">
+    <div style="background:#1a2530; border:1px solid #C5A059; border-radius:16px;
+                padding:40px; max-width:380px; width:90%; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">⚙️</div>
+        <h2 style="color:#C5A059; margin:0 0 6px 0; letter-spacing:2px;">ACCESO ADMIN</h2>
+        <p style="color:#888; font-size:0.8rem; margin:0 0 28px 0;">Identifícate para acceder al panel de administración</p>
+
+        <!-- Google -->
+        <button onclick="loginConGoogle()" style="width:100%; padding:14px; margin-bottom:12px;
+                background:white; color:#1a1a1a; border:none; border-radius:10px;
+                font-weight:700; font-size:0.95rem; cursor:pointer; display:flex;
+                align-items:center; justify-content:center; gap:10px;">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:20px; height:20px;">
+            Entrar con Google
+        </button>
+
+        <!-- Separador -->
+        <div style="display:flex; align-items:center; gap:10px; margin:16px 0;">
+            <div style="flex:1; height:1px; background:#334155;"></div>
+            <span style="color:#555; font-size:0.75rem;">o</span>
+            <div style="flex:1; height:1px; background:#334155;"></div>
+        </div>
+
+        <!-- Email + contraseña -->
+        <input id="login-email" type="email" placeholder="Email"
+               style="width:100%; box-sizing:border-box; padding:12px; margin-bottom:10px;
+                      background:#0b1118; border:1px solid #334155; border-radius:8px;
+                      color:white; font-size:0.9rem;">
+        <input id="login-password" type="password" placeholder="Contraseña"
+               onkeydown="if(event.key==='Enter') loginConEmail()"
+               style="width:100%; box-sizing:border-box; padding:12px; margin-bottom:16px;
+                      background:#0b1118; border:1px solid #334155; border-radius:8px;
+                      color:white; font-size:0.9rem;">
+        <button onclick="loginConEmail()" style="width:100%; padding:13px;
+                background:#C5A059; color:#0b1118; border:none; border-radius:10px;
+                font-weight:900; font-size:0.95rem; cursor:pointer; margin-bottom:12px;">
+            Entrar
+        </button>
+
+        <div id="login-error" style="color:#ff4444; font-size:0.8rem; min-height:20px;"></div>
+
+        <button onclick="cerrarLoginAdmin()" style="margin-top:12px; background:transparent;
+                border:none; color:#555; font-size:0.8rem; cursor:pointer;">Cancelar</button>
+    </div>
+</div>

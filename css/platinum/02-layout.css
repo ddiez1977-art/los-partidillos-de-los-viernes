@@ -1,0 +1,61 @@
+/* ══ 1. LAYOUT ══════════════════════════════════════════════ */
+body.theme-platinum header {
+  background: #050c14 !important;
+  border-bottom: 3px solid var(--pt-gold) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.8) !important;
+}
+body.theme-platinum header h1 {
+  color: var(--pt-green) !important;
+  text-shadow: 0 0 20px rgba(204,255,0,0.35) !important;
+  font-size: 1.5rem !important;
+}
+body.theme-platinum .top-bar {
+  background: #030810 !important;
+  color: var(--pt-text-sub) !important;
+}
+
+/* Timer */
+body.theme-platinum .timer-card {
+  background: #000 !important;
+  border: 2px solid var(--pt-border-hi) !important;
+}
+body.theme-platinum .timer-display {
+  color: var(--pt-cyan) !important;
+  text-shadow: 0 0 10px rgba(0,229,255,0.5) !important;
+}
+body.theme-platinum .btn-timer.play  { background: var(--pt-green) !important; color: #000 !important; }
+body.theme-platinum .btn-timer.pause { background: var(--pt-gold)  !important; color: #000 !important; }
+body.theme-platinum .btn-timer.reset { background: #334155 !important; color: var(--pt-text) !important; }
+body.theme-platinum .btn-tv {
+  background: linear-gradient(135deg, var(--pt-gold), #a07830) !important;
+  color: #000 !important; border: none !important;
+  border-radius: 10px !important; font-weight: 900 !important;
+}
+
+/* Nav */
+body.theme-platinum nav {
+  background: #030810 !important;
+  border-bottom: 2px solid var(--pt-border) !important;
+}
+body.theme-platinum nav button {
+  color: var(--pt-text-sub) !important;
+  border-bottom: 3px solid transparent !important;
+}
+body.theme-platinum nav button:hover {
+  color: var(--pt-green) !important;
+  background: rgba(204,255,0,0.06) !important;
+}
+body.theme-platinum nav button.active-tab {
+  color: var(--pt-green) !important;
+  border-bottom: 3px solid var(--pt-green) !important;
+  background: rgba(204,255,0,0.05) !important;
+}
+body.theme-platinum nav button:first-child {
+  background: var(--pt-gold) !important;
+  color: #000 !important;
+  border-radius: 8px !important;
+  margin: 6px 4px !important;
+  font-weight: 900 !important;
+  border-bottom: none !important;
+}
+

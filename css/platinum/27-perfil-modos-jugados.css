@@ -1,0 +1,80 @@
+/* ══ 26. PERFIL — MODOS JUGADOS (mini-cards de stats) ══════════
+   Las cards usan fondos pastel claros hardcodeados:
+   #f0f4ff (IND/DOB), #fff8f0 (3v3), #fff0ea (ASIM),
+   #f5f0ff (AUS), #e8f9f7 (GAM).
+   En dark mode quedan blancas sin contraste con el texto.
+   ══════════════════════════════════════════════════════════════ */
+
+/* IND y DOB — azul claro */
+body.theme-platinum [style*="background:#f0f4ff"],
+body.theme-platinum [style*="background: #f0f4ff"] {
+  background: rgba(0,100,200,0.12) !important;
+  border: 1px solid rgba(0,100,200,0.25) !important;
+}
+
+/* 3v3 — naranja claro */
+body.theme-platinum [style*="background:#fff8f0"],
+body.theme-platinum [style*="background: #fff8f0"] {
+  background: rgba(255,159,67,0.12) !important;
+  border: 1px solid rgba(255,159,67,0.25) !important;
+}
+
+/* ASIM — naranja intenso claro */
+body.theme-platinum [style*="background:#fff0ea"],
+body.theme-platinum [style*="background: #fff0ea"] {
+  background: rgba(255,107,53,0.12) !important;
+  border: 1px solid rgba(255,107,53,0.25) !important;
+}
+
+/* AUS — violeta claro */
+body.theme-platinum [style*="background:#f5f0ff"],
+body.theme-platinum [style*="background: #f5f0ff"] {
+  background: rgba(167,139,250,0.12) !important;
+  border: 1px solid rgba(167,139,250,0.25) !important;
+}
+
+/* GAM — cyan claro */
+body.theme-platinum [style*="background:#e8f9f7"],
+body.theme-platinum [style*="background: #e8f9f7"] {
+  background: rgba(0,139,168,0.12) !important;
+  border: 1px solid rgba(0,139,168,0.25) !important;
+}
+/* Texto dentro GAM (color:#008ba8 sobre fondo oscuro: ok, pero reforzamos) */
+body.theme-platinum [style*="color:#008ba8"],
+body.theme-platinum [style*="color: #008ba8"] {
+  color: #00d4ff !important;
+}
+
+/* Efectividad / Modos — fondo rgba(0,30,60,0.05) + border #eee */
+body.theme-platinum [style*="background:rgba(0,30,60,0.05)"],
+body.theme-platinum [style*="background: rgba(0,30,60,0.05)"] {
+  background: var(--pt-surface3) !important;
+  border-color: var(--pt-border-hi) !important;
+}
+
+/* Label "Efectividad" y "Modos jugados" (color:#888 ya cubierto globalmente) */
+/* Wins text color:#2e7d32 — oscuro en dark */
+body.theme-platinum [style*="color:#2e7d32"],
+body.theme-platinum [style*="color: #2e7d32"] {
+  color: #4ade80 !important;
+}
+
+/* WINS/LOSS sublabel (font-size: 0.5rem sin color explícito hereda #001e3c del padre) */
+body.theme-platinum .modal-content span[style*="font-size: 0.5rem"],
+body.theme-platinum .modal-content span[style*="font-size:0.5rem"] {
+  color: var(--pt-text-sub) !important;
+}
+
+/* color var(--atp-navy) en bold de IND/DOB (se resuelve con variable, pero por si acaso) */
+body.theme-platinum [style*="color:var(--atp-navy)"] b,
+body.theme-platinum [style*="color: var(--atp-navy)"] b {
+  color: var(--pt-green) !important;
+}
+
+/* Barras de progreso de efectividad (background:#eee) */
+body.theme-platinum [style*="background:#eee"][style*="border-radius:5px"],
+body.theme-platinum [style*="background: #eee"][style*="border-radius: 5px"] {
+  background: var(--pt-border-hi) !important;
+  border-color: var(--pt-border) !important;
+}
+

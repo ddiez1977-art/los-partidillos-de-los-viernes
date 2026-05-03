@@ -1,0 +1,5 @@
+/* ══ 22. atp-title y headings generales ═════════════════════ */
+body.theme-platinum .atp-title { color: var(--pt-gold) !important; border-bottom: 2px solid var(--pt-border) !important; }
+body.theme-platinum .no-partidos { color: var(--pt-text-dim) !important; border: 2px dashed var(--pt-border-hi) !important; }
+body.theme-platinum .card-resultado { background: var(--pt-surface2) !important; border-left: 5px solid var(--pt-border-hi) !important; }
+

@@ -1,0 +1,151 @@
+/* ══════════════════════════════════════════════════════════════
+   FIXES CONTRASTE — Configuración Jornada + Partidos Finalizados
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1. "✓ Se guarda automáticamente" — color:#888 con font-size:0.58rem
+      --pt-text-dim (#64748b) tiene bajo contraste sobre --pt-surface.
+      Subimos a --pt-text-sub para que sea legible. */
+body.theme-platinum [style*="font-size:0.58rem"],
+body.theme-platinum [style*="font-size: 0.58rem"] {
+  color: var(--pt-text-sub) !important;
+}
+
+/* 2. "Marca las pistas disponibles..." — párrafo con color:#666
+      El selector genérico [style*="color: #666"] ya debería funcionar,
+      pero el <p> tiene también font-size y font-weight; añadimos selector
+      específico por el contenido del contenedor. */
+body.theme-platinum #contenedor-cajas-pistas ~ p,
+body.theme-platinum .card > p[style*="color: #666"],
+body.theme-platinum .card > p[style*="color:#666"] {
+  color: var(--pt-text-sub) !important;
+}
+
+/* 3. HR con border:0 + border-top:1px solid #eee en la misma regla.
+      El selector general falla porque no matchea el atributo compuesto.
+      Seleccionamos por los dos atributos juntos. */
+body.theme-platinum hr[style*="border: 0"][style*="border-top"],
+body.theme-platinum hr[style*="border:0"][style*="border-top"] {
+  border-top-color: var(--pt-border-hi) !important;
+}
+
+/* 4. Tarjetas de Partidos Finalizados — card-historial con background: white
+      El selector genérico ya convierte el fondo, pero el texto interno
+      color:#888 (metadato pista/hora) puede quedar muy oscuro.
+      Reforzamos el texto dentro de .card-historial. */
+body.theme-platinum .card-historial [style*="color: #888"],
+body.theme-platinum .card-historial [style*="color:#888"] {
+  color: var(--pt-text-sub) !important;
+}
+
+/* El nombre del partido (color:#001e3c) dentro de card-historial */
+body.theme-platinum .card-historial [style*="color: #001e3c"],
+body.theme-platinum .card-historial [style*="color:#001e3c"] {
+  color: var(--pt-text) !important;
+}
+
+/* Marcador del partido (color:#001e3c dentro del badge) */
+body.theme-platinum .card-historial [style*="color: #001e3c"] {
+  color: var(--pt-text) !important;
+}
+
+/* 5. Encabezado "Partidos Finalizados" — border-bottom: 2px solid rgba(0,0,0,0.1)
+      Casi invisible en dark. */
+body.theme-platinum [style*="border-bottom: 2px solid rgba(0,0,0,0.1)"],
+body.theme-platinum [style*="border-bottom:2px solid rgba(0,0,0,0.1)"] {
+  border-bottom-color: var(--pt-border-hi) !important;
+}
+
+/* 6. "Aún no hay resultados registrados." — fondo rgba(0,0,0,0.02) invisible */
+body.theme-platinum [style*="background: rgba(0,0,0,0.02)"],
+body.theme-platinum [style*="background:rgba(0,0,0,0.02)"] {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text-sub) !important;
+}
+
+/* 7. Labels de configuración con opacity:0.8 — en dark quedan muy tenues */
+body.theme-platinum .card .field label[style*="opacity: 0.8"],
+body.theme-platinum .card .field label[style*="opacity:0.8"] {
+  opacity: 1 !important;
+  color: var(--pt-text-sub) !important;
+}
+
+/* 8. Inputs en la card de configuración de jornada */
+body.theme-platinum .card .atp-input {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text) !important;
+  border-color: var(--pt-border-hi) !important;
+}
+
+/* ── Ranking rows hover — platinum ───────────────────────── */
+body.theme-platinum .ranking-row { transition: transform 0.2s, box-shadow 0.2s !important; }
+body.theme-platinum .ranking-row:hover { transform: translateY(-3px) !important; box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important; }
+/* Evitar que el hover restaure backgrounds claros hardcodeados */
+body.theme-platinum .ranking-top3:hover,
+body.theme-platinum .ranking-normal:hover { background: var(--pt-surface3) !important; }
+
+/* ── TIE-BREAK buttons — Platinum dark mode ──────────────── */
+body.theme-platinum .btn-tiebreak-activar {
+    border-color: var(--pt-cyan, #00e5ff) !important;
+    background: rgba(0,229,255,0.08) !important;
+    color: var(--pt-cyan, #00e5ff) !important;
+}
+body.theme-platinum .btn-tiebreak-activar:hover {
+    background: rgba(0,229,255,0.18) !important;
+    box-shadow: 0 0 14px rgba(0,229,255,0.3) !important;
+}
+body.theme-platinum .btn-tiebreak-desactivar {
+    border-color: rgba(255,80,80,0.35) !important;
+    background: rgba(255,80,80,0.06) !important;
+    color: rgba(255,120,120,0.8) !important;
+}
+body.theme-platinum .btn-tiebreak-desactivar:hover {
+    background: rgba(255,80,80,0.14) !important;
+    color: #ff8080 !important;
+}
+
+/* ── Modal editar partido — scroll fix dark mode ─────────── */
+body.theme-platinum #modal-editar-partido-admin { background: rgba(0,0,0,0.92) !important; }
+body.theme-platinum #modal-editar-partido-admin .modal-content { background: var(--pt-surface2) !important; }
+/* Sticky buttons bar en dark */
+body.theme-platinum #modal-editar-partido-admin [style*="background:white"][style*="sticky"] {
+  background: var(--pt-surface2) !important;
+  border-top-color: var(--pt-border-hi) !important;
+}
+
+/* ── Tie-break edit/nuevo forms — dark mode ──────────────── */
+body.theme-platinum #edit-tb-section,
+body.theme-platinum [id^="np-tb-section-"] {
+  background: rgba(0,150,255,0.08) !important;
+  border-color: rgba(0,150,255,0.3) !important;
+}
+body.theme-platinum [id^="np-tb-"] label,
+body.theme-platinum .form-group label[for="edit-tb-activo"] {
+  color: var(--pt-text-sub) !important;
+}
+body.theme-platinum #edit-tb-section [style*="color:#0056b3"],
+body.theme-platinum [id^="np-tb-section-"] [style*="color:#0056b3"] {
+  color: var(--pt-cyan, #00e5ff) !important;
+}
+body.theme-platinum #edit-tb-section [style*="color:#555"],
+body.theme-platinum [id^="np-tb-section-"] [style*="color:#555"] {
+  color: var(--pt-text-sub) !important;
+}
+body.theme-platinum #edit-tb-section [style*="color:#888"],
+body.theme-platinum [id^="np-tb-section-"] [style*="color:#888"] {
+  color: var(--pt-text-dim) !important;
+}
+/* Checkbox accent en dark */
+body.theme-platinum #np-tb-activo-\\* {
+  accent-color: var(--pt-cyan, #00e5ff);
+}
+/* Nuevo partido form — fondo verde claro invisible en dark */
+body.theme-platinum [id^="form-nuevo-partido-"] {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+}
+body.theme-platinum [id^="form-nuevo-partido-"] [style*="color:#065f46"] {
+  color: var(--pt-green) !important;
+}
+body.theme-platinum [id^="form-nuevo-partido-"] [style*="color:#555"] {
+  color: var(--pt-text-sub) !important;
+}

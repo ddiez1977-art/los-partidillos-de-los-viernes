@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ATP Platinum | Live Portal</title>
+    <meta name="description" content="Portal en directo del ATP Master Platinum. Partidos, ranking y resultados en tiempo real.">
+    <meta property="og:title" content="ATP Master Platinum | Live Portal">
+    <meta property="og:description" content="Sigue los partidos en directo, el ranking y los resultados del torneo.">
+    <meta property="og:image" content="fondo_tenis.jpg">
+    <link rel="stylesheet" href="../style.css">
+
+    <link rel="stylesheet" href="css/fans.css">
+</head>
+<body>
+
+    <div class="header-fans">
+        <h1>ATP MASTER</h1>
+        <h2>PLATINUM LIVE PORTAL</h2>
+        <!-- Badge viewers -->
+        <div style="margin-top:8px;">
+            <span style="display:inline-flex; align-items:center; gap:6px;
+                         background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+                         border-radius:20px; padding:4px 12px; font-size:0.72rem; color:#aaa;">
+                <span style="width:7px; height:7px; background:#4ade80; border-radius:50%;
+                             box-shadow:0 0 6px #4ade80; display:inline-block;
+                             animation:live-pulse 2s ease-in-out infinite;"></span>
+                <span id="fans-viewer-count">–</span> viendo ahora
+            </span>
+        </div>
+        <div style="margin-top:12px;">
+            <a id="btn-inscripcion-fans" href="#" target="_blank" rel="noopener noreferrer" class="btn-inscripcion disabled">Cargando estado...</a>
+        </div>
+    </div>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="cambiarPestaña('directo')">🔴 DIRECTO Y RANKING</button>
+        <button class="tab-btn" onclick="cambiarPestaña('historial')">📚 HISTORIAL DEL TORNEO</button>
+    </div>
+
+    <div id="vista-directo" class="main-fans">
+        <div class="columna">
+            <h3 style="color:#C5A059; text-align:center; border-bottom:1px solid #C5A059; padding-bottom:10px;">🔴 PARTIDOS EN JUEGO</h3>
+            <div id="fans-pistas-container"></div>
+        </div>
+        <div class="columna">
+            <h3 style="color:#C5A059; text-align:center; border-bottom:1px solid #C5A059; padding-bottom:10px;">🏆 TOP RANKING</h3>
+            <div id="fans-ranking-container"></div>
+        </div>
+    </div>
+
+    <div id="vista-historial" class="main-fans" style="display:none; flex-direction:column;">
+        <div class="columna" style="max-width:800px; margin:0 auto; width:100%;">
+            <h3 style="color:#C5A059; text-align:center; border-bottom:1px solid #C5A059; padding-bottom:10px;">📚 HISTORIAL JORNADAS</h3>
+            <div id="fans-historial-container"></div>
+        </div>
+    </div>
+
+    <div class="sponsors-portal-container">
+        <div class="sponsors-header">
+            <span class="line"></span>
+            <span class="title">OFFICIAL PARTNERS</span>
+            <span class="line"></span>
+        </div>
+        <div class="sponsors-grid">
+            <a href="https://www.instagram.com/oroplus_joyeria/" target="_blank" class="sponsor-item">
+                <img src="../oro_plus.jpg" alt="Oro Plus">
+            </a>
+            <a href="https://albaescayo.com/albaescayo/" target="_blank" class="sponsor-item alba">
+                <img src="../alba.jpg" alt="Alba Escayo">
+            </a>
+        </div>
+        <div style="color:rgba(255,255,255,0.4); font-size:10px; font-style:italic; margin-top:5px;">"Excelencia en cada set"</div>
+    </div>
+
+    <div class="footer-ticker">
+        <div id="ticker-container" style="position:relative; width:100%; height:100%;">
+            <!--
+                ✅ FIX Bug 4: el ticker arranca con animación activa desde el principio
+                (animation-play-state: running en lugar de paused).
+                Antes solo se activaba cuando llegaban datos de Firebase; si Firebase
+                tardaba o fallaba, el ticker quedaba congelado con "Cargando información...".
+                Ahora arranca inmediatamente con el texto por defecto y fans.js lo
+                actualiza en cuanto llegan los datos reales.
+            -->
+            <div id="ticker-text" style="display:inline-block; white-space:nowrap; color:#ccff00;
+                                         font-size:1.2rem; font-weight:900; line-height:60px;
+                                         padding-left:100%; will-change:transform;
+                                         animation: ticker-move 30s linear infinite;
+                                         animation-play-state: running;">
+                🎾 ATP Platinum Master Tour — Transmisión en Vivo 🎾
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+    <!-- fans.js refactorizado en 6 módulos -->
+    <script src="js/01-config-firebase-fans.js"></script>
+    <script src="js/02-render-pistas.js"></script>
+    <script src="js/03-render-ranking.js"></script>
+    <script src="js/04-ticker.js"></script>
+    <script src="js/05-inscripciones-pestanas.js"></script>
+    <script src="js/06-historial-fans.js"></script>
+
+</body>
+</html>

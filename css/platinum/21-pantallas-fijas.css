@@ -1,0 +1,31 @@
+/* ══ 20. PANTALLAS FIJAS ════════════════════════════════════ */
+body.theme-platinum #pantalla-apertura { background: #030810 !important; }
+body.theme-platinum #pantalla-apertura > div {
+  background: var(--pt-surface) !important; border: 1px solid var(--pt-border-hi) !important; color: var(--pt-text) !important;
+}
+body.theme-platinum #pantalla-login-admin,
+body.theme-platinum #pantalla-espera-arbitro { background: rgba(0,0,0,0.92) !important; }
+body.theme-platinum #pantalla-login-admin > div,
+body.theme-platinum #pantalla-espera-arbitro > div {
+  background: var(--pt-surface) !important; border: 1px solid var(--pt-border-hi) !important; color: var(--pt-text) !important;
+}
+body.theme-platinum #pantalla-login-admin input {
+  background: #0a1420 !important; color: var(--pt-text) !important; border-color: var(--pt-border-hi) !important;
+}
+body.theme-platinum #panel-solicitudes-admin > div {
+  background: var(--pt-surface2) !important; border-color: var(--pt-gold) !important;
+}
+
+/* Pistas: config de horas */
+body.theme-platinum .card-pista-hora:hover { background: rgba(197,160,89,0.08) !important; border-color: var(--pt-gold) !important; }
+body.theme-platinum .fila-pistas-hora { background: var(--pt-surface2) !important; border-left: 4px solid var(--pt-border-hi) !important; border-radius: var(--pt-rsm) !important; }
+body.theme-platinum .fila-pistas-hora .hora-label { color: var(--pt-gold) !important; background: rgba(212,175,106,0.15) !important; padding: 3px 8px !important; border-radius: 5px !important; border: 1px solid rgba(212,175,106,0.35) !important; }
+body.theme-platinum .caja-pista-check.activa { background: var(--pt-green) !important; color: #000 !important; box-shadow: 0 0 8px rgba(204,255,0,0.3) !important; }
+/* ✅ FIX CONTRASTE: --pt-text-dim (#64748b) sobre #1e2d3d da ratio ~2.5:1 — ilegible.
+   Subimos a --pt-text-sub (#94a3b8) y añadimos borde visible para distinguir las cajas. */
+body.theme-platinum .caja-pista-check.inactiva { background: #1a2d42 !important; color: var(--pt-text-sub) !important; border-color: #2a4060 !important; }
+body.theme-platinum .caja-pista-check.inactiva:hover { background: #1e3a52 !important; color: var(--pt-text) !important; border-color: var(--pt-gold) !important; }
+body.theme-platinum .valor-pista-hora { color: var(--pt-gold) !important; font-weight: 900 !important; }
+body.theme-platinum #contenedor-cajas-pistas .card { background: var(--pt-surface2) !important; border: 1px solid var(--pt-border-hi) !important; }
+body.theme-platinum #contenedor-cajas-pistas .card:hover { background: rgba(197,160,89,0.12) !important; border-color: var(--pt-gold) !important; }
+

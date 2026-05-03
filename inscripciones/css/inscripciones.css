@@ -1,0 +1,572 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: linear-gradient(160deg, #0b1118 0%, #0f1e2e 100%);
+    min-height: 100vh;
+    padding: 24px 16px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+.atp-header {
+    text-align: center;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 600px;
+}
+.atp-header h1 {
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+    font-weight: 900;
+    color: #ccff00;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(204,255,0,0.3);
+}
+.atp-header .subtitle {
+    color: #C5A059;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    margin-top: 4px;
+}
+
+/* ── CARD ── */
+.portal-card {
+    background: rgba(26,37,48,0.95);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(197,160,89,0.3);
+}
+.card-header {
+    background: linear-gradient(135deg,#1a2530 0%,#0f1e2e 100%);
+    padding: 20px 22px 16px;
+    border-bottom: 2px solid rgba(197,160,89,0.3);
+}
+.card-header h3 {
+    color: #C5A059;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.portal-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.portal-status.open   { background: rgba(40,167,69,0.2);  color: #28a745; border: 1px solid #28a745; }
+.portal-status.closed { background: rgba(220,53,69,0.15); color: #dc3545; border: 1px solid #dc3545; }
+
+/* ── TABS ── */
+.tabs-nav {
+    display: flex;
+    border-bottom: 2px solid rgba(197,160,89,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.tab-btn {
+    flex: 1;
+    padding: 16px 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #667;
+    border: none;
+    background: transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    min-height: 48px;
+    touch-action: manipulation;
+}
+.tab-btn.active {
+    color: #C5A059;
+    border-bottom-color: #C5A059;
+    background: rgba(197,160,89,0.06);
+}
+
+/* ── PANTALLA CERRADA ── */
+#pantalla-cerrada { display:none; text-align:center; padding:40px 22px; }
+#pantalla-cerrada .lock-icon { font-size:3.5rem; margin-bottom:12px; }
+#pantalla-cerrada h3 { color:#d9534f; font-size:1.1rem; margin-bottom:8px; }
+#pantalla-cerrada p  { font-size:0.85rem; color:#8899aa; line-height:1.6; }
+#pantalla-abierta { display:none; }
+
+/* ── INSCRIPCIÓN ── */
+.info-banner {
+    margin: 16px 22px 0;
+    padding: 12px 14px;
+    background: rgba(197,160,89,0.1);
+    border: 1px solid rgba(197,160,89,0.3);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: #C5A059;
+    line-height: 1.5;
+}
+.info-banner b { color:#ccff00; }
+
+.search-wrap { padding: 14px 22px 0; }
+
+.atp-input {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;             /* ✅ ≥16px → iOS NO hace zoom */
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+    min-height: 44px;
+}
+.atp-input:focus { border-color:#C5A059; }
+.atp-input::placeholder { color:#556677; }
+
+#lista-jugadores {
+    max-height: 340px;
+    overflow-y: auto;
+    padding: 10px 22px 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #C5A059 transparent;
+}
+
+/* ✅ FILA DE JUGADOR — REDISEÑADA para que el nombre se vea completo */
+.jugador-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.2s;
+    gap: 8px;
+}
+.jugador-row.apuntado {
+    background: rgba(40,167,69,0.12);
+    border-color: rgba(40,167,69,0.4);
+}
+.jugador-nombre {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #e0e8f0;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.jugador-row.apuntado .jugador-nombre { color: #66cc88; }
+
+/* Contenedor de los dos botones — apilable cuando hace falta */
+.jugador-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.btn-toggle {
+    flex-shrink: 0;
+    min-width: 130px;
+    padding: 11px 14px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 800;
+    font-size: 0.78rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    touch-action: manipulation;
+    min-height: 44px;            /* ✅ touch target Apple/Material */
+}
+.btn-toggle.estado-apuntado {
+    background: #28a745;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(40,167,69,0.35);
+}
+.btn-toggle.estado-no-apuntado {
+    background: rgba(255,255,255,0.08);
+    color: #8899aa;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Botón ranking/invitado — más compacto pero accesible */
+.btn-inv-toggle {
+    flex-shrink: 0;
+    padding: 8px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(245,158,11,0.4);
+    font-weight: 800;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: rgba(245,158,11,0.08);
+    color: #f59e0b;
+    touch-action: manipulation;
+    min-height: 36px;
+    min-width: 36px;
+}
+.btn-inv-toggle.es-ranking {
+    background: rgba(40,167,69,0.08);
+    border-color: rgba(40,167,69,0.4);
+    color: #66cc88;
+}
+
+/* Sección añadir nuevo jugador */
+.nuevo-jugador-section {
+    padding: 14px 22px 22px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 10px;
+}
+.nuevo-jugador-section label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #8899aa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+.nuevo-jugador-row {
+    display: flex;
+    gap: 8px;
+}
+.btn-nuevo {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background: #C5A059;
+    color: #0b1118;
+    font-size: 1.5rem;
+    font-weight: 900;
+    cursor: pointer;
+    flex-shrink: 0;
+    touch-action: manipulation;
+}
+.contador-wrap { text-align:center; padding:10px 22px 0; }
+.contador-pill {
+    display: inline-block;
+    padding: 6px 18px;
+    background: rgba(204,255,0,0.1);
+    border: 1px solid rgba(204,255,0,0.3);
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #ccff00;
+}
+.status-nota {
+    text-align: center;
+    padding: 6px 22px 0;
+    font-size: 0.75rem;
+    color: #556677;
+}
+.no-results {
+    text-align: center;
+    padding: 30px 10px;
+    color: #556677;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* ── PISTAS ── */
+.pistas-section { padding: 20px; }
+.pistas-intro {
+    font-size: 0.85rem;
+    color: #8899aa;
+    margin-bottom: 18px;
+    line-height: 1.55;
+    padding: 12px 14px;
+    background: rgba(197,160,89,0.07);
+    border-left: 3px solid rgba(197,160,89,0.4);
+    border-radius: 0 10px 10px 0;
+}
+.pistas-intro strong { color: #C5A059; }
+
+/* Lista reservas */
+.reservas-lista { margin-bottom: 20px; }
+.reservas-lista-header {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #C5A059;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.reserva-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    background: rgba(204,255,0,0.05);
+    border: 1px solid rgba(204,255,0,0.2);
+}
+.ri-num {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #C5A059;
+    min-width: 36px;
+    text-align: center;
+    background: rgba(197,160,89,0.1);
+    border-radius: 8px;
+    padding: 4px;
+}
+.ri-info { flex: 1; min-width: 0; overflow: hidden; }
+.ri-hora {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: #ccff00;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ri-quien {
+    font-size: 0.78rem;
+    color: #889;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ri-cancel {
+    background: transparent;
+    border: 1px solid rgba(255,80,80,0.3);
+    border-radius: 8px;
+    color: rgba(255,100,100,0.8);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 8px 12px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    touch-action: manipulation;
+    flex-shrink: 0;
+    min-height: 40px;
+    min-width: 40px;
+}
+.ri-cancel:hover { background: rgba(255,80,80,0.15); color: #ff7777; }
+
+/* Formulario nueva reserva */
+.form-reserva {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(197,160,89,0.25);
+    border-radius: 14px;
+    padding: 18px;
+}
+.form-reserva-title {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #C5A059;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+.field-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #889;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+.field-wrap { margin-bottom: 12px; }
+
+.pista-select {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 13px 14px;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C5A059' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    min-height: 48px;
+}
+.pista-select:focus { outline: none; border-color: rgba(197,160,89,0.6); }
+.pista-select option, .pista-select optgroup { background: #0f1e2e; color: #fff; }
+
+.horas-row { display: flex; gap: 10px; }
+.horas-row .field-wrap { flex: 1; margin-bottom: 0; }
+
+.time-input,
+.text-input {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 13px 14px;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    min-height: 48px;
+}
+.time-input:focus, .text-input:focus {
+    outline: none;
+    border-color: rgba(197,160,89,0.6);
+}
+.text-input::placeholder { color: #445; }
+
+.btn-añadir {
+    width: 100%;
+    margin-top: 14px;
+    padding: 16px;
+    background: rgba(197,160,89,0.18);
+    border: 1.5px solid rgba(197,160,89,0.45);
+    border-radius: 12px;
+    color: #C5A059;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    touch-action: manipulation;
+    min-height: 52px;
+}
+.btn-añadir:hover:not(:disabled) { background: rgba(197,160,89,0.3); }
+.btn-añadir:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── TOAST ── */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    background: #0f1923;
+    color: #ccff00;
+    border: 1px solid #ccff00;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    max-width: calc(100% - 32px);
+    text-align: center;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.toast.out {
+    color: #ff6666;
+    border-color: #ff6666;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* TABLET ≥ 700px y arriba: card más ancha y dos columnas en pistas */
+@media (min-width: 700px) {
+    .portal-card {
+        max-width: 720px;
+    }
+    .info-banner,
+    .search-wrap,
+    #lista-jugadores,
+    .nuevo-jugador-section,
+    .contador-wrap,
+    .status-nota {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+    .contador-wrap, .status-nota { padding-top: 10px; padding-bottom: 0; }
+}
+
+/* DESKTOP ≥ 1024px: aún más ancho */
+@media (min-width: 1024px) {
+    .portal-card {
+        max-width: 800px;
+    }
+    body { padding: 40px 16px 80px; }
+    .atp-header { margin-bottom: 32px; }
+}
+
+/* MÓVIL pequeño ≤ 380px: condensar */
+@media (max-width: 380px) {
+    body { padding: 16px 10px 60px; }
+    .info-banner,
+    .search-wrap,
+    #lista-jugadores,
+    .nuevo-jugador-section,
+    .contador-wrap,
+    .status-nota,
+    .pistas-section {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .jugador-row { padding: 10px 12px; gap: 6px; }
+    .jugador-nombre { font-size: 0.88rem; }
+    .btn-toggle {
+        min-width: 110px;
+        font-size: 0.72rem;
+        padding: 10px 10px;
+    }
+    .btn-inv-toggle {
+        font-size: 0.65rem;
+        padding: 7px 8px;
+    }
+    .tab-btn { font-size: 0.78rem; padding: 14px 4px; }
+    .reserva-item { padding: 10px 12px; gap: 10px; }
+    .form-reserva { padding: 14px; }
+}
+
+/* MÓVIL ≤ 480px: SIEMPRE hacer wrap del nombre + botones, para garantizar
+   que cualquier nombre largo (incluso "Beatriz Sánchez Castillo") se vea
+   completo en cualquier móvil hasta iPhone Pro Max (430px).
+   Patrón consistente: nombre arriba (fila completa), botones abajo. */
+@media (max-width: 480px) {
+    .jugador-row {
+        flex-wrap: wrap;
+    }
+    .jugador-row .jugador-nombre {
+        flex-basis: 100%;
+        margin-bottom: 8px;
+        white-space: normal;
+        line-height: 1.3;
+    }
+    .jugador-row .jugador-actions {
+        flex-basis: 100%;
+        justify-content: flex-end;
+    }
+}

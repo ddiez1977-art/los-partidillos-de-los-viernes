@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Inscripción - ATP PLATINUM</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="css/inscripciones.css">
+</head>
+<body>
+
+<div class="atp-header">
+    <h1>ATP MASTER</h1>
+    <div class="subtitle">PORTAL DE INSCRIPCIÓN</div>
+</div>
+
+<div class="portal-card">
+
+    <!-- CABECERA -->
+    <div class="card-header">
+        <h3>📅 Próxima Jornada</h3>
+        <div id="portal-status" class="portal-status closed">🔒 Cargando...</div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs-nav">
+        <button class="tab-btn active" onclick="cambiarTab('inscripcion')">🎾 Inscripción</button>
+        <button class="tab-btn"        onclick="cambiarTab('pistas')">🏟️ Pistas reservadas</button>
+    </div>
+
+    <!-- ══ TAB INSCRIPCIÓN ══ -->
+    <div id="tab-inscripcion">
+
+        <!-- Pantalla cerrada -->
+        <div id="pantalla-cerrada">
+            <div class="lock-icon">🔒</div>
+            <h3>Inscripciones Cerradas</h3>
+            <p>El administrador aún no ha abierto la lista para la próxima jornada.<br><br>
+               Recibirás un aviso por WhatsApp cuando puedas apuntarte.</p>
+        </div>
+
+        <!-- Pantalla abierta -->
+        <div id="pantalla-abierta">
+            <div class="info-banner">
+                🎾 Busca tu nombre y pulsa <b>＋ APUNTARME</b> para confirmar tu asistencia.<br>
+                Si juegas <b>sin ranking</b>, pulsa <b>👨‍👧 INVITADO</b> junto a tu nombre.
+            </div>
+            <div class="contador-wrap">
+                <div class="contador-pill">Apuntados: <span id="contador-apuntados">0</span></div>
+            </div>
+            <div class="status-nota">
+                Por defecto entras como <b style="color:#66cc88;">🏆 RANKING</b>.
+                Si juegas en modo lúdico, pulsa <b style="color:#f59e0b;">👨‍👧 INVITADO</b>.
+            </div>
+            <div class="search-wrap">
+                <input type="text" id="buscador" class="atp-input" placeholder="🔍 Buscar mi nombre..." onkeyup="filtrarJugadores()">
+            </div>
+            <div id="lista-jugadores">
+                <div class="no-results">Conectando...</div>
+            </div>
+            <div class="nuevo-jugador-section">
+                <label>¿Eres nuevo? Escribe tu nombre</label>
+                <div class="nuevo-jugador-row">
+                    <input type="text" id="nuevo-nombre" class="atp-input" placeholder="Nombre y apellidos..." onkeydown="if(event.key==='Enter') apuntarNuevoJugador()">
+                    <button class="btn-nuevo" onclick="apuntarNuevoJugador()">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ══ TAB PISTAS ══ -->
+    <div id="tab-pistas" style="display:none;">
+        <div class="pistas-section">
+
+            <div class="pistas-intro">
+                <strong>👨‍👩‍👦 Para padres y reservadores:</strong> añade cada pista que hayas reservado
+                en el club. Puedes añadir <strong>varias pistas</strong> una tras otra — el nombre
+                se recuerda entre reservas. El admin lo verá en tiempo real.
+            </div>
+
+            <!-- Reservas confirmadas -->
+            <div id="reservas-confirmadas"></div>
+
+            <!-- Formulario -->
+            <div class="form-reserva">
+                <div class="form-reserva-title" id="form-title">➕ Añadir pista reservada</div>
+
+                <div class="field-wrap">
+                    <label class="field-label">🏟️ Pista del club</label>
+                    <select id="sel-pista" class="pista-select">
+                        <option value="">— Selecciona una pista —</option>
+                    </select>
+                </div>
+
+                <div class="horas-row">
+                    <div class="field-wrap">
+                        <label class="field-label">⏰ Hora inicio</label>
+                        <input type="time" id="hora-ini" class="time-input">
+                    </div>
+                    <div class="field-wrap">
+                        <label class="field-label">⏰ Hora fin <small style="font-weight:500;text-transform:none;">(opcional)</small></label>
+                        <input type="time" id="hora-fin" class="time-input">
+                    </div>
+                </div>
+
+                <div class="field-wrap" style="margin-top:12px;margin-bottom:0;">
+                    <label class="field-label">👤 Tu nombre (quién reserva)</label>
+                    <input type="text" id="inp-quien" class="text-input" placeholder="Nombre del padre/madre/reservador" maxlength="40" onkeydown="if(event.key==='Enter') añadirReserva()">
+                </div>
+
+                <button class="btn-añadir" id="btn-añadir" onclick="añadirReserva()">
+                    ✅ Añadir esta reserva
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
+<!-- inscripciones.html — script inline refactorizado en 5 módulos -->
+<script src="js/01-config-firebase-inscripciones.js"></script>
+<script src="js/02-jugadores-asistencia.js"></script>
+<script src="js/03-pistas-reservas.js"></script>
+<script src="js/04-tabs-helpers.js"></script>
+<script src="js/05-toast.js"></script>
+</body>
+</html>

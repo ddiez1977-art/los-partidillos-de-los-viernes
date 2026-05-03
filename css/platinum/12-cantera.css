@@ -1,0 +1,27 @@
+/* ══ 11. CANTERA ════════════════════════════════════════════ */
+body.theme-platinum #lista-total-jugadores .card {
+  background: var(--pt-surface) !important;
+  border-radius: var(--pt-r) !important;
+  box-shadow: var(--pt-shadow) !important;
+  color: var(--pt-text) !important;
+  transition: all 0.2s !important;
+}
+body.theme-platinum #lista-total-jugadores .card:hover {
+  border-color: var(--pt-gold) !important;
+  transform: translateY(-2px) !important;
+}
+body.theme-platinum #lista-total-jugadores h3 { color: var(--pt-text) !important; }
+body.theme-platinum #lista-total-jugadores small { color: var(--pt-text-sub) !important; }
+/* Botón FICHA */
+body.theme-platinum #lista-total-jugadores button[style*="background:var(--atp-blue)"],
+body.theme-platinum #lista-total-jugadores button[style*="background: var(--atp-blue)"] {
+  background: var(--pt-gold) !important;
+  color: #000 !important;
+  border: none !important;
+}
+/* Badge EN PISTA */
+body.theme-platinum #lista-total-jugadores [style*="background:#00d4ff"] {
+  background: var(--pt-cyan) !important;
+  color: #000 !important;
+}
+

@@ -1,0 +1,79 @@
+/* ══ 25. HISTORIAL GENERAL — card-historial-item ════════════════
+   Los fondos white/#fdfdfd/#fafafa generados por renderHistoricoGeneral
+   quedan invisibles en dark mode. Se sobreescriben aquí completos.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Card principal de cada jornada */
+body.theme-platinum .card-historial-item {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+body.theme-platinum .card-historial-item:hover {
+  background-color: var(--pt-surface3) !important;
+  border-color: var(--pt-gold) !important;
+}
+
+/* Cabecera clickable de cada jornada (background: #fdfdfd) */
+body.theme-platinum [style*="background: #fdfdfd"],
+body.theme-platinum [style*="background:#fdfdfd"] {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Texto del título de jornada (color:#001e3c ya cubierto, pero refuerzo) */
+body.theme-platinum .card-historial-item [style*="color: #001e3c"],
+body.theme-platinum .card-historial-item [style*="color:#001e3c"] {
+  color: var(--pt-text) !important;
+}
+
+/* Texto secundario de partidos/jugadores (color:#666) */
+body.theme-platinum .card-historial-item [style*="color: #666"],
+body.theme-platinum .card-historial-item [style*="color:#666"] {
+  color: var(--pt-text-sub) !important;
+}
+
+/* Panel de detalle expandido (background: #fafafa) */
+body.theme-platinum [style*="background: #fafafa"],
+body.theme-platinum [style*="background:#fafafa"] {
+  background: var(--pt-surface) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Separador dashed dentro del detalle (border-top: 1px dashed #ccc) */
+body.theme-platinum .card-historial-item [style*="border-top:1px dashed"],
+body.theme-platinum .card-historial-item [style*="border-top: 1px dashed"] {
+  border-top-color: var(--pt-border-hi) !important;
+}
+
+/* Título "CRÓNICA DE RESULTADOS" y separadores internos */
+body.theme-platinum .card-historial-item h4 {
+  color: var(--pt-text-sub) !important;
+  border-bottom-color: var(--pt-border) !important;
+}
+
+/* Mini-cards de resultado dentro del detalle (background: white + border-left) */
+body.theme-platinum .card-historial-item [style*="background: white"],
+body.theme-platinum .card-historial-item [style*="background:white"] {
+  background: var(--pt-surface3) !important;
+  color: var(--pt-text) !important;
+}
+
+/* Marcador en monospace dentro del detalle */
+body.theme-platinum .card-historial-item [style*="font-family:monospace"],
+body.theme-platinum .card-historial-item [style*="font-family: monospace"] {
+  color: var(--pt-green) !important;
+}
+
+/* Separador #eee en border-top del detalle */
+body.theme-platinum .card-historial-item [style*="border-top: 1px solid #eee"],
+body.theme-platinum .card-historial-item [style*="border-top:1px solid #eee"] {
+  border-top-color: var(--pt-border) !important;
+}
+
+/* Texto ID: color:#999 */
+body.theme-platinum .card-historial-item [style*="color:#999"],
+body.theme-platinum .card-historial-item [style*="color: #999"] {
+  color: var(--pt-text-dim) !important;
+}
+

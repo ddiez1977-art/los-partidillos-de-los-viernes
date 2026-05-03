@@ -1,0 +1,27 @@
+<!-- MODAL EDITAR PARTIDO ADMIN -->
+<div id="modal-editar-partido-admin" class="modal-atp"
+     style="display:none; align-items:flex-start; overflow-y:auto; padding:12px 0; -webkit-overflow-scrolling:touch;">
+    <div class="modal-content"
+         style="max-height:none; overflow:visible; margin:auto; width:94%; max-width:500px; padding-bottom:80px;">
+        <button onclick="cerrarModalEditarPartido()"
+            style="position:absolute;top:12px;right:16px;background:transparent;border:none;
+                   font-size:1.6rem;cursor:pointer;color:#999;line-height:1;z-index:10;">&times;</button>
+        <h2 class="atp-title" style="font-size:1.1rem;padding-right:30px;">✏️ EDITAR PARTIDO</h2>
+
+        <div id="modal-editar-contenido"></div>
+
+        <div id="modal-editar-feedback" style="display:none;padding:10px;border-radius:8px;margin-top:10px;font-size:0.85rem;"></div>
+
+        <!-- Botones fijos abajo dentro del scroll -->
+        <div style="display:flex;gap:10px;margin-top:20px;">
+            <button onclick="guardarEdicionPartido()" class="btn-add"
+                    style="flex:2;margin:0;background:var(--atp-navy);height:46px;font-weight:900;">
+                💾 GUARDAR CAMBIOS
+            </button>
+            <button onclick="cerrarModalEditarPartido()" class="btn-add"
+                    style="flex:1;margin:0;background:#868e96;height:46px;">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+/* ══ 3. CARDS ═══════════════════════════════════════════════ */
+body.theme-platinum .card {
+  background: var(--pt-surface) !important;
+  border-top: 4px solid var(--pt-border-hi) !important;
+  border-radius: var(--pt-r) !important;
+  box-shadow: var(--pt-shadow) !important;
+  color: var(--pt-text) !important;
+}
+body.theme-platinum .card h2,
+body.theme-platinum .card h3,
+body.theme-platinum .card h4 {
+  color: var(--pt-text) !important;
+}
+body.theme-platinum .card p,
+body.theme-platinum .card span,
+body.theme-platinum .card label,
+body.theme-platinum .card li { color: inherit; }
+
+/* Top-3 ranking card */
+body.theme-platinum [style*="background: #f8f1e3"],
+body.theme-platinum [style*="background:#f8f1e3"] {
+  background: rgba(197,160,89,0.08) !important;
+  border-left-color: var(--pt-gold) !important;
+}
+
+/* sec-card */
+body.theme-platinum .sec-card {
+  background: var(--pt-surface2) !important;
+  border-radius: var(--pt-rsm) !important;
+}
+

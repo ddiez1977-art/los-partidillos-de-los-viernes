@@ -1,0 +1,66 @@
+/* ══ 12. PISTAS ACTIVAS ═════════════════════════════════════ */
+body.theme-platinum .card-pista-activa {
+  background: var(--pt-surface) !important;
+  border: 1px solid var(--pt-border-hi) !important;
+  border-radius: var(--pt-r) !important;
+  box-shadow: var(--pt-shadow) !important;
+}
+body.theme-platinum .pista-header {
+  background: var(--pt-border-hi) !important;
+  color: var(--pt-gold) !important;
+  letter-spacing: 2px !important;
+}
+/* pista-body: background:white hardcodeado en JS */
+body.theme-platinum .pista-body {
+  background: var(--pt-surface) !important;
+  border: 1px solid var(--pt-border) !important;
+  border-top: none !important;
+  color: var(--pt-text) !important;
+}
+/* Nombres de jugadores dentro de pista (color:var(--atp-navy)) */
+body.theme-platinum .pista-jugadores,
+body.theme-platinum .pista-body .pista-jugadores { color: var(--pt-text) !important; }
+/* Marcador dentro de pista (color:#001e3c, monospace) */
+body.theme-platinum .pista-body [style*="font-family:monospace"],
+body.theme-platinum .pista-body [style*="font-family: monospace"] {
+  color: var(--pt-green) !important;
+}
+/* Fila de estado (background:#f8f9fa dentro de pista) */
+body.theme-platinum .pista-body [style*="background:#f8f9fa"],
+body.theme-platinum .pista-body [style*="background: #f8f9fa"] {
+  background: var(--pt-surface2) !important;
+  border-radius: 6px !important;
+}
+
+/* Cards de modalidad (estiloCard en script.js) */
+body.theme-platinum [style*="border-left: 8px solid"][style*="background: white"],
+body.theme-platinum [style*="border-left: 8px solid"][style*="background:white"] {
+  background: var(--pt-surface) !important;
+  color: var(--pt-text) !important;
+}
+body.theme-platinum [style*="border-left: 8px solid #00d4ff"][style*="linear-gradient"] {
+  background: linear-gradient(to right, rgba(0,212,255,0.06), var(--pt-surface)) !important;
+}
+body.theme-platinum [style*="border-left: 8px solid #ff9f43"][style*="linear-gradient"] {
+  background: linear-gradient(to right, rgba(255,159,67,0.08), var(--pt-surface)) !important;
+}
+body.theme-platinum [style*="border-left: 8px solid #ff6b35"][style*="linear-gradient"] {
+  background: linear-gradient(to right, rgba(255,107,53,0.06), var(--pt-surface)) !important;
+}
+body.theme-platinum [style*="border-left: 8px solid #a78bfa"][style*="linear-gradient"] {
+  background: linear-gradient(to right, rgba(167,139,250,0.06), var(--pt-surface)) !important;
+}
+
+/* Controles de juego dentro de pistas activas */
+body.theme-platinum [style*="background: #f8f9fa"][style*="border: 1px solid #eee"],
+body.theme-platinum [style*="background:#f8f9fa"][style*="border:1px solid #eee"] {
+  background: var(--pt-surface2) !important;
+  border-color: var(--pt-border-hi) !important;
+}
+/* Botones anular/edit inline */
+body.theme-platinum [style*="background: #fff;"][style*="border: 1px solid"],
+body.theme-platinum [style*="background:#fff;"][style*="border:1px solid"] {
+  background: var(--pt-surface2) !important;
+  color: var(--pt-text) !important;
+}
+

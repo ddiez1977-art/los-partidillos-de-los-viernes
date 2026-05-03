@@ -1,0 +1,23 @@
+/* ==========================================
+   ASISTENCIA MÚLTIPLE (Checkboxes)
+   ========================================== */
+.check-jugador {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s;
+    border: 1px solid #eee;
+}
+.check-jugador:hover { background: #eef2f5; border-color: var(--atp-blue); }
+.check-jugador input {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
